@@ -155,3 +155,44 @@ def test_a_deadline_with_the_wrong_year_is_rejected():
 
     assert values["deadline"] is None
     assert "deadline" in unknown
+
+
+def test_an_attendance_percentage_is_not_a_marks_requirement():
+    """
+    Found by reading the extractions by hand, not by any check.
+
+    The Delhi OBC scheme says "an attendance of at least 75%". The model
+    put 75 into min_percentage and every check passed, because the
+    sentence is real and it does contain 75. The scheme has no marks
+    requirement at all, so the filter was turning away eligible students
+    who had less than 75% marks.
+    """
+    document = "Applicants must have secured an attendance of at least 75% in the previous year."
+    extracted = {
+        "min_percentage": 75,
+        "min_percentage_quote": "Applicants must have secured an attendance of at least 75% in the previous year.",
+    }
+
+    values, sources, unknown, _ = verify_extraction(extracted, document)
+
+    assert values["min_percentage"] is None
+    assert "min_percentage" in unknown
+    assert "attendance" in sources["min_percentage"]["reason"]
+
+
+def test_a_sentence_about_both_marks_and_attendance_is_still_accepted():
+    """
+    The other half of the trade. Plenty of schemes ask for marks and
+    attendance in one sentence, and rejecting those would throw away
+    good extractions to catch a rarer bad one.
+    """
+    document = "Applicants must have 60% marks and maintain 75% attendance."
+    extracted = {
+        "min_percentage": 60,
+        "min_percentage_quote": "Applicants must have 60% marks and maintain 75% attendance.",
+    }
+
+    values, _, unknown, _ = verify_extraction(extracted, document)
+
+    assert values["min_percentage"] == 60
+    assert unknown == []

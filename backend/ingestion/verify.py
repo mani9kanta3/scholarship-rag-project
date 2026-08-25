@@ -61,10 +61,57 @@ def quote_is_in_document(quote, document_text):
     return matched / len(quote_words) >= WORD_OVERLAP_NEEDED
 
 
-def check_numeric(value, quote):
-    """The number has to be written in the sentence."""
+# A percentage in one of these sentences is measuring something that is
+# not marks. This list came out of the hand review, which is the point
+# of doing one.
+#
+# The Delhi OBC scheme says "an attendance of at least 75% in the
+# previous year". The model put 75 into min_percentage, and every check
+# passed: the sentence is real, it is in the document, and it contains
+# the number 75. The value was still wrong, because the scheme has no
+# marks requirement at all, and the filter was quietly turning away
+# eligible students with less than 75% marks.
+#
+# No automatic check could have caught that when it was written. A
+# person reading the quote caught it in about ten seconds, and now the
+# checker knows about it too.
+NOT_MARKS_WORDS = [
+    "attendance",
+    "disability",
+    "disabilities",
+    "reservation",
+    "interest rate",
+    "quota",
+]
+
+# ...unless the same sentence really is about marks as well. Plenty of
+# schemes say "60% marks and 75% attendance" in one breath, and throwing
+# those away would cost more than it saves.
+MARKS_WORDS = [
+    "marks",
+    "percentage",
+    "score",
+    "scored",
+    "cgpa",
+    "grade",
+    "aggregate",
+    "examination",
+    "exam",
+    "passed",
+]
+
+
+def check_numeric(value, quote, field=None):
+    """The number has to be written in the sentence, and it has to be the right kind of number."""
     if not contains_number(quote, value):
         return False, f"{value} does not appear in the quoted sentence"
+
+    if field in ("min_percentage", "min_cgpa"):
+        clean = normalise(quote)
+        wrong_kind = next((word for word in NOT_MARKS_WORDS if word in clean), None)
+        if wrong_kind and not any(word in clean for word in MARKS_WORDS):
+            return False, f"the quoted sentence is about {wrong_kind}, not marks"
+
     return True, None
 
 
@@ -195,7 +242,7 @@ def _check_one(field, value, quote, document_text):
         return False, "the quoted sentence is not in the document"
 
     if field in NUMERIC_FIELDS:
-        return check_numeric(value, quote)
+        return check_numeric(value, quote, field=field)
 
     if field in LIST_FIELDS:
         return check_list(value, quote, field=field)
