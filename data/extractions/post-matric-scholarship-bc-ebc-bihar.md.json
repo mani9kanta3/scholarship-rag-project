@@ -1,8 +1,8 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 4140,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3135,
   "extracted": {
-    "summary": "Post Matric Scholarship (PMS) for BC/EBC Category, Bihar provides up to INR 15,000 annually to BC and EBC students from Bihar pursuing post\u2011matric education.",
+    "summary": "Post Matric Scholarship for BC/EBC category students in Bihar.",
     "amount_text": "up to INR 15,000 annually",
     "min_cgpa": null,
     "min_cgpa_quote": null,
@@ -11,17 +11,11 @@
     "max_family_income": 100000.0,
     "max_family_income_quote": "Applicants must have an annual family income of not more than INR 1,00,000 from all sources.",
     "categories": null,
-    "categories_quote": null,
+    "categories_quote": "Applicants must belong to the BC or EBC category.",
     "genders": null,
     "genders_quote": null,
-    "course_levels": [
-      "SCHOOL",
-      "DIPLOMA",
-      "UG",
-      "PG",
-      "PHD"
-    ],
-    "course_levels_quote": "Intermediate: INR 2,000. Graduation: INR 5,000. Post Graduation, M.Phil. or Ph.D.: INR 5,000. ITI: INR 5,000. Polytechnic or Diploma: INR 10,000. Professional or Technical: INR 15,000.",
+    "course_levels": null,
+    "course_levels_quote": null,
     "states": [
       "Bihar"
     ],

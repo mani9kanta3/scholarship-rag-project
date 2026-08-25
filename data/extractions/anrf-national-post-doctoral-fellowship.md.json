@@ -1,9 +1,9 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 4016,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3284,
   "extracted": {
-    "summary": "The ANRF-National Post Doctoral Fellowship (N-PDF) is a prestigious initiative by the Government of India to support young researchers with a Ph.D. in science, engineering, or medicine for a two\u2011year post\u2011doctoral fellowship.",
-    "amount_text": "INR 80,000 per month plus applicable HRA, or INR 50,000 for pending degree holders. A research grant of INR 2,00,000 per year. An overhead of INR 1,00,000 per year.",
+    "summary": "A national postdoctoral fellowship for Indian citizens with a Ph.D. or equivalent, offering a monthly stipend and research grant.",
+    "amount_text": "INR 80,000 per month plus applicable HRA, or INR 50,000 for pending degree holders.",
     "min_cgpa": null,
     "min_cgpa_quote": null,
     "min_percentage": null,
@@ -15,20 +15,22 @@
       "ST",
       "OBC"
     ],
-    "categories_quote": "Age must not exceed 35 years at the time of application, with a 5 year relaxation for SC, ST, OBC, physically challenged and female candidates.",
-    "genders": null,
-    "genders_quote": null,
+    "categories_quote": "with a 5 year relaxation for SC, ST, OBC, physically challenged and female candidates.",
+    "genders": [
+      "FEMALE"
+    ],
+    "genders_quote": "with a 5 year relaxation for SC, ST, OBC, physically challenged and female candidates.",
     "course_levels": [
       "PHD"
     ],
     "course_levels_quote": "Applicants must hold a Ph.D. in Science or Engineering, or an M.D. or M.S. from a recognised university.",
     "states": null,
     "states_quote": null,
-    "min_age": null,
-    "min_age_quote": null,
-    "max_age": 35,
-    "max_age_quote": "Age must not exceed 35 years at the time of application, with a 5 year relaxation for SC, ST, OBC, physically challenged and female candidates.",
+    "min_age": 35,
+    "min_age_quote": "Age must not exceed 35 years at the time of application, with a 5 year relaxation for SC, ST, OBC, physically challenged and female candidates.",
+    "max_age": null,
+    "max_age_quote": null,
     "deadline": "2026-02-20",
-    "deadline_quote": "20th February 2026. The status shown on the page is Closed."
+    "deadline_quote": "20th February 2026."
   }
 }

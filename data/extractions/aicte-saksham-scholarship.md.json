@@ -1,8 +1,8 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 3541,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3141,
   "extracted": {
-    "summary": "The AICTE Saksham Scholarship provides financial assistance to specially-abled students enrolled in diploma or degree programs at AICTE\u2011approved institutions.",
+    "summary": "The AICTE Saksham Scholarship Scheme provides financial assistance to specially-abled students pursuing technical diploma or degree courses at AICTE-approved institutions.",
     "amount_text": "INR 50,000 per annum",
     "min_cgpa": null,
     "min_cgpa_quote": null,
@@ -16,9 +16,10 @@
     "genders_quote": null,
     "course_levels": [
       "DIPLOMA",
-      "UG"
+      "UG",
+      "PG"
     ],
-    "course_levels_quote": "Applicants must be enrolled in the first year of a diploma or degree program, or the second year via lateral entry, at an AICTE-approved institution.",
+    "course_levels_quote": "Applicants must be enrolled in the first year of a diploma or degree program, or the second year via lateral entry",
     "states": null,
     "states_quote": null,
     "min_age": null,

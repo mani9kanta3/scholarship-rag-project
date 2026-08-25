@@ -1,8 +1,8 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 3570,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3162,
   "extracted": {
-    "summary": "AICTE Pragati Scholarship for Girls provides financial support of INR 50,000 per annum to girl students admitted to the first year or lateral entry second year of technical diploma or degree programmes.",
+    "summary": "The AICTE Pragati Scholarship for Girls provides financial support to girl students admitted to the first year or second year through lateral entry in technical diploma or degree programmes, with a maximum family income of INR 8,00,000. The scholarship offers INR 50,000 per annum for up to three years for first\u2011year admits and two years for lateral entry students.",
     "amount_text": "INR 50,000 per annum",
     "min_cgpa": null,
     "min_cgpa_quote": null,
@@ -15,7 +15,7 @@
     "genders": [
       "FEMALE"
     ],
-    "genders_quote": "Applicants must be girl students admitted to the 1st year, or the 2nd year through lateral entry only, of a technical diploma or degree programme.",
+    "genders_quote": "Applicants must be girl students",
     "course_levels": [
       "DIPLOMA",
       "UG"

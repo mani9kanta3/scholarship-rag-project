@@ -1,8 +1,8 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 3714,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3097,
   "extracted": {
-    "summary": "The Vivek Medical Students Scholarship Program by Karuna Trust provides scholarships to meritorious and economically backward MBBS students.",
+    "summary": "The Vivek Medical Students Scholarship Program supports economically backward MBBS students at Bangalore Medical College or Mysore Medical College, offering financial aid based on academic performance and family income.",
     "amount_text": null,
     "min_cgpa": null,
     "min_cgpa_quote": null,

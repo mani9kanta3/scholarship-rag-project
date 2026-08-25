@@ -1,9 +1,9 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 3797,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3121,
   "extracted": {
-    "summary": "Mukhyamantri Jan Kalyan (Shiksha Protsahan) Yojana provides free higher education support to eligible students whose parent is registered as an unorganised worker in Madhya Pradesh.",
-    "amount_text": "For Engineering in a private college the cover is INR 1.5 lakh or the actual payable fee, whichever is lower.",
+    "summary": "Mukhyamantri Jan Kalyan (Shiksha Protsahan) Yojana provides free higher education support to students whose parent is registered as an unorganised worker in Madhya Pradesh.",
+    "amount_text": "INR 1.5 lakh or the actual payable fee, whichever is lower.",
     "min_cgpa": null,
     "min_cgpa_quote": null,
     "min_percentage": null,
@@ -20,10 +20,8 @@
       "DIPLOMA"
     ],
     "course_levels_quote": "Undergraduate, postgraduate, polytechnic diploma and ITI courses are covered.",
-    "states": [
-      "Madhya Pradesh"
-    ],
-    "states_quote": "The parent must be registered as an unorganised worker with the Labour Department, Government of Madhya Pradesh.",
+    "states": null,
+    "states_quote": null,
     "min_age": null,
     "min_age_quote": null,
     "max_age": null,

@@ -1,9 +1,9 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 4214,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3095,
   "extracted": {
-    "summary": "Post-Matric Scholarship for General, Minorities, SC, ST and OBC, Uttar Pradesh provides financial support to meritorious and needy students from Uttar Pradesh pursuing class 11 to postgraduate studies.",
-    "amount_text": "Hostelers receive up to INR 13,500 per year. Day scholars receive up to INR 7,000 per year.",
+    "summary": "Post-Matric Scholarship for General, Minorities, SC, ST and OBC, Uttar Pradesh is a state\u2011level scholarship for students in Uttar Pradesh pursuing studies from class 11 to postgraduate level, with income limits varying by category.",
+    "amount_text": "Day Scholar and Hosteler amounts vary by category and group from 1 to 4. Hostelers receive up to INR 13,500 per year. Day scholars receive up to INR 7,000 per year.",
     "min_cgpa": null,
     "min_cgpa_quote": null,
     "min_percentage": null,
@@ -22,6 +22,7 @@
     "genders_quote": null,
     "course_levels": [
       "SCHOOL",
+      "DIPLOMA",
       "UG",
       "PG"
     ],
@@ -34,7 +35,7 @@
     "min_age_quote": null,
     "max_age": null,
     "max_age_quote": null,
-    "deadline": null,
-    "deadline_quote": null
+    "deadline": "2025-10-30",
+    "deadline_quote": "30 October 2025 for Classes 11 and 12. 20 December 2025 for all except classes 11 and 12."
   }
 }

@@ -1,9 +1,9 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 3927,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3139,
   "extracted": {
     "summary": "The National Fellowship Scheme for Scheduled Caste Students provides financial assistance to SC students pursuing M.Phil or Ph.D. degrees in Science, Humanities, or Social Science at UGC\u2011recognised institutions.",
-    "amount_text": "INR 37,000 per month for the initial two years as Junior Research Fellow. INR 42,000 per month for the remaining tenure as Senior Research Fellow. Contingency allowances of INR 10,000 to INR 20,500 annually for Humanities and Social Sciences, and INR 12,000 to INR 25,000 for Sciences. House Rent Allowance as per rules. Reader assistance of INR 2,000 per month for disabled candidates.",
+    "amount_text": "INR 37,000 per month for the initial two years as Junior Research Fellow.",
     "min_cgpa": null,
     "min_cgpa_quote": null,
     "min_percentage": null,

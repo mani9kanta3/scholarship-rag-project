@@ -1,15 +1,15 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 4205,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3294,
   "extracted": {
-    "summary": "Post-Matric Scholarship (PMS) for SC/ST/BC/Disabled Category, Telangana provides tuition fee reimbursement and monthly maintenance charges for eligible students from SC, ST, BC and Disabled categories pursuing higher education in Telangana.",
+    "summary": "Post-Matric Scholarship for SC/ST/BC/Disabled Category in Telangana providing tuition fee reimbursement and monthly maintenance for intermediate to Ph.D. courses.",
     "amount_text": "Reimbursement of tuition fees ranging from INR 850 for intermediate courses to INR 6,90,000 for medical courses per annum.",
     "min_cgpa": null,
     "min_cgpa_quote": null,
     "min_percentage": null,
     "min_percentage_quote": null,
-    "max_family_income": 200000.0,
-    "max_family_income_quote": "The annual family income limit is INR 2,00,000 for the Scheduled Caste (SC/ST) category.",
+    "max_family_income": null,
+    "max_family_income_quote": null,
     "categories": [
       "SC",
       "ST",

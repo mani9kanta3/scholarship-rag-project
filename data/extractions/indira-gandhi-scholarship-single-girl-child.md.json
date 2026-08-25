@@ -1,8 +1,8 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 3468,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3098,
   "extracted": {
-    "summary": "A scholarship for single girl child pursuing a first-year master's degree, up to 30 years old, providing INR 36,200 per annum for up to 2 years.",
+    "summary": "The Post\u2011Graduate Indira Gandhi Scholarship for Single Girl Child is a UGC scheme for girl students who are the only girl child in their family, providing financial support for up to two years of a first\u2011year master\u2019s course.",
     "amount_text": "INR 36,200 per annum.",
     "min_cgpa": null,
     "min_cgpa_quote": null,
@@ -27,6 +27,6 @@
     "max_age": 30,
     "max_age_quote": "Applicants must be a girl student up to 30 years of age at the time of admission.",
     "deadline": "2022-12-31",
-    "deadline_quote": "The scholarship closing date was 31st December 2022."
+    "deadline_quote": "Closed. The scholarship closing date was 31st December 2022."
   }
 }

@@ -1,9 +1,9 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 4323,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3017,
   "extracted": {
-    "summary": "The scheme provides financial assistance to students belonging to the BC, EWS, and DNT communities of Sikkim studying at the post\u2011matric level.",
-    "amount_text": "Group 1 professional courses provide INR 10,000 academic allowance and INR 10,000 tuition fees annually, INR 20,000 in total. Group 2 offers INR 8,000 and INR 5,000 respectively. Group 3 provides INR 6,000 and INR 2,000. Group 4 offers INR 5,000.",
+    "summary": "Post-Matric Scholarship for OBC, EBC and DNT Students in Sikkim, offered by the Department of Social Justice & Empowerment, Government of India.",
+    "amount_text": null,
     "min_cgpa": null,
     "min_cgpa_quote": null,
     "min_percentage": null,
@@ -12,13 +12,16 @@
     "max_family_income_quote": "Applicants must have an annual parent or guardian income of not more than INR 2,50,000 from all sources.",
     "categories": [
       "OBC",
-      "EWS"
+      "EWS",
+      "MINORITY"
     ],
     "categories_quote": "Applicants must belong to the BC, EWS or DNT communities.",
     "genders": null,
     "genders_quote": null,
-    "course_levels": null,
-    "course_levels_quote": null,
+    "course_levels": [
+      "UG"
+    ],
+    "course_levels_quote": "Applicants must be studying post-matriculation in recognized institutions.",
     "states": [
       "Sikkim"
     ],

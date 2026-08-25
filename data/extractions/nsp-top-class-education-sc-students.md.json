@@ -1,9 +1,9 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 3620,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3186,
   "extracted": {
-    "summary": "A scholarship for Scheduled Caste students pursuing undergraduate or postgraduate studies, providing financial assistance for tuition and living expenses.",
-    "amount_text": "Full tuition fee and non-refundable charges. A ceiling of INR 2,00,000 per annum per student applies to private sector institutions. Academic allowance for the first year: INR 86,000. Academic allowance for subsequent years: INR 41,000 per year.",
+    "summary": "NSP Central Sector Scholarship of Top Class Education for SC Students provides full tuition fee and living expenses for Scheduled Caste students pursuing undergraduate or postgraduate studies.",
+    "amount_text": "Full tuition fee and non-refundable charges. A ceiling of INR 2,00,000 per annum per student applies to private sector institutions.",
     "min_cgpa": null,
     "min_cgpa_quote": null,
     "min_percentage": 60.0,

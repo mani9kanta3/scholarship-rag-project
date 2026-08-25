@@ -1,13 +1,13 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 3853,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3014,
   "extracted": {
-    "summary": "A centrally sponsored scholarship offering financial assistance to post-matriculation and post-secondary level OBC students domiciled in Delhi.",
-    "amount_text": "Day scholars receive INR 260 to INR 750 per month. Hostelers receive INR 160 to INR 350 per month. Full Tuition Fee, Registration Fee and Examination Fee as applicable.",
+    "summary": "A centrally sponsored scholarship for OBC students domiciled in Delhi, providing monthly stipends and fee coverage for post\u2011matriculation or post\u2011secondary level students.",
+    "amount_text": null,
     "min_cgpa": null,
     "min_cgpa_quote": null,
-    "min_percentage": 75.0,
-    "min_percentage_quote": "Applicants must have secured an attendance of at least 75% in the previous year.",
+    "min_percentage": null,
+    "min_percentage_quote": null,
     "max_family_income": 100000.0,
     "max_family_income_quote": "Applicants must have an annual parent or guardian income of not more than INR 1,00,000.",
     "categories": [

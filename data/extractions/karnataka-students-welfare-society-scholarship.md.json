@@ -1,9 +1,9 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 3400,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3040,
   "extracted": {
-    "summary": "A programme aimed at providing financial support to students in South India for higher education after high school.",
-    "amount_text": "Scholarships from INR 10,000 to INR 1,00,000, with funds sent directly to the educational institution to cover tuition and related costs.",
+    "summary": "Scholarship for students in Karnataka, Kerala and Tamil Nadu after 12th, covering tuition up to INR 1,00,000.",
+    "amount_text": "INR 10,000 to INR 1,00,000",
     "min_cgpa": null,
     "min_cgpa_quote": null,
     "min_percentage": 60.0,

@@ -1,8 +1,8 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 3587,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 2975,
   "extracted": {
-    "summary": "State Merit Scholarship for UG Girls Students, Haryana is a scholarship offered by the Directorate of Higher Education, Haryana to female students domiciled in Haryana pursuing general undergraduate degree courses at government colleges.",
+    "summary": "State Merit Scholarship for UG Girls Students, Haryana offers a scholarship to female students from Haryana pursuing general undergraduate courses.",
     "amount_text": "INR 3,000 per annum",
     "min_cgpa": null,
     "min_cgpa_quote": null,
@@ -15,11 +15,11 @@
     "genders": [
       "FEMALE"
     ],
-    "genders_quote": "An opportunity offered by the Directorate of Higher Education, Haryana to female students of the state who are pursuing general undergraduate degree courses.",
+    "genders_quote": "female students",
     "course_levels": [
       "UG"
     ],
-    "course_levels_quote": "An opportunity offered by the Directorate of Higher Education, Haryana to female students of the state who are pursuing general undergraduate degree courses.",
+    "course_levels_quote": "pursuing general undergraduate degree courses.",
     "states": [
       "Haryana"
     ],

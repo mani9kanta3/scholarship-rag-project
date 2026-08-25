@@ -1,8 +1,8 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 3635,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 2951,
   "extracted": {
-    "summary": "An initiative providing financial support to meritorious students from economically weaker sections to help them complete school education.",
+    "summary": "National Means\u2011cum\u2011Merit Scholarship Scheme (NMMS) provides financial support to meritorious students from economically weaker sections to complete school education.",
     "amount_text": "INR 1,000 per month for a year",
     "min_cgpa": null,
     "min_cgpa_quote": null,
@@ -10,8 +10,10 @@
     "min_percentage_quote": "Applicants must have scored at least 55% marks, or 50% for SC and ST, in their Class VII exams to qualify for the selection test.",
     "max_family_income": 350000.0,
     "max_family_income_quote": "The parental income must not exceed INR 3,50,000 per annum.",
-    "categories": null,
-    "categories_quote": null,
+    "categories": [
+      "GEN"
+    ],
+    "categories_quote": "Students from any community studying in Government, Government-aided, or local body schools are eligible.",
     "genders": null,
     "genders_quote": null,
     "course_levels": [

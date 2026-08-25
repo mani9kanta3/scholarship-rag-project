@@ -1,9 +1,9 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 3603,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3040,
   "extracted": {
-    "summary": "The Swami Dayanand India Scholarship provides financial assistance to meritorious students pursuing undergraduate professional courses in India.",
-    "amount_text": "up to INR 50,000 per academic year.",
+    "summary": "Financial assistance for meritorious students pursuing first year undergraduate professional courses in India.",
+    "amount_text": "up to INR 50,000 per academic year",
     "min_cgpa": null,
     "min_cgpa_quote": null,
     "min_percentage": 80.0,

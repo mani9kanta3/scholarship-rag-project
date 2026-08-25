@@ -1,9 +1,9 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 3860,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3161,
   "extracted": {
-    "summary": "The Chief Minister's Overseas Scholarship Scheme for Minorities, Telangana provides up to INR 20,00,000 to minority students from Telangana pursuing postgraduate or doctoral studies abroad.",
-    "amount_text": "scholarships up to INR 20,00,000",
+    "summary": "The Chief Minister's Overseas Scholarship Scheme for Minorities, Telangana supports minority students pursuing postgraduate and doctoral studies abroad, offering up to INR 20,00,000 in financial assistance.",
+    "amount_text": "up to INR 20,00,000",
     "min_cgpa": null,
     "min_cgpa_quote": null,
     "min_percentage": 60.0,
@@ -25,10 +25,10 @@
       "Telangana"
     ],
     "states_quote": "Applicants must be a domicile of Telangana.",
-    "min_age": null,
-    "min_age_quote": null,
-    "max_age": 30,
-    "max_age_quote": "Applicants must be below 30 years of age as of July 1st of the application year.",
+    "min_age": 30,
+    "min_age_quote": "Applicants must be below 30 years of age as of July 1st of the application year.",
+    "max_age": null,
+    "max_age_quote": null,
     "deadline": "2026-01-19",
     "deadline_quote": "19 January 2026."
   }

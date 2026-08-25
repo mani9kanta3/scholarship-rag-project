@@ -1,9 +1,9 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 3635,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3037,
   "extracted": {
-    "summary": "The Parivartan ECSS Programme provides financial assistance to excellent students from impoverished backgrounds who are aspiring for a greater future.",
-    "amount_text": "Classes 1 to 6: INR 15,000. Classes 7 to 12, Diploma, ITI and Polytechnic: INR 18,000. Undergraduate General: INR 30,000. Undergraduate Professional: INR 50,000. Postgraduate General: INR 35,000. Postgraduate Professional: INR 75,000.",
+    "summary": "The HDFC Bank Parivartan ECSS Programme offers financial assistance to students from impoverished backgrounds across all Indian states, covering classes 1 to 12, diploma, ITI, polytechnic, undergraduate and postgraduate courses.",
+    "amount_text": null,
     "min_cgpa": null,
     "min_cgpa_quote": null,
     "min_percentage": 55.0,

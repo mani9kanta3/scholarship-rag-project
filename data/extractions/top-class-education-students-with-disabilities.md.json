@@ -1,9 +1,9 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 3918,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3158,
   "extracted": {
-    "summary": "Financial assistance to Indian students with disabilities for diploma, undergraduate and postgraduate courses at premier institutions such as IITs, NITs and Institutes of Excellence.",
-    "amount_text": "Tuition fees up to INR 1.90 lakh per annum. Miscellaneous allowances up to INR 10,000 per annum. Computer or laptop grant of INR 45,000 as a one-time grant in the first year. Aids and assistive devices grant of INR 30,000 as a one-time grant in the first year. Maintenance of INR 3,000 per month for hostellers or INR 1,500 per month for day scholars. Special allowances of INR 2,000 per month. Book allowance of INR 5,000 per annum.",
+    "summary": "Financial assistance for Indian students with a benchmark disability of 40% or more to pursue diploma, undergraduate or postgraduate courses at Institutes of Excellence.",
+    "amount_text": "Tuition fees up to INR 1.90 lakh per annum.",
     "min_cgpa": null,
     "min_cgpa_quote": null,
     "min_percentage": null,

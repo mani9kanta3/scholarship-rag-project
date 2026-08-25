@@ -1,9 +1,9 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 3879,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3043,
   "extracted": {
-    "summary": "An opportunity to provide financial assistance to meritorious students from economically disadvantaged backgrounds for higher education.",
-    "amount_text": "Graduation 1st, 2nd and 3rd year regular courses: INR 12,000 per annum. Graduation 4th and 5th year professional courses: INR 20,000 per annum. Graduation up to 3rd year technical courses: INR 12,000 per annum. Postgraduation all courses: INR 20,000 per annum.",
+    "summary": "Central Sector Scheme of Scholarship for College and University Students provides financial assistance to meritorious students from economically disadvantaged backgrounds for higher education.",
+    "amount_text": null,
     "min_cgpa": null,
     "min_cgpa_quote": null,
     "min_percentage": 80.0,
@@ -26,6 +26,6 @@
     "max_age": null,
     "max_age_quote": null,
     "deadline": null,
-    "deadline_quote": null
+    "deadline_quote": "Closed."
   }
 }

@@ -1,9 +1,9 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 3582,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3039,
   "extracted": {
-    "summary": "A centrally sponsored pre\u2011matric scholarship for Scheduled Tribe students in Goa studying Class\u202f9 or\u202f10, providing financial assistance.",
-    "amount_text": "Day Scholars: INR 2,250 annually plus an INR 750 books or ad hoc grant. Hostelers: INR 5,250 annually plus an INR 1,000 books or ad hoc grant. Additional Divyangjan allowance: INR 800 per month for hostelers or INR 600 per month for day scholars.",
+    "summary": "The NSP Centrally Sponsored Scheme of Pre-Matric Scholarship for ST Students (Class 9 and 10), Goa provides financial assistance to Scheduled Tribe students in Goa enrolled in Classes 9 or 10.",
+    "amount_text": null,
     "min_cgpa": null,
     "min_cgpa_quote": null,
     "min_percentage": null,

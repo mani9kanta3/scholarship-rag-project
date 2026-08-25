@@ -1,8 +1,8 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 3689,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3177,
   "extracted": {
-    "summary": "The Dr Ambedkar Post-Matric Scholarship for Economically Backward Classes (EBC) in Tripura provides a monthly maintenance allowance of up to INR 750 to eligible EBC students pursuing post\u2011matriculation studies.",
+    "summary": "A scholarship for economically backward class students in Tripura for post\u2011matriculation studies.",
     "amount_text": "monthly maintenance allowance of up to INR 750",
     "min_cgpa": null,
     "min_cgpa_quote": null,
@@ -11,11 +11,15 @@
     "max_family_income": 250000.0,
     "max_family_income_quote": "The annual family income must be not more than INR 2,50,000.",
     "categories": null,
-    "categories_quote": null,
+    "categories_quote": "Applicants must belong to the EBC category.",
     "genders": null,
     "genders_quote": null,
-    "course_levels": null,
-    "course_levels_quote": null,
+    "course_levels": [
+      "UG",
+      "PG",
+      "PHD"
+    ],
+    "course_levels_quote": "Applicants must be enrolled in a post-matriculation course at a government-recognised institution.",
     "states": [
       "Tripura"
     ],

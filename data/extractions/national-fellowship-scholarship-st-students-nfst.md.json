@@ -1,9 +1,9 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 4252,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3343,
   "extracted": {
-    "summary": "The National Fellowship and Scholarship for Higher Education of ST Students (NFST) provides fellowships for M.Phil and Ph.D. studies and scholarships for graduate and postgraduate professional courses to Scheduled Tribe students.",
-    "amount_text": "Fellowship recipients receive a stipend of up to INR 35,000 monthly. An annual contingency grant of up to INR 25,000. House rent allowance as per rules. Scholarship awardees receive full tuition and admission fees, capped at INR 2,50,000 annually for private institutions. A books allowance of INR 5,000 annually. A monthly stipend of INR 3,000. One-time computer assistance of INR 45,000.",
+    "summary": "National Fellowship and Scholarship for Higher Education of ST Students promotes higher education for Scheduled Tribe students through fellowship for M.Phil and Ph.D. and scholarship for graduate and postgraduate studies.",
+    "amount_text": "Fellowship stipend up to INR 35,000 monthly; scholarship full tuition up to INR 2,50,000 annually",
     "min_cgpa": null,
     "min_cgpa_quote": null,
     "min_percentage": 55.0,
@@ -17,11 +17,10 @@
     "genders": null,
     "genders_quote": null,
     "course_levels": [
-      "UG",
       "PG",
       "PHD"
     ],
-    "course_levels_quote": "The National Fellowship Scheme supports M.Phil and Ph.D. study, and the National Scholarship Scheme supports graduate and postgraduate studies in professional fields like medicine, engineering, management and law.",
+    "course_levels_quote": "For the fellowship, the applicant must be a maximum of 36 years old, admitted to a full-time M.Phil or Ph.D. course, and have a minimum of 55% marks in the postgraduate degree. For the scholarship, the applicant must be pursuing studies in a premier institute and have an annual family income not exceeding INR 6,00,000.",
     "states": null,
     "states_quote": null,
     "min_age": null,

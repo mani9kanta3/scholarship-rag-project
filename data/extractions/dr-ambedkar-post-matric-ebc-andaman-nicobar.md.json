@@ -1,9 +1,9 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 3722,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3132,
   "extracted": {
-    "summary": "A government initiative offering financial aid to economically disadvantaged students from Andaman and Nicobar pursuing higher education beyond Class 10.",
-    "amount_text": null,
+    "summary": "A government scholarship for economically disadvantaged students from Andaman and Nicobar Union Territory pursuing higher education beyond Class 10.",
+    "amount_text": "The maintenance allowance varies by course group.",
     "min_cgpa": null,
     "min_cgpa_quote": null,
     "min_percentage": null,

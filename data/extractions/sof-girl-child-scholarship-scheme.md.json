@@ -1,8 +1,8 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 3577,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 2970,
   "extracted": {
-    "summary": "The SOF Girl Child Scholarship Scheme provides INR 5,000 annually to 300 female students in classes 1 to 10 across India.",
+    "summary": "The Science Olympiad Foundation offers the SOF Girl Child Scholarship Scheme to support female students in classes 1 to 10 across India.",
     "amount_text": "INR 5,000 each annually",
     "min_cgpa": null,
     "min_cgpa_quote": null,

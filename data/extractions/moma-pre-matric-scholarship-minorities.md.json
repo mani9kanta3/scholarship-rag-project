@@ -1,9 +1,9 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 3538,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 2994,
   "extracted": {
-    "summary": "The MOMA Pre-Matric Scholarship for Minorities provides financial assistance to minority students studying in Class 9 or 10.",
-    "amount_text": "INR 500 admission fee annually. INR 350 per month tuition. Maintenance of INR 600 per month for hostellers or INR 100 per month for day scholars.",
+    "summary": "MOMA Pre-Matric Scholarship for Minorities supports Class 9 and 10 students from recognized minority communities, requiring a minimum of 50% marks and a family income of INR 1,00,000 or less.",
+    "amount_text": null,
     "min_cgpa": null,
     "min_cgpa_quote": null,
     "min_percentage": 50.0,
@@ -27,6 +27,6 @@
     "max_age": null,
     "max_age_quote": null,
     "deadline": null,
-    "deadline_quote": null
+    "deadline_quote": "Not stated on the page."
   }
 }

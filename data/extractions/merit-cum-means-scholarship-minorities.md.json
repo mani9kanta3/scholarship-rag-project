@@ -1,8 +1,8 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 3706,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3105,
   "extracted": {
-    "summary": "A scholarship for minority community students pursuing technical or professional undergraduate or postgraduate courses, providing financial assistance based on merit and means.",
+    "summary": "NSP Merit Cum Means Scholarship for Professional and Technical Courses (Minorities) provides financial assistance to minority community students pursuing technical or professional courses at the undergraduate or postgraduate level.",
     "amount_text": "INR 20,000 per annum subject to actual whichever is less, for both Hostellers and Day Scholars.",
     "min_cgpa": null,
     "min_cgpa_quote": null,
@@ -28,6 +28,6 @@
     "max_age": null,
     "max_age_quote": null,
     "deadline": null,
-    "deadline_quote": "Closed."
+    "deadline_quote": null
   }
 }

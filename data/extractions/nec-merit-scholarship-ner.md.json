@@ -1,9 +1,9 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 3907,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3167,
   "extracted": {
-    "summary": "The NSP NEC Merit Scholarship provides financial assistance to meritorious students from the North Eastern Region of India pursuing diploma, degree, postgraduate, M.Phil or Ph.D. programs.",
-    "amount_text": "Diploma: INR 20,000 per annum.\nDegree: INR 22,000 per annum.\nPG: INR 25,000 per annum.\nM.Phil or Ph.D.: INR 30,000 per annum.",
+    "summary": "Financial assistance to meritorious students from the North Eastern Region of India for pursuing higher professional courses in recognised Indian institutions.",
+    "amount_text": null,
     "min_cgpa": null,
     "min_cgpa_quote": null,
     "min_percentage": 60.0,

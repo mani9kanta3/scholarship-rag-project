@@ -1,9 +1,9 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 3645,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3099,
   "extracted": {
-    "summary": "Post-Matric Scholarship for OBC Students, Assam provides financial support to OBC students in Class 11 and above residing in Assam.",
-    "amount_text": "Scholarships range from INR 5,000 to INR 20,000 annually depending on the course category.",
+    "summary": "NSP Post-Matric Scholarship for OBC Students, Assam provides financial support to OBC students in Assam studying from class 11 onwards.",
+    "amount_text": "INR 5,000 to INR 20,000 annually",
     "min_cgpa": null,
     "min_cgpa_quote": null,
     "min_percentage": null,
@@ -17,7 +17,11 @@
     "genders": null,
     "genders_quote": null,
     "course_levels": [
-      "SCHOOL"
+      "SCHOOL",
+      "DIPLOMA",
+      "UG",
+      "PG",
+      "PHD"
     ],
     "course_levels_quote": "Applicants must be studying in classes 11 or above in a recognised institution.",
     "states": [

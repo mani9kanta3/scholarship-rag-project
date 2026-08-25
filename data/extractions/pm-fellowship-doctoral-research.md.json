@@ -1,8 +1,8 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 3488,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3084,
   "extracted": {
-    "summary": "The Prime Minister's Fellowship Scheme for Doctoral Research provides up to INR 10,41,000 per annum to full-time Ph.D. scholars for up to four years.",
+    "summary": "Prime Minister's Fellowship Scheme for Doctoral Research provides up to INR 10,41,000 annually to full\u2011time Ph.D. scholars in Science, Technology, Engineering, Agriculture or Medicine.",
     "amount_text": "up to INR 10,41,000 annually",
     "min_cgpa": null,
     "min_cgpa_quote": null,
@@ -25,6 +25,6 @@
     "max_age": null,
     "max_age_quote": null,
     "deadline": null,
-    "deadline_quote": null
+    "deadline_quote": "Always Open. Last date for online submission of form is within 14 months from registration in the Ph.D."
   }
 }

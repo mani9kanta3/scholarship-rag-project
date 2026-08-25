@@ -1,26 +1,27 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 3837,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3198,
   "extracted": {
-    "summary": "A centrally sponsored post-matric scholarship initiative supporting economically disadvantaged Backward Class students pursuing higher education from Class 11 to PhD levels, named after the architect of the Indian Constitution.",
-    "amount_text": "Monthly maintenance allowances by group. Hostellers receive INR 260 to INR 750 and day scholars receive INR 160 to INR 350.",
+    "summary": "The Dr Ambedkar Scholarship is a centrally sponsored post\u2011matric scholarship for economically disadvantaged students from Class 11 to PhD levels, limited to permanent residents of Chandigarh.",
+    "amount_text": null,
     "min_cgpa": null,
     "min_cgpa_quote": null,
     "min_percentage": null,
     "min_percentage_quote": null,
     "max_family_income": 250000.0,
     "max_family_income_quote": "The annual household income must not exceed INR 2,50,000.",
-    "categories": null,
-    "categories_quote": null,
+    "categories": [
+      "EWS"
+    ],
+    "categories_quote": "Applicants must belong to the EBC categories per the Government of India's list.",
     "genders": null,
     "genders_quote": null,
     "course_levels": [
-      "SCHOOL",
       "UG",
       "PG",
       "PHD"
     ],
-    "course_levels_quote": "supporting economically disadvantaged Backward Class students pursuing higher education from Class 11 to PhD levels",
+    "course_levels_quote": "Applicants must be enrolled in post-matriculation courses at recognised institutions.",
     "states": [
       "Chandigarh"
     ],

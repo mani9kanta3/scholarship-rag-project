@@ -1,9 +1,9 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 4092,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3134,
   "extracted": {
-    "summary": "Financial support for minority students from higher secondary through postgraduation in West Bengal, offering up to INR 60,000.",
-    "amount_text": "Selected students will receive an award of up to INR 60,000.",
+    "summary": "The Swami Vivekananda Merit Cum Means Scholarship Scheme for Minorities, West Bengal provides financial support to minority students from higher secondary to post\u2011graduation, including diploma and professional courses, with a maximum award of INR 60,000.",
+    "amount_text": "up to INR 60,000",
     "min_cgpa": null,
     "min_cgpa_quote": null,
     "min_percentage": 53.0,
@@ -13,11 +13,10 @@
     "categories": [
       "MINORITY"
     ],
-    "categories_quote": "Financial support for minority students pursuing education from higher secondary through postgraduation, including diploma and professional courses like Diploma (Polytechnic), Diploma in Pharmacy, B.Ed., D.El.Ed. and M.Ed.",
+    "categories_quote": "Swami Vivekananda Merit Cum Means Scholarship Scheme for Minorities, West Bengal",
     "genders": null,
     "genders_quote": null,
     "course_levels": [
-      "SCHOOL",
       "DIPLOMA",
       "UG",
       "PG"

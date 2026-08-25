@@ -1,9 +1,9 @@
 {
-  "model": "openai/gpt-oss-120b",
-  "tokens": 3736,
+  "model": "openai/gpt-oss-20b",
+  "tokens": 3033,
   "extracted": {
-    "summary": "Pre-Matric Scholarship for SC Students (Class 9 and 10) in Delhi provides financial assistance to Scheduled Caste students studying in Class 9 or 10.",
-    "amount_text": "Day Scholar: INR 225 monthly plus an INR 750 annual book grant. Hosteller: INR 525 monthly plus an INR 1,000 annual book grant. A consolidated academic allowance and an extra allowance for disabled students.",
+    "summary": "Pre-Matric Scholarship for SC Students (Class 9 and 10) in Delhi provides financial assistance to Scheduled Caste students to reduce dropout rates.",
+    "amount_text": null,
     "min_cgpa": null,
     "min_cgpa_quote": null,
     "min_percentage": null,
