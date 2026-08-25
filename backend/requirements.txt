@@ -30,6 +30,10 @@ transformers==5.15.1
 # splitter only. Retrieval, ranking, prompting and the grounding check
 # are all written by hand, because that is where the whole contribution
 # of this project sits.
+#
+# Note: requirements-eval.txt moves this back to 0.3.29, because RAGAS
+# will not import against 0.4. Only PyPDFLoader comes from here and it
+# is a lazy import, so either version works for the project itself.
 langchain-community==0.4.2
 langchain-text-splitters==1.1.2
 pypdf==6.16.2

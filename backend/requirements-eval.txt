@@ -1,0 +1,28 @@
+# Only needed to run eval/ragas_eval.py. Everything else in the project
+# works without any of this.
+#
+#     pip install -r requirements-eval.txt
+#
+# It is a separate file because installing RAGAS moves two packages the
+# rest of the project also uses, and both moves are worth knowing about
+# rather than discovering.
+#
+# groq goes from 1.6.0 down to 0.37.1, because that is what RAGAS pins.
+# The project works fine on the older SDK, but forcing every install
+# down a major version for an optional measurement tool is the wrong
+# trade, so it stays opt in.
+#
+# langchain-community has to go back to 0.3.x. RAGAS 0.4.3, which is the
+# newest release, still does `from langchain_community.chat_models.vertexai
+# import ChatVertexAI` on import, and that module was removed in
+# langchain-community 0.4. Nothing in this project is affected: the only
+# thing it uses langchain-community for is PyPDFLoader, and that is a
+# lazy import inside one function.
+#
+# To go back to the newer versions afterwards:
+#     pip install groq==1.6.0 langchain-community==0.4.2
+# which will in turn break RAGAS. Pick one; they do not co-exist.
+
+ragas==0.4.3
+langchain-groq==1.1.3
+langchain-community==0.3.29

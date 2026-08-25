@@ -35,24 +35,34 @@ import sys
 from app import config, embeddings, llm, retrieval
 
 from .questions import QUESTIONS
+from .run_eval import CONFIGS
 
 RESULTS_DIR = config.DATA_DIR / "eval"
 BY_ID = {question["id"]: question for question in QUESTIONS}
 
 
-def rebuild_contexts(row):
-    """Get back the chunks this answer was written from."""
+def rebuild_contexts(row, settings):
+    """
+    Get back the chunks this answer was actually written from.
+
+    The retrieval path has to match the configuration being scored. An
+    earlier version keyed off whether any scheme ids were recorded,
+    which quietly rebuilt hybrid contexts for the naive run and would
+    have credited the baseline with retrieval it never did.
+    """
     question = BY_ID[row["id"]]
 
-    if row["retrieved_scheme_ids"]:
-        chunks, _ = retrieval.hybrid_retrieve(
-            question["question"],
-            profile=question.get("profile"),
-            scheme_ids=row["retrieved_scheme_ids"],
-            use_reranker=True,
+    if settings["mode"] == "naive":
+        chunks = retrieval.naive_retrieve(
+            question["question"], use_reranker=settings["use_reranker"]
         )
     else:
-        chunks = retrieval.naive_retrieve(question["question"])
+        chunks, _ = retrieval.hybrid_retrieve(
+            question["question"],
+            profile=question.get("profile") if settings["use_profile"] else None,
+            scheme_ids=row["retrieved_scheme_ids"] or None,
+            use_reranker=settings["use_reranker"],
+        )
 
     return [chunk["chunk_text"] for chunk in chunks]
 
@@ -64,6 +74,7 @@ def build_dataset(name):
         raise SystemExit(f"No results for {name}. Run python -m eval.run_eval first.")
 
     rows = json.loads(path.read_text(encoding="utf-8"))
+    settings = next(item for item in CONFIGS if item["name"] == name)
 
     samples = []
     for row in rows:
@@ -78,7 +89,7 @@ def build_dataset(name):
             {
                 "user_input": row["question"],
                 "response": row["answer"] or "",
-                "retrieved_contexts": rebuild_contexts(row),
+                "retrieved_contexts": rebuild_contexts(row, settings),
                 "reference": BY_ID[row["id"]]["expected_answer"],
             }
         )
