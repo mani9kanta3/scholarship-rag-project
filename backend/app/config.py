@@ -66,7 +66,7 @@ GROQ_MODEL = get("GROQ_MODEL", "openai/gpt-oss-120b")
 # phrasing and its own reasoning and marks them generously. Judge and
 # generator being different models is the cheap version of not marking
 # your own homework.
-GROQ_JUDGE_MODEL = get("GROQ_JUDGE_MODEL", "openai/gpt-oss-20b")
+GROQ_JUDGE_MODEL = get("GROQ_JUDGE_MODEL", "openai/gpt-oss-safeguard-20b")
 
 # Local models. Both are inference only, nothing is trained here.
 EMBEDDING_MODEL = get("EMBEDDING_MODEL", "BAAI/bge-small-en-v1.5")
