@@ -1,0 +1,42 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 3907,
+  "extracted": {
+    "summary": "The NSP NEC Merit Scholarship provides financial assistance to meritorious students from the North Eastern Region of India pursuing diploma, degree, postgraduate, M.Phil or Ph.D. programs.",
+    "amount_text": "Diploma: INR 20,000 per annum.\nDegree: INR 22,000 per annum.\nPG: INR 25,000 per annum.\nM.Phil or Ph.D.: INR 30,000 per annum.",
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": 60.0,
+    "min_percentage_quote": "Applicants must have scored a minimum of 60% marks in the qualifying examinations.",
+    "max_family_income": 800000.0,
+    "max_family_income_quote": "Applicants must have an annual family income of less than INR 8,00,000 from all sources.",
+    "categories": null,
+    "categories_quote": null,
+    "genders": null,
+    "genders_quote": null,
+    "course_levels": [
+      "DIPLOMA",
+      "UG",
+      "PG",
+      "PHD"
+    ],
+    "course_levels_quote": "Applicants must be enrolled in a diploma, degree or postgraduate course, or be registered in a M.Phil. or Ph.D. program.",
+    "states": [
+      "Assam",
+      "Arunachal Pradesh",
+      "Manipur",
+      "Meghalaya",
+      "Mizoram",
+      "Nagaland",
+      "Sikkim",
+      "Tripura"
+    ],
+    "states_quote": "Applicants must be an Indian citizen and a permanent resident of Assam, Arunachal Pradesh, Manipur, Meghalaya, Mizoram, Nagaland, Sikkim or Tripura.",
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": null,
+    "max_age_quote": null,
+    "deadline": "2025-12-15",
+    "deadline_quote": "15 December 2025."
+  }
+}

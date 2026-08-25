@@ -1,0 +1,33 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 4308,
+  "extracted": {
+    "summary": "The National Overseas Scholarship Scheme for SC Students provides financial support for SC, DNT, LAL, and TA students to pursue Master's, Ph.D., and Post-Doctoral studies abroad at QS Top 500 universities.",
+    "amount_text": "Annual maintenance of USD 15,400 for non-UK, or GBP 9,900 for the UK.",
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": 55.0,
+    "min_percentage_quote": "Applicants must score a minimum of 60% in the Bachelor's degree for a Master's, or in the Master's degree for a Ph.D., or 55% for Post-Doctoral study.",
+    "max_family_income": 800000.0,
+    "max_family_income_quote": "The family income must not exceed INR 8 lakh annually.",
+    "categories": [
+      "SC"
+    ],
+    "categories_quote": "Applicants must belong to the SC, DNT or SNT, LAL, or TA groups with a valid certificate.",
+    "genders": null,
+    "genders_quote": null,
+    "course_levels": [
+      "PG",
+      "PHD"
+    ],
+    "course_levels_quote": "This flagship initiative is designed to support meritorious students from historically marginalized communities, including Scheduled Castes (SC), Denotified and Semi-Nomadic Tribes (DNTs), Landless Agricultural Labourers, and Traditional Artisans, in pursuing Master's and Ph.D. programs at top universities abroad.",
+    "states": null,
+    "states_quote": null,
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": 45,
+    "max_age_quote": "The age limit is 35 years or less for a Master's, 40 years or less for a Ph.D., and 45 years or less for Post-Doctoral study, as of April 1.",
+    "deadline": null,
+    "deadline_quote": null
+  }
+}

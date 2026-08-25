@@ -1,0 +1,33 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 3706,
+  "extracted": {
+    "summary": "A scholarship for minority community students pursuing technical or professional undergraduate or postgraduate courses, providing financial assistance based on merit and means.",
+    "amount_text": "INR 20,000 per annum subject to actual whichever is less, for both Hostellers and Day Scholars.",
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": 50.0,
+    "min_percentage_quote": "Applicants must have secured at least 50% marks or equivalent grade in the previous final examination.",
+    "max_family_income": 250000.0,
+    "max_family_income_quote": "Applicants must have an annual family income of less than INR 2.50 lakhs from all sources.",
+    "categories": [
+      "MINORITY"
+    ],
+    "categories_quote": "Applicants must belong to Minority communities (Muslims, Sikhs, Christians, Buddhists, Jain, and Parsis/Zoroastrians).",
+    "genders": null,
+    "genders_quote": null,
+    "course_levels": [
+      "UG",
+      "PG"
+    ],
+    "course_levels_quote": "Applicants must be pursuing a technical or professional course at the undergraduate or postgraduate level from a recognized institution.",
+    "states": null,
+    "states_quote": null,
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": null,
+    "max_age_quote": null,
+    "deadline": null,
+    "deadline_quote": "Closed."
+  }
+}

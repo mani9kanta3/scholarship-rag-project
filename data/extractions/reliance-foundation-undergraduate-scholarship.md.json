@@ -1,0 +1,30 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 3772,
+  "extracted": {
+    "summary": "The Reliance Foundation Undergraduate Scholarships provide up to INR 2,00,000 financial aid to first-year undergraduate students across all streams, supporting them throughout the degree program.",
+    "amount_text": "Students will receive a scholarship amount of up to INR 2,00,000 over the duration of the UG degree programme.",
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": 60.0,
+    "min_percentage_quote": "Applicant must have passed class 12 with minimum 60% marks.",
+    "max_family_income": 1500000.0,
+    "max_family_income_quote": "Applicant's family income must be less than INR 15 Lakhs.",
+    "categories": null,
+    "categories_quote": null,
+    "genders": null,
+    "genders_quote": null,
+    "course_levels": [
+      "UG"
+    ],
+    "course_levels_quote": "Students will receive a scholarship amount of up to INR 2,00,000 over the duration of the UG degree programme.",
+    "states": null,
+    "states_quote": null,
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": null,
+    "max_age_quote": null,
+    "deadline": "2025-10-07",
+    "deadline_quote": "October 7, 2025."
+  }
+}

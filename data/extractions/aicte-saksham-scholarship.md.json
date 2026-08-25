@@ -1,0 +1,31 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 3541,
+  "extracted": {
+    "summary": "The AICTE Saksham Scholarship provides financial assistance to specially-abled students enrolled in diploma or degree programs at AICTE\u2011approved institutions.",
+    "amount_text": "INR 50,000 per annum",
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": null,
+    "min_percentage_quote": null,
+    "max_family_income": 800000.0,
+    "max_family_income_quote": "The annual family income from all sources should not exceed INR 8 lakh during the current financial year.",
+    "categories": null,
+    "categories_quote": null,
+    "genders": null,
+    "genders_quote": null,
+    "course_levels": [
+      "DIPLOMA",
+      "UG"
+    ],
+    "course_levels_quote": "Applicants must be enrolled in the first year of a diploma or degree program, or the second year via lateral entry, at an AICTE-approved institution.",
+    "states": null,
+    "states_quote": null,
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": null,
+    "max_age_quote": null,
+    "deadline": "2026-10-31",
+    "deadline_quote": "October 31, 2026."
+  }
+}

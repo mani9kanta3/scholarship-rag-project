@@ -1,0 +1,30 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 3714,
+  "extracted": {
+    "summary": "The Vivek Medical Students Scholarship Program by Karuna Trust provides scholarships to meritorious and economically backward MBBS students.",
+    "amount_text": null,
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": 70.0,
+    "min_percentage_quote": "A 2nd, 3rd or 4th year MBBS student who has not received any scholarship other than VMS in previous years and has secured over 70% in the last university exam.",
+    "max_family_income": 300000.0,
+    "max_family_income_quote": "Annual family income not exceeding INR 3,00,000.",
+    "categories": null,
+    "categories_quote": null,
+    "genders": null,
+    "genders_quote": null,
+    "course_levels": [
+      "UG"
+    ],
+    "course_levels_quote": "A 1st year MBBS student of Bangalore Medical College or Mysore Medical College with 85% or above in 2nd PUC and an entrance exam rank of 2000 or below.",
+    "states": null,
+    "states_quote": null,
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": null,
+    "max_age_quote": null,
+    "deadline": "2025-11-20",
+    "deadline_quote": "20 November 2025."
+  }
+}

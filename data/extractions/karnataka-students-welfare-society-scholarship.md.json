@@ -1,0 +1,32 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 3400,
+  "extracted": {
+    "summary": "A programme aimed at providing financial support to students in South India for higher education after high school.",
+    "amount_text": "Scholarships from INR 10,000 to INR 1,00,000, with funds sent directly to the educational institution to cover tuition and related costs.",
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": 60.0,
+    "min_percentage_quote": "Applicants must have passed the 12th board or Pre-University Course (PUC) examination with a minimum of 60% marks.",
+    "max_family_income": null,
+    "max_family_income_quote": null,
+    "categories": null,
+    "categories_quote": null,
+    "genders": null,
+    "genders_quote": null,
+    "course_levels": null,
+    "course_levels_quote": null,
+    "states": [
+      "Karnataka",
+      "Kerala",
+      "Tamil Nadu"
+    ],
+    "states_quote": "Applicants must be a resident of Karnataka, Kerala or Tamil Nadu.",
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": null,
+    "max_age_quote": null,
+    "deadline": "2025-08-30",
+    "deadline_quote": "30 August 2025."
+  }
+}

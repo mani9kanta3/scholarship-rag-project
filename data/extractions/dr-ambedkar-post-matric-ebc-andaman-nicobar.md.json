@@ -1,0 +1,32 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 3722,
+  "extracted": {
+    "summary": "A government initiative offering financial aid to economically disadvantaged students from Andaman and Nicobar pursuing higher education beyond Class 10.",
+    "amount_text": null,
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": null,
+    "min_percentage_quote": null,
+    "max_family_income": 100000.0,
+    "max_family_income_quote": "Applicants must have a combined annual income not exceeding INR 1,00,000.",
+    "categories": [
+      "GEN"
+    ],
+    "categories_quote": "Applicants must be of the General category, that is not SC, ST or OBC.",
+    "genders": null,
+    "genders_quote": null,
+    "course_levels": null,
+    "course_levels_quote": null,
+    "states": [
+      "Andaman and Nicobar"
+    ],
+    "states_quote": "Applicants must be domiciled in Andaman and Nicobar.",
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": null,
+    "max_age_quote": null,
+    "deadline": "2025-10-31",
+    "deadline_quote": "31 October 2025."
+  }
+}

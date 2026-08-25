@@ -1,0 +1,34 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 3736,
+  "extracted": {
+    "summary": "Pre-Matric Scholarship for SC Students (Class 9 and 10) in Delhi provides financial assistance to Scheduled Caste students studying in Class 9 or 10.",
+    "amount_text": "Day Scholar: INR 225 monthly plus an INR 750 annual book grant. Hosteller: INR 525 monthly plus an INR 1,000 annual book grant. A consolidated academic allowance and an extra allowance for disabled students.",
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": null,
+    "min_percentage_quote": null,
+    "max_family_income": 250000.0,
+    "max_family_income_quote": "Applicants must have a family income of less than INR 2,50,000 per annum.",
+    "categories": [
+      "SC"
+    ],
+    "categories_quote": "Applicants must belong to the Scheduled Caste (SC) category.",
+    "genders": null,
+    "genders_quote": null,
+    "course_levels": [
+      "SCHOOL"
+    ],
+    "course_levels_quote": "Applicants must be a full-time student in Class 9 or 10 from a recognised institution.",
+    "states": [
+      "Delhi"
+    ],
+    "states_quote": "Applicants must be a domicile of Delhi.",
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": null,
+    "max_age_quote": null,
+    "deadline": "2026-01-31",
+    "deadline_quote": "31st January 2026."
+  }
+}

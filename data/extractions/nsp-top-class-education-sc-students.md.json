@@ -1,0 +1,33 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 3620,
+  "extracted": {
+    "summary": "A scholarship for Scheduled Caste students pursuing undergraduate or postgraduate studies, providing financial assistance for tuition and living expenses.",
+    "amount_text": "Full tuition fee and non-refundable charges. A ceiling of INR 2,00,000 per annum per student applies to private sector institutions. Academic allowance for the first year: INR 86,000. Academic allowance for subsequent years: INR 41,000 per year.",
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": 60.0,
+    "min_percentage_quote": "Applicants must have passed the Class 12 examination with a minimum of 60% marks.",
+    "max_family_income": 800000.0,
+    "max_family_income_quote": "Applicants must have an annual income of less than INR 8,00,000 from all sources.",
+    "categories": [
+      "SC"
+    ],
+    "categories_quote": "Applicants must belong to the Scheduled Caste (SC) category.",
+    "genders": null,
+    "genders_quote": null,
+    "course_levels": [
+      "UG",
+      "PG"
+    ],
+    "course_levels_quote": "Applicants must have secured admission to a recognised college or university for a full-time undergraduate or postgraduate degree.",
+    "states": null,
+    "states_quote": null,
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": null,
+    "max_age_quote": null,
+    "deadline": "2026-10-31",
+    "deadline_quote": "31st October 2026."
+  }
+}

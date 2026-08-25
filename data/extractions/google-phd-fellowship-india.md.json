@@ -1,0 +1,30 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 3580,
+  "extracted": {
+    "summary": "Google PhD Fellowship India Program is an opportunity offered by Google to support promising Ph.D. candidates of all backgrounds who seek to influence the future of technology.",
+    "amount_text": "Early-stage PhD candidates receive an up to 4 year fellowship with USD 50,000 plus a Google research mentor. Late-stage PhD candidates receive a 1 year fellowship with USD 10,000 plus a Google research mentor.",
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": null,
+    "min_percentage_quote": null,
+    "max_family_income": null,
+    "max_family_income_quote": null,
+    "categories": null,
+    "categories_quote": null,
+    "genders": null,
+    "genders_quote": null,
+    "course_levels": [
+      "PHD"
+    ],
+    "course_levels_quote": "Applicants must be enrolled full-time in the Ph.D. program.",
+    "states": null,
+    "states_quote": null,
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": null,
+    "max_age_quote": null,
+    "deadline": "2026-04-30",
+    "deadline_quote": "30th April 2026. The status shown on the page is Closed."
+  }
+}

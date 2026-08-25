@@ -1,0 +1,34 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 3582,
+  "extracted": {
+    "summary": "A centrally sponsored pre\u2011matric scholarship for Scheduled Tribe students in Goa studying Class\u202f9 or\u202f10, providing financial assistance.",
+    "amount_text": "Day Scholars: INR 2,250 annually plus an INR 750 books or ad hoc grant. Hostelers: INR 5,250 annually plus an INR 1,000 books or ad hoc grant. Additional Divyangjan allowance: INR 800 per month for hostelers or INR 600 per month for day scholars.",
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": null,
+    "min_percentage_quote": null,
+    "max_family_income": 250000.0,
+    "max_family_income_quote": "Applicants must have an annual family income of less than INR 2,50,000.",
+    "categories": [
+      "ST"
+    ],
+    "categories_quote": "Applicants must belong to the Scheduled Tribe (ST) community.",
+    "genders": null,
+    "genders_quote": null,
+    "course_levels": [
+      "SCHOOL"
+    ],
+    "course_levels_quote": "Applicants must be a regular full-time student in Class 9 or 10 in a government or recognised school.",
+    "states": [
+      "Goa"
+    ],
+    "states_quote": "Applicants must be a domicile of Goa.",
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": null,
+    "max_age_quote": null,
+    "deadline": "2025-10-31",
+    "deadline_quote": "31 October 2025."
+  }
+}

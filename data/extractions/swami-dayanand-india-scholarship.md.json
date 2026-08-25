@@ -1,0 +1,30 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 3603,
+  "extracted": {
+    "summary": "The Swami Dayanand India Scholarship provides financial assistance to meritorious students pursuing undergraduate professional courses in India.",
+    "amount_text": "up to INR 50,000 per academic year.",
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": 80.0,
+    "min_percentage_quote": "Applicants must have secured a minimum of 80% marks or equivalent CGPA in Class 12.",
+    "max_family_income": 1200000.0,
+    "max_family_income_quote": "Applicants must have an annual family income of INR 12 lakh or less from all sources.",
+    "categories": null,
+    "categories_quote": null,
+    "genders": null,
+    "genders_quote": null,
+    "course_levels": [
+      "UG"
+    ],
+    "course_levels_quote": "Applicants must be enrolled in the first year of a full-time undergraduate professional degree programme in India.",
+    "states": null,
+    "states_quote": null,
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": null,
+    "max_age_quote": null,
+    "deadline": "2026-10-31",
+    "deadline_quote": "31st October 2026."
+  }
+}

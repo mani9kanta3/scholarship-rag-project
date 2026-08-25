@@ -1,0 +1,30 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 3488,
+  "extracted": {
+    "summary": "The Prime Minister's Fellowship Scheme for Doctoral Research provides up to INR 10,41,000 per annum to full-time Ph.D. scholars for up to four years.",
+    "amount_text": "up to INR 10,41,000 annually",
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": null,
+    "min_percentage_quote": null,
+    "max_family_income": null,
+    "max_family_income_quote": null,
+    "categories": null,
+    "categories_quote": null,
+    "genders": null,
+    "genders_quote": null,
+    "course_levels": [
+      "PHD"
+    ],
+    "course_levels_quote": "Applicants must have taken admission in a full-time Ph.D. degree in the last 14 months from the date of submission of applications in any recognized Indian University, Institute or Research Laboratory.",
+    "states": null,
+    "states_quote": null,
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": null,
+    "max_age_quote": null,
+    "deadline": null,
+    "deadline_quote": null
+  }
+}

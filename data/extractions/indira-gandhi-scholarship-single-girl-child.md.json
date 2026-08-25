@@ -1,0 +1,32 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 3468,
+  "extracted": {
+    "summary": "A scholarship for single girl child pursuing a first-year master's degree, up to 30 years old, providing INR 36,200 per annum for up to 2 years.",
+    "amount_text": "INR 36,200 per annum.",
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": null,
+    "min_percentage_quote": null,
+    "max_family_income": null,
+    "max_family_income_quote": null,
+    "categories": null,
+    "categories_quote": null,
+    "genders": [
+      "FEMALE"
+    ],
+    "genders_quote": "Applicants must be a girl student up to 30 years of age at the time of admission.",
+    "course_levels": [
+      "PG"
+    ],
+    "course_levels_quote": "Applicants must have taken admission to a regular full-time first-year master's degree course in any designated university or a post-graduate college.",
+    "states": null,
+    "states_quote": null,
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": 30,
+    "max_age_quote": "Applicants must be a girl student up to 30 years of age at the time of admission.",
+    "deadline": "2022-12-31",
+    "deadline_quote": "The scholarship closing date was 31st December 2022."
+  }
+}

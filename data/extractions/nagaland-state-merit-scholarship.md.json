@@ -1,0 +1,35 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 4482,
+  "extracted": {
+    "summary": "The Nagaland State Merit Scholarship, offered by the Department of Higher Education, Nagaland, provides financial assistance to domiciled students pursuing post\u2011matric studies.",
+    "amount_text": null,
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": 70.0,
+    "min_percentage_quote": "For PG 1st year, a minimum of 70% at the Graduation level is required.",
+    "max_family_income": null,
+    "max_family_income_quote": null,
+    "categories": null,
+    "categories_quote": null,
+    "genders": null,
+    "genders_quote": null,
+    "course_levels": [
+      "SCHOOL",
+      "DIPLOMA",
+      "UG",
+      "PG"
+    ],
+    "course_levels_quote": "Applicants must be pursuing studies at the post-matric level in a recognised institution.",
+    "states": [
+      "Nagaland"
+    ],
+    "states_quote": "Applicants must be a domicile of Nagaland or permanently settled in Nagaland.",
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": null,
+    "max_age_quote": null,
+    "deadline": "2025-10-31",
+    "deadline_quote": "31 October 2025."
+  }
+}

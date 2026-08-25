@@ -1,0 +1,35 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 3427,
+  "extracted": {
+    "summary": "The Post Matric Scholarship for SC Students provides financial assistance to SC students from Class 11 to Ph.D. level across India.",
+    "amount_text": null,
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": null,
+    "min_percentage_quote": null,
+    "max_family_income": 250000.0,
+    "max_family_income_quote": "Applicants must have an annual family income of less than INR 2.5 lakhs.",
+    "categories": [
+      "SC"
+    ],
+    "categories_quote": "Applicants must belong to the Scheduled Caste category as determined by the state/union territory (UT).",
+    "genders": null,
+    "genders_quote": null,
+    "course_levels": [
+      "SCHOOL",
+      "UG",
+      "PG",
+      "PHD"
+    ],
+    "course_levels_quote": "Applicants must be studying at post-matriculation or post-secondary level i.e. Class 11 to Ph.D. level.",
+    "states": null,
+    "states_quote": null,
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": null,
+    "max_age_quote": null,
+    "deadline": "2022-04-30",
+    "deadline_quote": "Scholarship Closing Date - 30th April 2022. The status shown on the page is Closed."
+  }
+}

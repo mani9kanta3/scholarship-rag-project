@@ -1,0 +1,31 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 3879,
+  "extracted": {
+    "summary": "An opportunity to provide financial assistance to meritorious students from economically disadvantaged backgrounds for higher education.",
+    "amount_text": "Graduation 1st, 2nd and 3rd year regular courses: INR 12,000 per annum. Graduation 4th and 5th year professional courses: INR 20,000 per annum. Graduation up to 3rd year technical courses: INR 12,000 per annum. Postgraduation all courses: INR 20,000 per annum.",
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": 80.0,
+    "min_percentage_quote": "Applicants must have passed Class 12 from a recognised institution with a minimum score of 80% in their chosen stream.",
+    "max_family_income": 450000.0,
+    "max_family_income_quote": "Applicants must have an annual parental/family income not exceeding INR 4,50,000.",
+    "categories": null,
+    "categories_quote": null,
+    "genders": null,
+    "genders_quote": null,
+    "course_levels": [
+      "UG",
+      "PG"
+    ],
+    "course_levels_quote": "Applicants must be currently enrolled in an undergraduate (UG) or postgraduate (PG) program in a professional field at a college/institution recognised by the All India Council for Technical Education (AICTE) or other relevant regulatory bodies.",
+    "states": null,
+    "states_quote": null,
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": null,
+    "max_age_quote": null,
+    "deadline": null,
+    "deadline_quote": null
+  }
+}

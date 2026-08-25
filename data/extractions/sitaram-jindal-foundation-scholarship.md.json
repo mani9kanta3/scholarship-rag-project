@@ -1,0 +1,33 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 4147,
+  "extracted": {
+    "summary": "The Sitaram Jindal Foundation Scholarship Scheme provides financial assistance to underprivileged students from class 11 up to postgraduate level across various fields.",
+    "amount_text": null,
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": null,
+    "min_percentage_quote": null,
+    "max_family_income": 400000.0,
+    "max_family_income_quote": "Applicants must have an income up to INR 4,00,000 for salaried employees, and up to INR 2,50,000 for others.",
+    "categories": null,
+    "categories_quote": null,
+    "genders": null,
+    "genders_quote": null,
+    "course_levels": [
+      "SCHOOL",
+      "DIPLOMA",
+      "UG",
+      "PG"
+    ],
+    "course_levels_quote": "Applicants must be a student of class 11, 12, ITI, Diploma, graduation or postgraduation, in General Fields, Medical or Engineering.",
+    "states": null,
+    "states_quote": null,
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": 30,
+    "max_age_quote": "Applicants must be below 30 years of age.",
+    "deadline": null,
+    "deadline_quote": "Always Open. Applications are received round the year."
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 3645,
+  "extracted": {
+    "summary": "Post-Matric Scholarship for OBC Students, Assam provides financial support to OBC students in Class 11 and above residing in Assam.",
+    "amount_text": "Scholarships range from INR 5,000 to INR 20,000 annually depending on the course category.",
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": null,
+    "min_percentage_quote": null,
+    "max_family_income": 250000.0,
+    "max_family_income_quote": "Applicants must have an annual parent or guardian income of not more than INR 2,50,000 from all sources.",
+    "categories": [
+      "OBC"
+    ],
+    "categories_quote": "Applicants must belong to the Other Backward Class (OBC) community.",
+    "genders": null,
+    "genders_quote": null,
+    "course_levels": [
+      "SCHOOL"
+    ],
+    "course_levels_quote": "Applicants must be studying in classes 11 or above in a recognised institution.",
+    "states": [
+      "Assam"
+    ],
+    "states_quote": "Applicants must be domiciled in Assam.",
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": null,
+    "max_age_quote": null,
+    "deadline": "2026-09-30",
+    "deadline_quote": "30 September 2026."
+  }
+}

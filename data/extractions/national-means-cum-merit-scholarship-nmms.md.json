@@ -1,0 +1,30 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 3635,
+  "extracted": {
+    "summary": "An initiative providing financial support to meritorious students from economically weaker sections to help them complete school education.",
+    "amount_text": "INR 1,000 per month for a year",
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": 55.0,
+    "min_percentage_quote": "Applicants must have scored at least 55% marks, or 50% for SC and ST, in their Class VII exams to qualify for the selection test.",
+    "max_family_income": 350000.0,
+    "max_family_income_quote": "The parental income must not exceed INR 3,50,000 per annum.",
+    "categories": null,
+    "categories_quote": null,
+    "genders": null,
+    "genders_quote": null,
+    "course_levels": [
+      "SCHOOL"
+    ],
+    "course_levels_quote": "Students from any community studying in Government, Government-aided, or local body schools are eligible.",
+    "states": null,
+    "states_quote": null,
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": null,
+    "max_age_quote": null,
+    "deadline": "2025-08-31",
+    "deadline_quote": "Student application open till 31 August 2025."
+  }
+}

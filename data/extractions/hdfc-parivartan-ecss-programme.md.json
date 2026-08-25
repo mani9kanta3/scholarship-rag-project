@@ -1,0 +1,33 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 3635,
+  "extracted": {
+    "summary": "The Parivartan ECSS Programme provides financial assistance to excellent students from impoverished backgrounds who are aspiring for a greater future.",
+    "amount_text": "Classes 1 to 6: INR 15,000. Classes 7 to 12, Diploma, ITI and Polytechnic: INR 18,000. Undergraduate General: INR 30,000. Undergraduate Professional: INR 50,000. Postgraduate General: INR 35,000. Postgraduate Professional: INR 75,000.",
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": 55.0,
+    "min_percentage_quote": "A minimum of 55% marks in the previous qualifying examination is required.",
+    "max_family_income": 250000.0,
+    "max_family_income_quote": "The annual family income should be less than or equal to INR 2.5 lakh.",
+    "categories": null,
+    "categories_quote": null,
+    "genders": null,
+    "genders_quote": null,
+    "course_levels": [
+      "SCHOOL",
+      "DIPLOMA",
+      "UG",
+      "PG"
+    ],
+    "course_levels_quote": "Applicants must be students in Classes 1 to 12, diploma, ITI, polytechnic, undergraduate or postgraduate courses in recognized institutions.",
+    "states": null,
+    "states_quote": null,
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": null,
+    "max_age_quote": null,
+    "deadline": "2025-12-31",
+    "deadline_quote": "31 December 2025."
+  }
+}

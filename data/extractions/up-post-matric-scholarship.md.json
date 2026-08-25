@@ -1,0 +1,40 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 4214,
+  "extracted": {
+    "summary": "Post-Matric Scholarship for General, Minorities, SC, ST and OBC, Uttar Pradesh provides financial support to meritorious and needy students from Uttar Pradesh pursuing class 11 to postgraduate studies.",
+    "amount_text": "Hostelers receive up to INR 13,500 per year. Day scholars receive up to INR 7,000 per year.",
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": null,
+    "min_percentage_quote": null,
+    "max_family_income": null,
+    "max_family_income_quote": null,
+    "categories": [
+      "GEN",
+      "SC",
+      "ST",
+      "OBC",
+      "MINORITY"
+    ],
+    "categories_quote": "Applicants must belong to one of the following categories: General, Scheduled Caste (SC), Scheduled Tribe (ST), Other Backward Classes (OBC), Minorities.",
+    "genders": null,
+    "genders_quote": null,
+    "course_levels": [
+      "SCHOOL",
+      "UG",
+      "PG"
+    ],
+    "course_levels_quote": "Applicants must be pursuing studies from class 11 to the postgraduate level in recognised institutions.",
+    "states": [
+      "Uttar Pradesh"
+    ],
+    "states_quote": "Applicants must be a resident of Uttar Pradesh.",
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": null,
+    "max_age_quote": null,
+    "deadline": null,
+    "deadline_quote": null
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 3894,
+  "extracted": {
+    "summary": "The Mahatma Jyothiba Phule Overseas Vidya Nidhi Scholarship, Telangana provides financial assistance to BC and EBC students from Telangana pursuing UG, PG or Ph.D. studies abroad.",
+    "amount_text": "A scholarship amount of up to INR 20,00,000 or as mentioned in the admission letter, whichever is less.",
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": 60.0,
+    "min_percentage_quote": "Applicants must have secured a minimum of 60% in the previous qualifying examination.",
+    "max_family_income": 500000.0,
+    "max_family_income_quote": "Applicants must have an annual family income below INR 5,00,000 from all sources.",
+    "categories": null,
+    "categories_quote": null,
+    "genders": null,
+    "genders_quote": null,
+    "course_levels": [
+      "UG",
+      "PG",
+      "PHD"
+    ],
+    "course_levels_quote": "An initiative for BC and EBC category students pursuing UG, PG and Ph.D. level courses abroad.",
+    "states": [
+      "Telangana"
+    ],
+    "states_quote": "Applicants must be a Telangana resident.",
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": 35,
+    "max_age_quote": "Applicants must not be more than 35 years of age as on 1st July of the year of advertisement.",
+    "deadline": "2025-10-15",
+    "deadline_quote": "15 October 2025."
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 4092,
+  "extracted": {
+    "summary": "Financial support for minority students from higher secondary through postgraduation in West Bengal, offering up to INR 60,000.",
+    "amount_text": "Selected students will receive an award of up to INR 60,000.",
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": 53.0,
+    "min_percentage_quote": "Minimum marks required are 53% for the Post-graduation level and for an Honours subject at Graduation level.",
+    "max_family_income": 250000.0,
+    "max_family_income_quote": "Annual household income must not exceed INR 2,50,000.",
+    "categories": [
+      "MINORITY"
+    ],
+    "categories_quote": "Financial support for minority students pursuing education from higher secondary through postgraduation, including diploma and professional courses like Diploma (Polytechnic), Diploma in Pharmacy, B.Ed., D.El.Ed. and M.Ed.",
+    "genders": null,
+    "genders_quote": null,
+    "course_levels": [
+      "SCHOOL",
+      "DIPLOMA",
+      "UG",
+      "PG"
+    ],
+    "course_levels_quote": "Financial support for minority students pursuing education from higher secondary through postgraduation, including diploma and professional courses like Diploma (Polytechnic), Diploma in Pharmacy, B.Ed., D.El.Ed. and M.Ed.",
+    "states": [
+      "West Bengal"
+    ],
+    "states_quote": "Applicants must be a permanent West Bengal resident studying in a recognized institution.",
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": null,
+    "max_age_quote": null,
+    "deadline": "2026-05-31",
+    "deadline_quote": "31st May 2026."
+  }
+}

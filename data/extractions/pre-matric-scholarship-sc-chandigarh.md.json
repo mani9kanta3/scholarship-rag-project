@@ -1,0 +1,34 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 3754,
+  "extracted": {
+    "summary": "The NSP Pre-Matric Scholarship Scheme for SC Students provides financial assistance to SC students in Classes 9 and 10 in Chandigarh.",
+    "amount_text": "Day scholars receive INR 225 monthly for 10 months plus an INR 750 annual books grant. Hostellers receive INR 525 monthly for 10 months plus an INR 1,000 annual books grant. Additional allowances are available for disabled students in private schools, from INR 160 to INR 240 monthly depending on the disability type.",
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": null,
+    "min_percentage_quote": null,
+    "max_family_income": 250000.0,
+    "max_family_income_quote": "Applicants must have an annual parental or guardian income of not more than INR 2,50,000 from all sources.",
+    "categories": [
+      "SC"
+    ],
+    "categories_quote": "Applicants must belong to the Scheduled Caste (SC) category.",
+    "genders": null,
+    "genders_quote": null,
+    "course_levels": [
+      "SCHOOL"
+    ],
+    "course_levels_quote": "Applicants must be studying in Class 9 or 10 in a government school, or a school recognised by the Government, or a Central or State Board of Secondary Education.",
+    "states": [
+      "Chandigarh"
+    ],
+    "states_quote": "Applicants must be a domicile of Chandigarh.",
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": null,
+    "max_age_quote": null,
+    "deadline": "2026-09-15",
+    "deadline_quote": "15th September 2026."
+  }
+}

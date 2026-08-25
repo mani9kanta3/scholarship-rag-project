@@ -1,0 +1,32 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 3577,
+  "extracted": {
+    "summary": "The SOF Girl Child Scholarship Scheme provides INR 5,000 annually to 300 female students in classes 1 to 10 across India.",
+    "amount_text": "INR 5,000 each annually",
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": 60.0,
+    "min_percentage_quote": "Applicants must have secured at least 60% marks or equivalent in the previous academic year.",
+    "max_family_income": 25000.0,
+    "max_family_income_quote": "Applicants must have a monthly family income of less than INR 25,000.",
+    "categories": null,
+    "categories_quote": null,
+    "genders": [
+      "FEMALE"
+    ],
+    "genders_quote": "Applicants must be a female currently studying in classes 1 to 10 in a recognised school or institution.",
+    "course_levels": [
+      "SCHOOL"
+    ],
+    "course_levels_quote": "Applicants must be a female currently studying in classes 1 to 10 in a recognised school or institution.",
+    "states": null,
+    "states_quote": null,
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": null,
+    "max_age_quote": null,
+    "deadline": "2025-12-31",
+    "deadline_quote": "31 December 2025."
+  }
+}

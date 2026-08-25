@@ -1,0 +1,33 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 4285,
+  "extracted": {
+    "summary": "A scholarship for ST students to pursue higher education at foreign institutes or universities.",
+    "amount_text": "Annual maintenance allowance of USD 15,400 in the US or GBP 9,900 in the UK.",
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": 55.0,
+    "min_percentage_quote": "For a Master's degree, the applicant must be not more than 32 years of age as of 1st July 2026, and must have scored 55% marks or equivalent in the bachelor's degree.",
+    "max_family_income": 600000.0,
+    "max_family_income_quote": "Applicants must have a family income not exceeding INR 6,00,000 per annum.",
+    "categories": [
+      "ST"
+    ],
+    "categories_quote": "Applicants must belong to the ST category.",
+    "genders": null,
+    "genders_quote": null,
+    "course_levels": [
+      "PG",
+      "PHD"
+    ],
+    "course_levels_quote": "For a PhD, the applicant must be not more than 35 years of age as of 1st July 2026, and must have scored 55% marks or equivalent in the master's degree.",
+    "states": null,
+    "states_quote": null,
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": null,
+    "max_age_quote": null,
+    "deadline": "2026-06-30",
+    "deadline_quote": "30th June 2026."
+  }
+}

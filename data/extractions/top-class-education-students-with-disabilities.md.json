@@ -1,0 +1,32 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "tokens": 3918,
+  "extracted": {
+    "summary": "Financial assistance to Indian students with disabilities for diploma, undergraduate and postgraduate courses at premier institutions such as IITs, NITs and Institutes of Excellence.",
+    "amount_text": "Tuition fees up to INR 1.90 lakh per annum. Miscellaneous allowances up to INR 10,000 per annum. Computer or laptop grant of INR 45,000 as a one-time grant in the first year. Aids and assistive devices grant of INR 30,000 as a one-time grant in the first year. Maintenance of INR 3,000 per month for hostellers or INR 1,500 per month for day scholars. Special allowances of INR 2,000 per month. Book allowance of INR 5,000 per annum.",
+    "min_cgpa": null,
+    "min_cgpa_quote": null,
+    "min_percentage": null,
+    "min_percentage_quote": null,
+    "max_family_income": 800000.0,
+    "max_family_income_quote": "The annual family income should not exceed INR 8,00,000.",
+    "categories": null,
+    "categories_quote": null,
+    "genders": null,
+    "genders_quote": null,
+    "course_levels": [
+      "DIPLOMA",
+      "UG",
+      "PG"
+    ],
+    "course_levels_quote": "Financial assistance to students with disabilities to support their higher education, for diploma, graduate and postgraduate courses from premier institutions like IITs, NITs and Institutes of Excellence.",
+    "states": null,
+    "states_quote": null,
+    "min_age": null,
+    "min_age_quote": null,
+    "max_age": null,
+    "max_age_quote": null,
+    "deadline": "2026-10-31",
+    "deadline_quote": "The student application last date is October 31, 2026."
+  }
+}
