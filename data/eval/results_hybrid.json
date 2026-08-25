@@ -1,0 +1,873 @@
+[
+  {
+    "id": 1,
+    "type": "eligibility",
+    "question": "Am I eligible for the Post Matric Scholarship for SC Students?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      31
+    ],
+    "retrieved_scheme_ids": [
+      31
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer correctly confirms eligibility and accurately matches the expected facts regarding the student's SC status and annual family income being below the 2.5 lakh threshold.",
+    "answer": "Yes, you are eligible for the Post Matric Scholarship for SC Students.  \nThe scholarship requires an annual family income of less than INR\u202f2.5\u202flakhs, and your income of INR\u202f180,000 meets that criterion. It also requires that the applicant belong to the Scheduled Caste category, which you do. The scholarship is open to students studying at post\u2011matriculation or post\u2011secondary level, and you are pursuing an undergraduate course, so that condition is satisfied as well.  \n\nThe rule about the specific course levels (e.g., whether UG is explicitly listed) could not be confirmed from the sources. You can check the official scholarship page for that detail.",
+    "top_score": 0.8541,
+    "latency_ms": 8791
+  },
+  {
+    "id": 2,
+    "type": "eligibility",
+    "question": "Am I eligible for the Post-Matric Scholarship for OBC Students, Delhi?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      29
+    ],
+    "retrieved_scheme_ids": [
+      29
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer matches the expected answer by correctly citing the student's caste and domicile as reasons for ineligibility.",
+    "answer": "No, you are not eligible for the Post\u2011Matric Scholarship for OBC Students, Delhi. The scheme requires applicants to belong to the OBC category and to be domiciled in Delhi, while you are SC and from Telangana. [1]",
+    "top_score": 0.8998,
+    "latency_ms": 1063
+  },
+  {
+    "id": 3,
+    "type": "eligibility",
+    "question": "Am I eligible for the AICTE Pragati Scholarship for Girls?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      1
+    ],
+    "retrieved_scheme_ids": [
+      1
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer correctly states that the scholarship is exclusively for female students, aligning with the expected answer's eligibility criterion and verdict.",
+    "answer": "No. The AICTE Pragati Scholarship for Girls is only for female students\u30101\u3011.",
+    "top_score": 0.8519,
+    "latency_ms": 1022
+  },
+  {
+    "id": 4,
+    "type": "eligibility",
+    "question": "Am I eligible for the State Merit Scholarship for UG Girls Students, Haryana?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      38
+    ],
+    "retrieved_scheme_ids": [
+      38
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer correctly confirms eligibility and cites the same criteria (female, Haryana resident, UG student, >60% marks) as the expected answer.",
+    "answer": "Yes, you are eligible for the State Merit Scholarship for UG Girls Students, Haryana.  \nYou meet the requirements: you are a female student from Haryana, you have at least 60\u202f% marks (you have 65\u202f%) and you are pursuing a general undergraduate degree at a government college. The scholarship is open to female students in Haryana and is for UG courses. [1]",
+    "top_score": 0.9013,
+    "latency_ms": 1104
+  },
+  {
+    "id": 5,
+    "type": "eligibility",
+    "question": "Am I eligible for the State Merit Scholarship for UG Girls Students, Haryana?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      38
+    ],
+    "retrieved_scheme_ids": [
+      38
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer correctly identifies the student as ineligible based on their domicile status, matching the expected answer.",
+    "answer": "No. The State Merit Scholarship for UG Girls Students, Haryana is only for students who are domiciles of Haryana. Since you are from Kerala, you do not meet this requirement\u30101\u3011.",
+    "top_score": 0.9013,
+    "latency_ms": 1744
+  },
+  {
+    "id": 6,
+    "type": "eligibility",
+    "question": "Am I eligible for the Google PhD Fellowship India Program?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      10
+    ],
+    "retrieved_scheme_ids": [
+      10
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer correctly states that the student is ineligible because they are an undergraduate, which perfectly matches the expected answer's reasoning regarding the full-time PhD enrollment requirement.",
+    "answer": "No. The Google PhD Fellowship India Program requires applicants to be enrolled full\u2011time in a Ph.D. program. Since you are at the undergraduate level, you do not meet this eligibility criterion\u30101\u3011.",
+    "top_score": 0.9001,
+    "latency_ms": 1321
+  },
+  {
+    "id": 7,
+    "type": "eligibility",
+    "question": "Am I eligible for the ANRF-National Post Doctoral Fellowship?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      3
+    ],
+    "retrieved_scheme_ids": [
+      3
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer correctly confirms eligibility based on the same core facts (SC category, age 30, and doctoral qualification) as the expected answer, with additional details that do not contradict the expected response.",
+    "answer": "Yes, you are eligible for the ANRF\u2011National Post Doctoral Fellowship (N\u2011PDF).  \nThe scheme allows candidates from SC, ST, OBC categories and the age limit is 35 years, with a 5\u2011year relaxation for SC, ST, OBC, physically challenged and female candidates. Your age of 30 and SC category fall within this relaxed limit, and you hold a Ph.D. in Science or Engineering, which meets the qualification requirement. [1]",
+    "top_score": 0.8468,
+    "latency_ms": 1616
+  },
+  {
+    "id": 8,
+    "type": "eligibility",
+    "question": "Am I eligible for the NSP Merit Cum Means Scholarship for Professional and Technical Courses?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      15
+    ],
+    "retrieved_scheme_ids": [
+      15
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer correctly confirms eligibility based on the same criteria (minority status, course type, 50% marks, and income limit) as the expected answer.",
+    "answer": "Yes, you are eligible for the NSP Merit Cum Means Scholarship for Professional and Technical Courses (Minorities).  \nThe scheme requires:  \n\n- Belonging to a minority community \u2013 you are MINORITY [1].  \n- Pursuing a technical or professional course at the undergraduate level \u2013 you are UG [1].  \n- Securing at least 50\u202f% marks \u2013 you have 60\u202f% [1].  \n- Having an annual family income of less than INR\u202f2.50\u202flakhs \u2013 your income is INR\u202f2.00\u202flakhs, which is below the limit [1].  \n\nAll these conditions are met, so you qualify for the scholarship. However, the application deadline for this scheme is already closed [4].",
+    "top_score": 0.865,
+    "latency_ms": 1165
+  },
+  {
+    "id": 9,
+    "type": "eligibility",
+    "question": "Am I eligible for the Dr. Ambedkar Post-Matric Scholarship for EBC Students, Andaman and Nicobar?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      7
+    ],
+    "retrieved_scheme_ids": [
+      7
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer agrees with the expected answer regarding the eligibility criteria (General category, Andaman and Nicobar domicile, income limit of INR 1,00,000) and the student's qualification.",
+    "answer": "Yes, you meet the eligibility criteria for the Dr.\u202fAmbedkar Post\u2011Matric Scholarship for EBC Students in Andaman and Nicobar.  \nThe scheme requires applicants to be Indian nationals, domiciled in Andaman and Nicobar, of the General category, and to have a combined annual income not exceeding INR\u202f1,00,000. Your income of INR\u202f90,000, General category status, and domicile in Andaman and Nicobar satisfy all these conditions [1].",
+    "top_score": 0.9138,
+    "latency_ms": 1123
+  },
+  {
+    "id": 10,
+    "type": "eligibility",
+    "question": "Am I eligible for the Dr. Ambedkar Post-Matric Scholarship for EBC Students, Andaman and Nicobar?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      7
+    ],
+    "retrieved_scheme_ids": [
+      7
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer correctly states the student is ineligible because the scheme is for General category students and the student belongs to the SC category, matching the expected answer.",
+    "answer": "You are not eligible for the Dr.\u202fAmbedkar Post\u2011Matric Scholarship for EBC Students, Andaman and Nicobar. The scholarship is only for students of the General category, and you belong to the SC category\u30101\u3011.",
+    "top_score": 0.9138,
+    "latency_ms": 1109
+  },
+  {
+    "id": 11,
+    "type": "eligibility",
+    "question": "Am I eligible for the NSP Centrally Sponsored Scheme of Pre-Matric Scholarship for ST Students, Goa?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      34
+    ],
+    "retrieved_scheme_ids": [
+      34
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer correctly affirms eligibility and aligns with the expected answer on all key facts, including the income limit of INR 2,50,000, class level, and community requirement.",
+    "answer": "Yes, you are eligible for the NSP Centrally Sponsored Scheme of Pre\u2011Matric Scholarship for ST Students in Goa.  \nThe scheme requires: an Indian national, a domicile of Goa, belonging to the Scheduled Tribe community, a regular full\u2011time student in Class\u202f9 or\u202f10 in a government or recognised school, an annual family income of less than INR\u202f2,50,000, and not receiving any other centrally funded Pre\u2011Matric Scholarship. Your details match all these criteria [1].",
+    "top_score": 0.8843,
+    "latency_ms": 1099
+  },
+  {
+    "id": 12,
+    "type": "eligibility",
+    "question": "Am I eligible for the NSP Centrally Sponsored Scheme of Pre-Matric Scholarship for ST Students, Goa?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      34
+    ],
+    "retrieved_scheme_ids": [
+      34
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer correctly states the student is ineligible because they are Scheduled Caste while the scheme is for Scheduled Tribe students.",
+    "answer": "You are not eligible for the NSP Centrally Sponsored Scheme of Pre\u2011Matric Scholarship for ST Students in Goa because the scheme is only for students belonging to the Scheduled Tribe (ST) community, and you belong to the Scheduled Caste (SC) community. [1]",
+    "top_score": 0.8843,
+    "latency_ms": 1136
+  },
+  {
+    "id": 13,
+    "type": "threshold",
+    "question": "Am I eligible for the Central Sector Scheme of Scholarship for College and University Students?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      5
+    ],
+    "retrieved_scheme_ids": [
+      5
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer correctly states the student is ineligible because their 79.5% score is below the required 80%, matching the expected facts.",
+    "answer": "You are not eligible for the Central Sector Scheme of Scholarship for College and University Students. The scheme requires a minimum of 80\u202f% in Class\u202f12, and your score is 79.5\u202f%\u30101\u3011.",
+    "top_score": 0.8568,
+    "latency_ms": 1438
+  },
+  {
+    "id": 14,
+    "type": "threshold",
+    "question": "Am I eligible for the Central Sector Scheme of Scholarship for College and University Students?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      5
+    ],
+    "retrieved_scheme_ids": [
+      5
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer correctly identifies the eligibility criteria (80% marks and 4.5 lakh income limit) and confirms the student meets them, which matches the facts in the expected answer.",
+    "answer": "Yes, you are eligible for the Central Sector Scheme of Scholarship for College and University Students.  \nThe scheme requires an annual family income not exceeding INR\u202f4,50,000 and a minimum of 80\u202f% marks in Class\u202f12, both of which you meet. The scheme also covers undergraduate (UG) programmes, which is your course level. [1]",
+    "top_score": 0.8568,
+    "latency_ms": 747
+  },
+  {
+    "id": 15,
+    "type": "threshold",
+    "question": "Am I eligible for the Post-Matric Scholarship for OBC Students, Delhi?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      29
+    ],
+    "retrieved_scheme_ids": [
+      29
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer correctly concludes ineligibility and accurately matches the required 75% threshold and the student's 74.5% figure from the expected answer.",
+    "answer": "No, you are not eligible for the Post\u2011Matric Scholarship for OBC Students, Delhi. The scholarship requires a minimum of 75\u202f% attendance in the previous year, and your attendance is 74.5\u202f%\u30101\u3011.",
+    "top_score": 0.8998,
+    "latency_ms": 1619
+  },
+  {
+    "id": 16,
+    "type": "threshold",
+    "question": "Am I eligible for the Post-Matric Scholarship for OBC Students, Delhi?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      29
+    ],
+    "retrieved_scheme_ids": [
+      29
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer agrees with the expected answer on the eligibility verdict and the specific numerical criteria for income and percentage.",
+    "answer": "Yes, you are eligible for the Post\u2011Matric Scholarship for OBC Students, Delhi.  \nThe scheme requires an annual parent or guardian income of not more than INR\u202f1,00,000, and you have INR\u202f90,000. It also requires a minimum attendance of 75\u202f%, and you have 75.5\u202f%. The scheme is open to OBC students domiciled in Delhi, which matches your details. [1]",
+    "top_score": 0.8998,
+    "latency_ms": 1241
+  },
+  {
+    "id": 17,
+    "type": "threshold",
+    "question": "Am I eligible for the Nagaland State Merit Scholarship?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      18
+    ],
+    "retrieved_scheme_ids": [
+      18
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer correctly states that the student is not eligible because the minimum required percentage is 70% and the student has 69.5%, matching the expected answer.",
+    "answer": "You are not eligible for the Nagaland State Merit Scholarship.  \nThe scholarship requires a minimum of 70\u202f% at the Graduation level for PG\u202f1st\u2011year students, and your score is 69.5\u202f% [1].  \n\nThe rule about which course levels are covered by the scholarship could not be confirmed in the source material, so that information is unverified [1].",
+    "top_score": 0.842,
+    "latency_ms": 8555
+  },
+  {
+    "id": 18,
+    "type": "threshold",
+    "question": "Am I eligible for the Nagaland State Merit Scholarship?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      18
+    ],
+    "retrieved_scheme_ids": [
+      18
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The answer confirms the student meets the 70% graduation requirement and is from Nagaland, matching the expected facts.",
+    "answer": "Yes, you meet the eligibility criteria for the Nagaland State Merit Scholarship.  \n- The scholarship requires a minimum of 70\u202f% at the Graduation level for PG\u202f1st\u2011year students, and you have 70.5\u202f%\u30101\u3011.  \n- You are a student from Nagaland, which satisfies the domicile requirement\u30101\u3011.\n\n**Unverified information**  \n- The specific course levels that are covered by the scholarship could not be confirmed from the source\u30101\u3011.  \n\nIf you are still unsure about your domicile status or any other requirement, please check the official application guidelines\u30104\u3011.",
+    "top_score": 0.842,
+    "latency_ms": 941
+  },
+  {
+    "id": 19,
+    "type": "threshold",
+    "question": "Am I eligible for the NSP Central Sector Scholarship of Top Class Education for SC Students?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      25
+    ],
+    "retrieved_scheme_ids": [
+      25
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer correctly identifies the student as ineligible because their income of 810,000 exceeds the limit of 800,000, matching the expected facts.",
+    "answer": "No, you are not eligible for the NSP Central Sector Scholarship of Top Class Education for SC Students. The scholarship requires an annual family income of less than INR\u202f8,00,000, and your income of INR\u202f810,000 exceeds that limit\u30101\u3011.",
+    "top_score": 0.8887,
+    "latency_ms": 1299
+  },
+  {
+    "id": 20,
+    "type": "threshold",
+    "question": "Am I eligible for the NSP Central Sector Scholarship of Top Class Education for SC Students?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      25
+    ],
+    "retrieved_scheme_ids": [
+      25
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer correctly confirms eligibility and aligns perfectly with the expected answer's facts regarding the student's SC status, 65% marks exceeding the 60% threshold, and family income of 7,90,000 being below the 8,00,000 limit.",
+    "answer": "Yes, you are eligible for the NSP Central Sector Scholarship of Top Class Education for SC Students.  \nThe scholarship requires:  \n\n- Scheduled Caste (SC) category \u2013 you are SC [1].  \n- Minimum 60\u202f% marks in Class\u202f12 \u2013 you have 65\u202f% [1].  \n- Admission to a recognised college/university for a full\u2011time undergraduate or postgraduate degree \u2013 you are pursuing UG [1].  \n- Annual family income less than INR\u202f8,00,000 \u2013 your income is INR\u202f7,90,000, which is below the limit [1].  \n\nAll eligibility criteria are met.",
+    "top_score": 0.8887,
+    "latency_ms": 1366
+  },
+  {
+    "id": 21,
+    "type": "threshold",
+    "question": "Am I eligible for the Swami Dayanand India Scholarship?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      39
+    ],
+    "retrieved_scheme_ids": [
+      39
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer correctly states the student is ineligible because their 79% marks fall short of the required 80% minimum in Class 12.",
+    "answer": "You are not eligible for the Swami Dayanand India Scholarship. The scholarship requires a minimum of 80\u202f% marks in Class\u202f12, and you have 79\u202f%\u30101\u3011.",
+    "top_score": 0.8393,
+    "latency_ms": 979
+  },
+  {
+    "id": 22,
+    "type": "threshold",
+    "question": "Am I eligible for the Swami Dayanand India Scholarship?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      39
+    ],
+    "retrieved_scheme_ids": [
+      39
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer correctly confirms eligibility and matches the expected answer's facts regarding the income limit and marks requirement.",
+    "answer": "Yes, you are eligible for the Swami Dayanand India Scholarship.  \n- Your annual family income of \u20b9800,000 is below the \u20b91,200,000 limit.  \n- Your marks of 81\u202f% meet the minimum 80\u202f% requirement.  \n- You are in the first year of a full\u2011time undergraduate professional degree (UG).  \n\nAll these conditions are satisfied according to the scholarship\u2019s eligibility criteria\u30101\u3011.",
+    "top_score": 0.8393,
+    "latency_ms": 956
+  },
+  {
+    "id": 23,
+    "type": "threshold",
+    "question": "Am I eligible for the Chief Minister's Overseas Scholarship Scheme for Minorities, Telangana?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      6
+    ],
+    "retrieved_scheme_ids": [
+      6
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer correctly states the applicant is ineligible because they are 31 years old, exceeding the age limit of 30, which matches the expected answer.",
+    "answer": "You are not eligible for the Chief Minister's Overseas Scholarship Scheme for Minorities, Telangana. The scheme requires applicants to be below 30 years of age as of July\u202f1st of the application year, and you are 31 years old [2].",
+    "top_score": 0.8782,
+    "latency_ms": 1079
+  },
+  {
+    "id": 24,
+    "type": "threshold",
+    "question": "Am I eligible for the Chief Minister's Overseas Scholarship Scheme for Minorities, Telangana?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      6
+    ],
+    "retrieved_scheme_ids": [
+      6
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer matches the expected answer by confirming eligibility and citing the same applicant details regarding age, community, course, marks, and income.",
+    "answer": "Yes, you are eligible for the Chief Minister's Overseas Scholarship Scheme for Minorities, Telangana.  \n- Your family income of \u20b9400,000 is below the \u20b95,00,000 limit\u30102\u3011.  \n- Your marks of 65\u202f% meet the minimum 60\u202f% requirement\u30102\u3011.  \n- You are a minority community member\u30102\u3011.  \n- You are below 30 years old (you are 29)\u30102\u3011.  \n- You are pursuing a PG course\u30102\u3011.  \n- You are a domicile of Telangana\u30102\u3011.",
+    "top_score": 0.8782,
+    "latency_ms": 1052
+  },
+  {
+    "id": 25,
+    "type": "detail",
+    "question": "What documents do I need for the AICTE Pragati Scholarship for Girls?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      1
+    ],
+    "retrieved_scheme_ids": [
+      1
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer lists the exact same documents as the expected answer.",
+    "answer": "For the AICTE Pragati Scholarship for Girls you need to submit the following documents:\n\n- Class\u202f10 and 12 marksheets  \n- Aadhaar card  \n- Passport\u2011size photo  \n- Signature  \n- Income certificate  \n- Admission letter  \n- Fee receipt  \n- Bank passbook  \n- Institute certificate  \n- Caste certificate (if applicable)  \n- Parental declaration  \n\nThese are the documents listed in the scheme\u2019s requirements\u30101\u3011.",
+    "top_score": 0.8803,
+    "latency_ms": 1192
+  },
+  {
+    "id": 26,
+    "type": "detail",
+    "question": "How do I apply for the Post Matric Scholarship for SC Students?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      31
+    ],
+    "retrieved_scheme_ids": [
+      31
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer agrees with the expected answer by correctly identifying the National Scholarship Portal and listing the same key steps for the application process, including state selection, bank details, OTP verification, and receiving the application ID.",
+    "answer": "To apply for the Post\u202fMatric Scholarship for SC Students, follow these steps:\n\n1. Go to the National Scholarship Portal at www.scholarships.gov.in.  \n2. Click on \u201cApply Now.\u201d  \n3. Read the guidelines and select your state and the scholarship details.  \n4. Provide your bank details.  \n5. Choose the identification method.  \n6. Verify your mobile number with an OTP.  \n7. Log in and complete the application form.  \n8. After submission you will receive an application ID and password.  \n\nThese steps are the eight\u2011step process described in the portal. [1]",
+    "top_score": 0.8644,
+    "latency_ms": 1073
+  },
+  {
+    "id": 27,
+    "type": "detail",
+    "question": "How much does the NSP NEC Merit Scholarship pay a PhD student?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      24
+    ],
+    "retrieved_scheme_ids": [
+      24
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer correctly states the scholarship amount as INR 30,000 per annum, which matches the expected answer.",
+    "answer": "The NSP NEC Merit Scholarship pays a PhD student INR\u202f30,000 per annum\u30101\u3011.",
+    "top_score": 0.8461,
+    "latency_ms": 960
+  },
+  {
+    "id": 28,
+    "type": "detail",
+    "question": "How much does the Central Sector Scheme of Scholarship pay a postgraduate student?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      5
+    ],
+    "retrieved_scheme_ids": [
+      5
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer correctly states the scholarship amount as INR 20,000 per annum, which exactly matches the expected answer.",
+    "answer": "The Central Sector Scheme of Scholarship pays a postgraduate student INR\u202f20,000 per annum\u30101\u3011.",
+    "top_score": 0.8418,
+    "latency_ms": 799
+  },
+  {
+    "id": 29,
+    "type": "detail",
+    "question": "What is the deadline for the AICTE Saksham Scholarship Scheme?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      2
+    ],
+    "retrieved_scheme_ids": [
+      2
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer states the exact same deadline date as the expected answer, differing only in date formatting.",
+    "answer": "The deadline for the AICTE Saksham Scholarship Scheme is October\u202f31,\u202f2026. [1]",
+    "top_score": 0.9101,
+    "latency_ms": 853
+  },
+  {
+    "id": 30,
+    "type": "detail",
+    "question": "What English test scores do I need for the Mahatma Jyothiba Phule Overseas Vidya Nidhi scholarship?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      14
+    ],
+    "retrieved_scheme_ids": [
+      14
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer lists the exact same minimum scores for all the specified tests as the expected answer.",
+    "answer": "You need to have the following English proficiency test scores to apply for the Mahatma Jyothiba Phule Overseas Vidya Nidhi scholarship:  \n\n- TOEFL\u202f\u2265\u202f60  \n- IELTS\u202f\u2265\u202f6.0  \n- GRE\u202f\u2265\u202f260  \n- GMAT\u202f\u2265\u202f500  \n- PTE\u202f\u2265\u202f50  \n\nThese are the minimum scores required for the scholarship application. [1]",
+    "top_score": 0.8137,
+    "latency_ms": 1048
+  },
+  {
+    "id": 31,
+    "type": "detail",
+    "question": "What is the monthly amount for a Junior Research Fellow under the National Fellowship Scheme for Scheduled Caste Students?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      19
+    ],
+    "retrieved_scheme_ids": [
+      19
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer correctly states the monthly stipend as INR 37,000 for the first two years, matching the expected answer exactly.",
+    "answer": "The monthly amount for a Junior Research Fellow under the National Fellowship Scheme for Scheduled Caste Students is INR\u202f37,000 per month for the initial two years of the fellowship. [1]",
+    "top_score": 0.8368,
+    "latency_ms": 1056
+  },
+  {
+    "id": 32,
+    "type": "detail",
+    "question": "Who can apply for the SOF Girl Child Scholarship Scheme?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      37
+    ],
+    "retrieved_scheme_ids": [
+      37
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer accurately matches all the eligibility criteria specified in the expected answer, including gender, class range, academic performance, and income limit.",
+    "answer": "Applicants must be female students currently studying in classes\u202f1 to\u202f10 in a recognised school or institution, have secured at least\u202f60\u202f% marks or equivalent in the previous academic year, and have a monthly family income of less than INR\u202f25,000. [1]",
+    "top_score": 0.7941,
+    "latency_ms": 1022
+  },
+  {
+    "id": 33,
+    "type": "trap",
+    "question": "What is the eligibility for the Fulbright-Nehru Doctoral Research Fellowship?",
+    "expected_abstain": true,
+    "expected_scheme_ids": [],
+    "retrieved_scheme_ids": [
+      26
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer correctly states that no information was found, matching the expected answer that the scheme is not present in the corpus.",
+    "answer": "I couldn\u2019t find any information about the eligibility criteria for the Fulbright\u2011Nehru Doctoral Research Fellowship in the provided sources.",
+    "top_score": 0.7564,
+    "latency_ms": 713
+  },
+  {
+    "id": 34,
+    "type": "trap",
+    "question": "What is the deadline for the Punjab Post-Matric Scholarship?",
+    "expected_abstain": true,
+    "expected_scheme_ids": [],
+    "retrieved_scheme_ids": [
+      31
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": false,
+    "judge_reason": "The expected answer states that there is no Punjab Post-Matric Scholarship information in the corpus, but the actual answer provides a specific deadline, which is not supported by the expected answer.",
+    "answer": "The deadline for the Punjab Post\u2011Matric Scholarship is 30th April\u202f2022. The scholarship is currently closed as of that date. [1]",
+    "top_score": 0.8221,
+    "latency_ms": 1104
+  },
+  {
+    "id": 35,
+    "type": "trap",
+    "question": "What is the interest rate on the Vidya Lakshmi education loan?",
+    "expected_abstain": true,
+    "expected_scheme_ids": [],
+    "retrieved_scheme_ids": [
+      6,
+      13,
+      14,
+      16
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": false,
+    "judge_reason": "The expected response is to refuse, as Vidya\u202fLakshmi is a loan, not a scholarship; the system\u2019s answer about not finding an interest rate does not match this required refusal.",
+    "answer": "I couldn\u2019t find any information about the interest rate for the Vidya\u202fLakshmi education loan in the sources provided.",
+    "top_score": 0.6429,
+    "latency_ms": 1109
+  },
+  {
+    "id": 36,
+    "type": "trap",
+    "question": "What is the helpline phone number for the AICTE Pragati Scholarship?",
+    "expected_abstain": true,
+    "expected_scheme_ids": [],
+    "retrieved_scheme_ids": [
+      1
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The answer correctly states that no phone number for the AICTE Pragati Scholarship is available in the sources, matching the expected answer.",
+    "answer": "I couldn\u2019t find a helpline phone number for the AICTE Pragati Scholarship in the provided sources.",
+    "top_score": 0.7865,
+    "latency_ms": 1781
+  },
+  {
+    "id": 37,
+    "type": "trap",
+    "question": "How many students received the Reliance Foundation Undergraduate Scholarship in 2019?",
+    "expected_abstain": true,
+    "expected_scheme_ids": [],
+    "retrieved_scheme_ids": [
+      35
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The expected answer indicates that there is no available data for 2019, so a refusal is appropriate; the actual answer correctly states that no information was found.",
+    "answer": "I couldn\u2019t find any information in the provided sources about how many students received the Reliance Foundation Undergraduate Scholarship in 2019. The sources only describe the program\u2019s purpose, benefits, eligibility, deadline, and required documents, but do not mention past recipient numbers.",
+    "top_score": 0.8687,
+    "latency_ms": 826
+  },
+  {
+    "id": 38,
+    "type": "trap",
+    "question": "Which scholarship should I apply for if I want to study in Sri Lanka?",
+    "expected_abstain": true,
+    "expected_scheme_ids": [],
+    "retrieved_scheme_ids": [
+      2,
+      5,
+      13,
+      14,
+      34
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer correctly states that no scholarship in the given list is for Sri\u202fLanka, matching the expected answer.",
+    "answer": "I couldn\u2019t find any scholarship listed in the sources that is specifically for studying in Sri\u202fLanka. The available schemes in the sources are for Indian students studying in India or in certain other countries, but none mention Sri\u202fLanka. You may need to look at other resources or official scholarship portals for options that allow study in Sri\u202fLanka.",
+    "top_score": 0.6421,
+    "latency_ms": 1405
+  },
+  {
+    "id": 39,
+    "type": "trap",
+    "question": "What was the cut-off rank for the Google PhD Fellowship India Program in 2023?",
+    "expected_abstain": true,
+    "expected_scheme_ids": [],
+    "retrieved_scheme_ids": [
+      10
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The expected answer indicates that no cut\u2011off rank is provided, so a refusal to give a rank is appropriate, which matches the actual answer's statement of lacking information.",
+    "answer": "I couldn\u2019t find any information about a cut\u2011off rank for the Google PhD Fellowship India Program in 2023 in the provided sources.",
+    "top_score": 0.8216,
+    "latency_ms": 726
+  },
+  {
+    "id": 40,
+    "type": "trap",
+    "question": "How long does it take to get the money after being selected for the NMMS scholarship?",
+    "expected_abstain": true,
+    "expected_scheme_ids": [],
+    "retrieved_scheme_ids": [
+      21
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": false,
+    "judge_reason": "The expected answer requires a refusal since the corpus provides no disbursement duration; the actual answer gives a tentative statement and suggests checking external sites, which does not match the required refusal.",
+    "answer": "I couldn\u2019t find any information in the provided sources about how long it takes to receive the scholarship money after a student is selected for the NMMS. You may want to check the official National Scholarship Portal or the state\u2011specific official websites for that detail.",
+    "top_score": 0.7818,
+    "latency_ms": 1057
+  }
+]
