@@ -50,7 +50,12 @@ const ROWS = [
   {
     key: "abstention_recall",
     label: "Refused when it should",
-    help: "Of the questions with no answer in the corpus, how many were refused.",
+    help: "Of the questions with no answer in the corpus, how many an abstention rule caught.",
+  },
+  {
+    key: "declined_correctly",
+    label: "Told the truth about not knowing",
+    help: "The looser and more useful version: how often the student was told the answer is not in the sources, whether a rule caught it or the answer said so plainly.",
   },
   {
     key: "abstention_precision",
