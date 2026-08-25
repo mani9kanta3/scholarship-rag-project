@@ -43,8 +43,13 @@ from .numbers import find_dates, find_numbers, normalise
 CITATION_PATTERN = re.compile(r"[\[【]\s*\d+(?:\s*,\s*\d+)*\s*[\]】]")
 LIST_MARKER_PATTERN = re.compile(r"^\s*[-*]?\s*\d+[.)]\s", re.MULTILINE)
 
+# "1st year", "2nd year", "12th standard". An ordinal names a position
+# in a sequence, not a quantity being compared against a limit, so it is
+# not the kind of number this check exists to police.
+ORDINAL_PATTERN = re.compile(r"\b\d+(?:st|nd|rd|th)\b", re.IGNORECASE)
 
-def strip_non_claims(answer):
+
+def strip_non_claims(answer, drop_ordinals=False):
     """
     Take out the numbers that are not facts about scholarships.
 
@@ -53,9 +58,21 @@ def strip_non_claims(answer):
     formatting. Neither is a claim, and treating them as claims would
     block good answers and push me towards switching the check off,
     which would defeat the whole point of having it.
+
+    drop_ordinals also removes "1st", "2nd" and so on. The evaluation
+    blocked a perfectly good answer because it said "you are in the 1st
+    year of your degree" and the number one appeared in no source.
+
+    It is off by default, and only the number check turns it on, because
+    a date is written "31st October 2026" and taking the ordinal out of
+    that would leave "October 2026", which no longer parses as a date.
+    A fabricated deadline would then walk straight through the one check
+    built to catch it.
     """
     cleaned = CITATION_PATTERN.sub(" ", answer)
     cleaned = LIST_MARKER_PATTERN.sub(" ", cleaned)
+    if drop_ordinals:
+        cleaned = ORDINAL_PATTERN.sub(" ", cleaned)
     return cleaned
 
 
@@ -77,7 +94,7 @@ def check_numbers(answer, context_texts, tolerance=0.01):
     allowed = allowed_numbers(context_texts)
     unsupported = []
 
-    for value in find_numbers(strip_non_claims(answer)):
+    for value in find_numbers(strip_non_claims(answer, drop_ordinals=True)):
         if not any(abs(value - permitted) <= tolerance for permitted in allowed):
             unsupported.append(value)
 

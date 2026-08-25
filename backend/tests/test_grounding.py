@@ -112,3 +112,24 @@ def test_the_students_own_numbers_count_as_a_source():
     answer = "Your income of 3,00,000 is above the limit of 2,50,000."
     result = check_layer_one(answer, CHUNKS, extra_texts=["my family income is 300000"])
     assert result["grounded"] is True
+
+
+def test_ordinals_are_not_treated_as_claims():
+    """
+    The evaluation blocked a correct answer because it said "you are in
+    the 1st year of your degree" and the number one appeared in no
+    source. An ordinal is a position, not a quantity being compared.
+    """
+    answer = "You are in the 1st year, and lateral entry to the 2nd year also counts."
+    assert check_numbers(answer, [chunk["chunk_text"] for chunk in CHUNKS]) == []
+
+
+def test_dates_keep_their_ordinal_so_a_fake_deadline_is_still_caught():
+    """
+    The other side of that fix, and the reason it is not applied to
+    dates. "31st October 2026" only parses as a date while the "st" is
+    still attached. Strip it and a fabricated deadline walks through the
+    one check built to catch it.
+    """
+    answer = "Applications close on 31st December 2027."
+    assert check_dates(answer, [chunk["chunk_text"] for chunk in CHUNKS]) != []
