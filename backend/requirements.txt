@@ -1,0 +1,43 @@
+# The API
+fastapi==0.141.1
+uvicorn==0.52.4
+pydantic==2.13.4
+python-dotenv==1.2.3
+
+# Postgres, the source of truth for criteria, chunks and embeddings
+psycopg2-binary==2.9.12
+
+# The vector index, rebuilt from Postgres at boot
+chromadb==1.5.9
+
+# The two model providers. Only one is used at a time, picked by
+# LLM_PROVIDER in the .env, and both are behind app/llm.py.
+groq==1.6.0
+google-genai==2.19.0
+
+# Embeddings and the reranker. Both run locally on the CPU.
+#
+# torch is pinned to the CPU build on purpose. The GPU wheel is about
+# 2.5 GB against 200 MB, and Render's free tier has no GPU anyway, so a
+# latency number measured on CUDA would not describe the thing I shipped.
+# Install it with:
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+torch==2.13.0
+sentence-transformers==6.0.0
+transformers==5.15.1
+
+# Ingestion. LangChain is here for the document loaders and the text
+# splitter only. Retrieval, ranking, prompting and the grounding check
+# are all written by hand, because that is where the whole contribution
+# of this project sits.
+langchain-community==0.4.2
+langchain-text-splitters==1.1.2
+pypdf==6.16.2
+beautifulsoup4==4.15.0
+
+# Tracing and errors. Both do nothing at all when their keys are blank.
+langfuse==4.14.5
+sentry-sdk==2.68.1
+
+# Tests
+pytest==9.1.1
