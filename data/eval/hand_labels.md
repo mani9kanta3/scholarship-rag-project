@@ -28,7 +28,7 @@ I would agree with it, and the agreement rate would measure nothing.
 > 
 > The rule about the specific course levels (e.g., whether UG is explicitly listed) could not be confirmed from the sources. You can check the official scholarship page for that detail.
 
-My verdict: 
+My verdict: yes
 
 ---
 
@@ -44,7 +44,7 @@ My verdict:
 
 > No, you are not eligible for the Post‑Matric Scholarship for OBC Students, Delhi. The scheme requires applicants to belong to the OBC category and to be domiciled in Delhi, while you are SC and from Telangana. [1]
 
-My verdict: 
+My verdict: yes
 
 ---
 
@@ -60,7 +60,7 @@ My verdict:
 
 > No. The AICTE Pragati Scholarship for Girls is only for female students【1】.
 
-My verdict: 
+My verdict: yes
 
 ---
 
@@ -76,7 +76,7 @@ My verdict:
 
 > No. The Google PhD Fellowship India Program requires applicants to be enrolled full‑time in a Ph.D. program. Since you are at the undergraduate level, you do not meet this eligibility criterion【1】.
 
-My verdict: 
+My verdict: yes
 
 ---
 
@@ -93,7 +93,7 @@ My verdict:
 > Yes, you are eligible for the ANRF‑National Post Doctoral Fellowship (N‑PDF).  
 > The scheme allows candidates from SC, ST, OBC categories and the age limit is 35 years, with a 5‑year relaxation for SC, ST, OBC, physically challenged and female candidates. Your age of 30 and SC category fall within this relaxed limit, and you hold a Ph.D. in Science or Engineering, which meets the qualification requirement. [1]
 
-My verdict: 
+My verdict: yes
 
 ---
 
@@ -117,7 +117,7 @@ My verdict:
 > 
 > All these conditions are met, so you qualify for the scholarship. However, the application deadline for this scheme is already closed [4].
 
-My verdict: 
+My verdict: yes
 
 ---
 
@@ -134,7 +134,7 @@ My verdict:
 > Yes, you meet the eligibility criteria for the Dr. Ambedkar Post‑Matric Scholarship for EBC Students in Andaman and Nicobar.  
 > The scheme requires applicants to be Indian nationals, domiciled in Andaman and Nicobar, of the General category, and to have a combined annual income not exceeding INR 1,00,000. Your income of INR 90,000, General category status, and domicile in Andaman and Nicobar satisfy all these conditions [1].
 
-My verdict: 
+My verdict: yes
 
 ---
 
@@ -150,7 +150,7 @@ My verdict:
 
 > No, you are not eligible for the Post‑Matric Scholarship for OBC Students, Delhi. The scholarship requires a minimum of 75 % attendance in the previous year, and your attendance is 74.5 %【1】.
 
-My verdict: 
+My verdict: no
 
 ---
 
@@ -167,7 +167,7 @@ My verdict:
 > Yes, you are eligible for the Post‑Matric Scholarship for OBC Students, Delhi.  
 > The scheme requires an annual parent or guardian income of not more than INR 1,00,000, and you have INR 90,000. It also requires a minimum attendance of 75 %, and you have 75.5 %. The scheme is open to OBC students domiciled in Delhi, which matches your details. [1]
 
-My verdict: 
+My verdict: no
 
 ---
 
@@ -186,7 +186,7 @@ My verdict:
 > 
 > The rule about which course levels are covered by the scholarship could not be confirmed in the source material, so that information is unverified [1].
 
-My verdict: 
+My verdict: yes
 
 ---
 
@@ -209,7 +209,7 @@ My verdict:
 > 
 > If you are still unsure about your domicile status or any other requirement, please check the official application guidelines【4】.
 
-My verdict: 
+My verdict: yes
 
 ---
 
@@ -233,7 +233,7 @@ My verdict:
 > 
 > All eligibility criteria are met.
 
-My verdict: 
+My verdict: yes
 
 ---
 
@@ -249,7 +249,7 @@ My verdict:
 
 > You are not eligible for the Swami Dayanand India Scholarship. The scholarship requires a minimum of 80 % marks in Class 12, and you have 79 %【1】.
 
-My verdict: 
+My verdict: yes
 
 ---
 
@@ -263,7 +263,7 @@ My verdict:
 
 > The Central Sector Scheme of Scholarship pays a postgraduate student INR 20,000 per annum【1】.
 
-My verdict: 
+My verdict: yes
 
 ---
 
@@ -285,7 +285,7 @@ My verdict:
 > 
 > These are the minimum scores required for the scholarship application. [1]
 
-My verdict: 
+My verdict: yes
 
 ---
 
@@ -299,7 +299,7 @@ My verdict:
 
 > Applicants must be female students currently studying in classes 1 to 10 in a recognised school or institution, have secured at least 60 % marks or equivalent in the previous academic year, and have a monthly family income of less than INR 25,000. [1]
 
-My verdict: 
+My verdict: yes
 
 ---
 
@@ -313,7 +313,7 @@ My verdict:
 
 > The deadline for the Punjab Post‑Matric Scholarship is 30th April 2022. The scholarship is currently closed as of that date. [1]
 
-My verdict: 
+My verdict: no
 
 ---
 
@@ -327,7 +327,7 @@ My verdict:
 
 > I couldn’t find any scholarship listed in the sources that is specifically for studying in Sri Lanka. The available schemes in the sources are for Indian students studying in India or in certain other countries, but none mention Sri Lanka. You may need to look at other resources or official scholarship portals for options that allow study in Sri Lanka.
 
-My verdict: 
+My verdict: yes
 
 ---
 
@@ -341,7 +341,7 @@ My verdict:
 
 > I couldn’t find any information about a cut‑off rank for the Google PhD Fellowship India Program in 2023 in the provided sources.
 
-My verdict: 
+My verdict: yes
 
 ---
 
@@ -355,6 +355,6 @@ My verdict:
 
 > I couldn’t find any information in the provided sources about how long it takes to receive the scholarship money after a student is selected for the NMMS. You may want to check the official National Scholarship Portal or the state‑specific official websites for that detail.
 
-My verdict: 
+My verdict: yes
 
 ---

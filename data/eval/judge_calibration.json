@@ -1,0 +1,22 @@
+{
+  "hand_labelled": 20,
+  "agreed": 17,
+  "agreement_rate": 0.85,
+  "disagreements": [
+    {
+      "id": 15,
+      "mine": false,
+      "judge": true
+    },
+    {
+      "id": 16,
+      "mine": false,
+      "judge": true
+    },
+    {
+      "id": 40,
+      "mine": true,
+      "judge": false
+    }
+  ]
+}
