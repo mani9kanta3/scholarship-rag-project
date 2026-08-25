@@ -44,6 +44,15 @@ Both systems get the same corpus, the same model and the same student profile.
 The only difference is that the baseline has no SQL filter, no reranker and no
 abstention rules.
 
+> **These numbers are being regenerated.** They were measured before the hand
+> review of the extractions, which found a wrong value behind two of the
+> threshold questions, and before the retrieval floor was calibrated. The
+> corpus has since been re-extracted and the questions corrected. The re-run is
+> partly done and stopped on a daily token limit; `python -m eval.run_eval
+> --resume` finishes it. I have left the old figures here rather than delete
+> them, because a table that quietly disappears is worse than one that says
+> what it is.
+
 | | Naive semantic RAG | Hybrid + abstention |
 |---|---|---|
 | Overall correctness | 0.83 | **0.93** |
@@ -125,8 +134,13 @@ none.
 
 - 12 threshold questions means one question is 8 points. Differences smaller
   than that are noise.
-- Correctness is graded by a language model. `eval/calibrate_judge.py` measures
-  its agreement against hand labels.
+- Correctness is graded by a language model, and I checked the grader. Twenty
+  answers were labelled by hand with the judge's verdict hidden:
+  **agreement 0.85, 17 of 20.** Two of the three disagreements were the
+  attendance bug above, where the judge marked an answer correct because it
+  matched my expected answer and my expected answer was wrong. The third was
+  a trap where the judge wanted a flat refusal and the system said "I could
+  not find this, check the official portal", which I count as correct.
 - Two questions were corrected after the first run and re-asked. The reason is
   in *What I got wrong* below, and it is worth reading.
 
@@ -231,10 +245,43 @@ offered as a candidate, and the answering layer refuses to state it as fact.
 things, and treating the first as the second is how a filter quietly starts
 recommending schemes nobody qualifies for.
 
-**Measured: 96% of extracted fields verified, 37 of 44 schemes fully verified.**
-All seven failures were the same mistake, the model inferring a course level
-from a phrase like "Class 11 to Ph.D. level" instead of quoting a sentence that
-names one. I left them rejected rather than loosening the check.
+**Machine check: 93% of extracted fields verified, 32 of 44 schemes clean.**
+Nearly all the failures are the same mistake, the model inferring a course
+level from a phrase like "Class 11 to Ph.D. level" instead of quoting a
+sentence that names one. I left them rejected rather than loosening the check.
+
+That number moves. The same prompt over the same 44 documents scored 0.96 with
+37 clean schemes on one run and 0.93 with 32 on the next, because the model does not
+always pick the same sentence to quote, and on one run it turned "below 30
+years of age" into 29 where before it had written 30. The checker caught the
+difference both times, which is the point, but **extraction confidence is
+itself a measurement with noise in it** and quoting it to three decimal places
+would be pretending otherwise.
+
+**Hand check: 30 schemes read one by one, 24 clean.** That is the number worth
+quoting, because it measures what the machine check cannot. Six schemes had a
+value that passed every automatic test and was still wrong. The review was done
+on the extraction as it stood before the fixes below, which is why the machine
+numbers moved afterwards:
+
+| What was wrong | Schemes | Example |
+|---|---|---|
+| A percentage that is not marks | 1 | Delhi OBC stores 75 in `min_percentage`, quoted from *"an attendance of at least 75% in the previous year"*. That scheme has no marks requirement at all. |
+| One threshold kept out of several | 5 | Nagaland asks 80% of an undergraduate and 70% of a postgraduate. NMMS asks 55%, or 50% of SC and ST students. Sitaram Jindal allows ₹4,00,000 for a salaried family and ₹2,50,000 for everyone else. One column, one number. |
+
+The first one is the more interesting failure. The sentence was real, it was in
+the document, and it contained the number 75. Every check I had written passed
+it. But a percentage of attendance is not a percentage of marks, and the filter
+was quietly turning away eligible students who had less than 75% marks.
+
+Reading thirty extractions found it in about ten seconds. **The checker now
+knows about it too**: a marks value quoted from a sentence about attendance,
+disability or a reservation quota is rejected, unless the sentence really does
+talk about marks as well. That is the loop the hand review is for — a person
+finds the class of error, and then it becomes a test.
+
+The second row is a schema limitation rather than an extraction failure, and it
+is the top item in *What I would do next*.
 
 ### 2. The comparison is decided in SQL, not by the model
 
@@ -303,6 +350,23 @@ correctly cited answer was blocked as ungrounded.
 straight to that scheme's chunks and never ran the SQL filter, so the one part
 of the system that can actually compare two numbers was being bypassed on
 exactly the questions it was built for.
+
+**A percentage is not always a mark, and every check I had said it was.**
+The Delhi OBC document says applicants need "an attendance of at least 75% in
+the previous year". The model put 75 into `min_percentage`. The quote was real,
+it was in the document, and it contained the number, so the extraction check
+passed and the confidence for that scheme was 1.00. The scheme has no marks
+requirement at all, and the filter was turning away eligible students whose
+marks were below 75.
+
+Nothing automatic could have caught it, because the failure is semantic and the
+check was arithmetic. It took a person reading thirty extractions to spot it,
+and it took two evaluation questions built on the same wrong number down with
+it. The checker now rejects a marks value quoted from a sentence about
+attendance, disability or a quota, unless that sentence talks about marks too.
+This is the strongest argument I have for the "review the first 30 by hand"
+step: it is the only place in the pipeline where a new class of error can be
+discovered rather than re-detected.
 
 **My schema could not hold the rule, and the eval blamed the model for it.**
 This is the one worth reading. Two threshold questions asked about the Nagaland
@@ -379,7 +443,12 @@ Run the evaluation:
 ```bash
 python -m eval.load_questions
 python -m eval.run_eval              # add --resume if a run was interrupted
-python -m eval.calibrate_judge --prepare
+python -m eval.calibrate_judge --prepare   # then grade them, then run it again
+
+# The four standard RAG metrics. Optional, and it moves two packages:
+# see the note at the top of requirements-eval.txt.
+pip install -r requirements-eval.txt
+python -m eval.ragas_eval --runs 3
 ```
 
 ### A free API key
@@ -467,11 +536,16 @@ Written out because they are real.
 - **44 schemes is a demo corpus**, not a census. India has thousands. The pages
   were collected from a public aggregator on 25 August 2026 and some already
   show closed deadlines.
-- **The rules were extracted by a language model.** 96% of fields were verified
-  against a quoted sentence; the rest are flagged, not hidden. Seven schemes
+- **The rules were extracted by a language model.** 93% of fields were verified
+  against a quoted sentence; the rest are flagged, not hidden. Eleven schemes
   have a NULL `course_levels` because the extraction was rejected, and NULL
-  means "no constraint", so those seven are offered more widely than they
-  should be. They are marked as unverified in the UI and the API.
+  means "no constraint", so those are offered more widely than they should be.
+  They are marked as unverified in the UI and the API.
+- **A hand check of 30 schemes found 6 with a value that every automatic test
+  passed and that was still wrong.** One was an attendance percentage stored as
+  a marks requirement; five flattened a rule that varies by course level or
+  category. The first class is now caught automatically. The second is the
+  schema limitation below.
 - **One cutoff per scheme.** Some documents set a different mark requirement
   per course level. `eligibility_criteria` has a single `min_percentage`, so
   for those schemes the filter uses one of the several real thresholds. This
