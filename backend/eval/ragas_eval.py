@@ -132,7 +132,13 @@ def get_scorers():
 
     return [
         Faithfulness(llm=judge),
-        AnswerRelevancy(llm=judge, embeddings=wrapped_embeddings),
+        # strictness=1 is not a preference, it is what Groq allows.
+        #
+        # AnswerRelevancy defaults to 3, which asks the provider for
+        # three completions in one request. Groq answers that with
+        # "'n' : number must be at most 1" and the job fails. Left at
+        # the default, a chunk of the metric silently scores on nothing.
+        AnswerRelevancy(llm=judge, embeddings=wrapped_embeddings, strictness=1),
         ContextPrecision(llm=judge),
         ContextRecall(llm=judge),
     ]
@@ -142,9 +148,16 @@ def score_once(samples):
     """One RAGAS pass. Returns {metric: mean score}."""
     from ragas import evaluate
     from ragas.dataset_schema import EvaluationDataset
+    from ragas.run_config import RunConfig
 
     dataset = EvaluationDataset.from_list(samples)
-    result = evaluate(dataset=dataset, metrics=get_scorers())
+
+    # Slower and calmer than the defaults, on purpose. The first run
+    # threw ten TimeoutErrors against a free tier, and a metric computed
+    # from the jobs that happened to survive is not a measurement.
+    run_config = RunConfig(timeout=300, max_workers=4, max_retries=5)
+
+    result = evaluate(dataset=dataset, metrics=get_scorers(), run_config=run_config)
 
     scores = {}
     for metric, value in result._repr_dict.items():
