@@ -1,0 +1,30 @@
+{
+  "answer_relevancy": {
+    "mean": 0.595,
+    "spread": 0.0,
+    "runs": [
+      0.595
+    ]
+  },
+  "context_precision": {
+    "mean": 0.897,
+    "spread": 0.0,
+    "runs": [
+      0.897
+    ]
+  },
+  "context_recall": {
+    "mean": 0.417,
+    "spread": 0.0,
+    "runs": [
+      0.417
+    ]
+  },
+  "faithfulness": {
+    "mean": 0.222,
+    "spread": 0.0,
+    "runs": [
+      0.222
+    ]
+  }
+}
