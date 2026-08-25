@@ -1,0 +1,22 @@
+# Python
+backend/venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Secrets - never commit this
+.env
+
+# Downloaded models and the Chroma index. Both are rebuilt from
+# Postgres and Hugging Face, so there is no reason to store them in git.
+models/
+backend/chroma/
+
+# Node
+node_modules/
+dist/
+
+# Editors
+.vscode/
+.idea/
+.DS_Store
