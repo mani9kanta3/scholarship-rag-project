@@ -62,7 +62,22 @@ def strip_thinking(text):
 # Failures worth trying again. 429 is a rate limit and the 5xx family is
 # the provider being busy. Neither says my request was wrong, so neither
 # should end a job halfway through a corpus.
-RETRYABLE = ["429", "500", "502", "503", "504", "RESOURCE_EXHAUSTED", "UNAVAILABLE"]
+# A reasoning model sometimes spends its whole reply thinking and
+# returns nothing at all. It is a hiccup, not a bad request, and it
+# killed a forty minute evaluation run on question four. Retrying is the
+# right response; failing the whole job is not.
+EMPTY_REPLY = "the model returned an empty reply"
+
+RETRYABLE = [
+    "429",
+    "500",
+    "502",
+    "503",
+    "504",
+    "RESOURCE_EXHAUSTED",
+    "UNAVAILABLE",
+    EMPTY_REPLY,
+]
 
 # Model families that think before answering. Only these accept the
 # reasoning options below; the rest reject the request outright.
@@ -155,9 +170,13 @@ def _groq_call(prompt, system_instruction, temperature, json_mode, model=None):
         **extra,
     )
 
-    text = response.choices[0].message.content or ""
+    text = strip_thinking(response.choices[0].message.content or "")
     tokens = response.usage.total_tokens if response.usage else 0
-    return strip_thinking(text), tokens
+
+    if not text:
+        raise RuntimeError(EMPTY_REPLY)
+
+    return text, tokens
 
 
 # -------------------------------------------------------------- Gemini
@@ -279,8 +298,9 @@ def generate_json(prompt, response_schema, system_instruction=None, model=None):
 
     total_tokens = 0
     last_problem = None
+    attempts = 3
 
-    for attempt in range(2):
+    for attempt in range(attempts):
         ask = full_prompt
         if last_problem:
             ask = (
@@ -299,7 +319,7 @@ def generate_json(prompt, response_schema, system_instruction=None, model=None):
             return response_schema(**parsed).model_dump(), total_tokens
         except (ValueError, ValidationError, TypeError) as error:
             last_problem = str(error)[:300]
-            if attempt == 1:
+            if attempt == attempts - 1:
                 raise ValueError(f"model would not return valid JSON: {last_problem}")
 
 
