@@ -204,25 +204,35 @@ QUESTIONS = [
         "expected_answer": "Yes. The scheme needs at least 80% and this student has 80.5%, and the family income of 4,00,000 is under the INR 4,50,000 limit.",
         "why": "The other half of the pair. If a system answers both 13 and 14 the same way, it is not comparing anything.",
     },
+    # These two used to ask about the Delhi OBC scheme and a 75% cutoff.
+    # Reading the extractions by hand showed there is no such cutoff:
+    # the Delhi document says "an attendance of at least 75%", and the
+    # 75 had landed in min_percentage, which is marks. Every automatic
+    # check passed it, because the sentence is real and it does contain
+    # the number. The scheme sets no marks requirement at all.
+    #
+    # So the questions moved to a scheme whose percentage really is a
+    # percentage of marks, and the checker learned to reject a marks
+    # value quoted from a sentence about attendance.
     {
         "id": 15,
         "type": "threshold",
-        "question": "Am I eligible for the Post-Matric Scholarship for OBC Students, Delhi?",
-        "profile": profile(percentage=74.5, income=90000, category="OBC", course_level="UG", state="Delhi"),
-        "expected_scheme_ids": [29],
+        "question": "Am I eligible for the Karnataka Students Welfare Society Scholarship Program?",
+        "profile": profile(percentage=59.5, course_level="UG", state="Karnataka"),
+        "expected_scheme_ids": [13],
         "expected_abstain": False,
-        "expected_answer": "No. It needs at least 75% and this student has 74.5%.",
-        "why": "A second cutoff at a different number, so a system cannot pass by having memorised that 80 is the magic figure.",
+        "expected_answer": "No. It needs at least 60% in the 12th or PUC examination and this student has 59.5%.",
+        "why": "A second cutoff at a different number, so a system cannot pass by having memorised that 80 is the magic figure. It replaced a question built on a cutoff that turned out not to exist.",
     },
     {
         "id": 16,
         "type": "threshold",
-        "question": "Am I eligible for the Post-Matric Scholarship for OBC Students, Delhi?",
-        "profile": profile(percentage=75.5, income=90000, category="OBC", course_level="UG", state="Delhi"),
-        "expected_scheme_ids": [29],
+        "question": "Am I eligible for the Karnataka Students Welfare Society Scholarship Program?",
+        "profile": profile(percentage=60.5, course_level="UG", state="Karnataka"),
+        "expected_scheme_ids": [13],
         "expected_abstain": False,
-        "expected_answer": "Yes. It needs at least 75% and this student has 75.5%, with an income of 90,000 under the INR 1,00,000 limit.",
-        "why": "The pass side of the 75% cutoff, with every categorical rule also satisfied so nothing else can explain a no.",
+        "expected_answer": "Yes. It needs at least 60% and this student has 60.5%, and Karnataka is one of the states it covers.",
+        "why": "The pass side of the 60% cutoff, half a percent above it, with the state rule also satisfied so nothing else can explain a no.",
     },
     # These two were corrected after the first evaluation run, and the
     # reason is the most useful thing this eval set found.
