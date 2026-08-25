@@ -44,44 +44,91 @@ Both systems get the same corpus, the same model and the same student profile.
 The only difference is that the baseline has no SQL filter, no reranker and no
 abstention rules.
 
-> **These numbers are being regenerated.** They were measured before the hand
-> review of the extractions, which found a wrong value behind two of the
-> threshold questions, and before the retrieval floor was calibrated. The
-> corpus has since been re-extracted and the questions corrected. The re-run is
-> partly done and stopped on a daily token limit; `python -m eval.run_eval
-> --resume` finishes it. I have left the old figures here rather than delete
-> them, because a table that quietly disappears is worse than one that says
-> what it is.
-
 | | Naive semantic RAG | Hybrid + abstention |
 |---|---|---|
-| Overall correctness | 0.83 | **0.93** |
-| **Threshold questions** | **0.83** | **1.00** |
-| Eligibility questions | 0.83 | 1.00 |
+| Overall correctness | 0.80 | **0.88** |
+| **Threshold questions** | **0.83** | **0.92** |
+| Eligibility questions | 0.75 | 0.75 |
 | Detail questions | 1.00 | 1.00 |
-| Groundedness | 0.95 | **1.00** |
-| Answers containing an invented figure | 0.05 | **0.00** |
-| Mean latency | 1057 ms | 1507 ms |
+| Groundedness | 0.93 | **1.00** |
+| Answers containing an invented figure | 0.075 | **0.00** |
+| Told the student it did not know, when it did not | 0.63 | **0.88** |
+| Refusals caught by an actual rule | 0.00 | 0.25 |
+| Mean latency | 3556 ms | 3748 ms |
 
-Answers written by `openai/gpt-oss-20b`, graded by a different model. Retrieval
-uses `bge-small-en-v1.5` with a `ms-marco-MiniLM` cross-encoder.
+Answers written by `openai/gpt-oss-20b`, graded by `openai/gpt-oss-safeguard-20b`,
+which is deliberately a different model. Retrieval uses `bge-small-en-v1.5` with
+a `ms-marco-MiniLM` cross-encoder.
+
+The row I would actually defend is the invented figure one. Three of the forty
+answers the baseline handed over contained a number that appears in no source
+it retrieved. The hybrid path handed over none, because layer 1 stopped them.
+That is the whole safety argument in one line, and it is the only row where the
+difference is a mechanism rather than a few questions of luck.
 
 ### Did the reranker earn its latency?
 
-The guide says to measure this rather than assume it, so the eval runs the
-hybrid pipeline with the cross-encoder on and off:
+The guide says to measure this rather than assume it. I did, twice, and got
+opposite answers:
 
-| | Hybrid, no reranker | Hybrid, reranked |
+| | First run | Second run |
 |---|---|---|
-| Overall correctness | 0.88 | **0.93** |
-| Eligibility questions | 0.75 | **1.00** |
-| Threshold questions | 1.00 | 1.00 |
-| Mean latency | 861 ms | 1507 ms |
+| Hybrid, no reranker | 0.88 | **0.93** |
+| Hybrid, reranked | **0.93** | 0.88 |
 
-Yes, but narrowly and only in one place. It bought five points of overall
-correctness for about 650 ms, and all of the gain was on eligibility
-questions. On threshold questions it changed nothing, which makes sense:
-those are decided by arithmetic in SQL before the reranker ever sees a chunk.
+Nothing changed between them except the corpus being re-extracted and two
+questions being corrected. On 40 questions a five point swing is two questions,
+and two questions is well inside the run-to-run variation of a pipeline whose
+generator and grader are both language models.
+
+So the honest answer is not "it helps" and not "it hurts". It is **my eval is
+too small to tell**, and that is a more useful thing to know than a number I
+could have quoted from either run and sounded confident about. What is
+consistent across both is that the reranker never moved the threshold
+questions, which makes sense: those are decided by arithmetic in SQL before the
+cross-encoder ever sees a chunk.
+
+To settle it I would need a bigger eval set, not a better reranker.
+
+### RAGAS, and why I am not quoting it as a result
+
+The guide asks for the four standard metrics rather than only the four I
+defined myself, which is fair: standard names are easier for someone else to
+check. `eval/ragas_eval.py` wires RAGAS to this project's own judge model and
+its own embedding model, and it runs. Two runs over the same 32 answerable
+questions gave this:
+
+| | First run | Second run |
+|---|---|---|
+| context_precision | 0.94 | 0.90 |
+| answer_relevancy | 0.72 | 0.60 |
+| context_recall | 0.48 | 0.42 |
+| faithfulness | 0.48 | **0.22** |
+
+I am reporting these and not standing behind them, for two reasons.
+
+**Faithfulness is measuring something my system does not do.** It asks whether
+every claim in an answer is supported by the *retrieved context*. My answers are
+grounded in three things: the retrieved chunks, the student's own profile, and a
+verdict computed in SQL. RAGAS is only shown the first. So an answer reading
+"the scheme needs 60% and you have 65%, your income of ₹7,90,000 is under the
+₹8,00,000 limit" is half unsupported by RAGAS's definition and fully grounded by
+mine. I checked: neither "65%" nor "7,90,000" appears anywhere in the retrieved
+text, and they never could, because they came from the form the student filled
+in. A low faithfulness score here is a measure of how much of a hybrid answer
+comes from structured data rather than from prose, which for this design is a
+lot and is the entire point.
+
+**And the spread is too wide to quote anyway.** Faithfulness moved from 0.48 to
+0.22 on identical answers. Part of that is the first run being degraded — ten
+jobs timed out and `AnswerRelevancy` was asking Groq for three completions per
+request, which it rejects — and both are fixed. But a metric that halves
+between runs needs the three runs the guide asks for and a general purpose
+judge model, not the safety classifier I had free quota on. Until then, quoting
+0.22 as "my faithfulness" would be worse than saying nothing.
+
+It is in the repository, reproducible in one command, and flagged as unfinished.
+That is the honest state of it.
 
 ### What the eval questions do not show
 
@@ -96,44 +143,67 @@ Three student profiles.
 
   schemes plain retrieval handed the model:   54
   of those the student cannot get:            44   (81%)
-  eligible schemes plain retrieval never saw:  8
+  eligible schemes plain retrieval never saw: 12
 ```
 
 Four out of five schemes that plain semantic search puts in front of the model
-are ones the student is not eligible for, and it never retrieves eight schemes
-they do qualify for. Reranking cannot fix the second number, because a chunk
+are ones the student is not eligible for, and it never retrieves twelve schemes
+they do qualify for. Reranking cannot fix that second number, because a chunk
 that was never retrieved cannot be re-ranked.
 
-### Where it is weak, stated plainly
+This is the clearest evidence in the project for filtering first, and it is
+also the one that cost nothing to produce: no model is involved, so it is
+exact and it is free to re-run.
 
-**My abstention rules fired zero times on the trap questions.** The system
-still declined honestly in 5 of 8, but that was the model saying "the sources
-do not cover this", not a rule of mine catching it.
+### What refusing costs, and what it buys
 
-Digging into why produced the most useful bug in the project. The retrieval
-score floor was set to 0.30, and the actual scores from this embedding model on
-this corpus run from 0.64 to 0.91. The rule sat far below anything that ever
-happens and could not fire once. An abstention rule that cannot trigger is not
-a safety net, it is a comment.
+Refusal is not free and the eval prices it.
 
-The floor is now 0.75, which sits below the weakest answerable question in the
-eval (0.794) and above five of the eight traps. **The numbers in the tables
-above were measured before that fix and have not been retro-fitted**, because a
-threshold chosen by looking at the eval set makes any abstention number from
-that same set optimistic. Quoting it properly needs a held-out set.
+**It buys:** the baseline told a student "I do not have that" on 5 of the 8
+unanswerable questions. The hybrid path managed 7 of 8, and it let through zero
+answers containing an unsourced figure against the baseline's three.
 
-Three traps would still get through, because they ask an unanswerable question
-about a scheme that genuinely is in the corpus, like the helpline number for a
-scheme whose page has no phone number on it. No retrieval score can catch that.
-That is what the grounding check is for, and it is the layer that produced the
-one number in the table I would actually defend: the baseline let an answer
-through carrying a figure that appears in no source, and the hybrid path let
-none.
+**It costs:** the hybrid run refused five questions, and only two of those
+deserved it. The other three were eligibility questions with perfectly good
+answers, all blocked by layer 1. That is an abstention precision of 0.40, and
+it is the entire reason hybrid scores 0.75 on eligibility rather than higher.
+
+Reading the three blocked answers is the interesting part:
+
+| What the model wrote | Was blocking it right? |
+|---|---|
+| An age limit of **40**, reached by adding the document's "5 year relaxation" to its "35 years" | Yes. The source never states 40. The arithmetic is reasonable and the number is still not in the document. |
+| **Class 12**, narrowed from the document's "Class 11 to Ph.D. level" | Yes, narrowly. It is an inference presented as a fact. |
+| "you are in the **1st** year of your degree" | **No.** An ordinal is a position, not a quantity. This was a false positive and the check now ignores ordinals, while still keeping them for dates so "31st October" survives as a date. |
+
+So the strict rule cost about 9% of answerable questions, and two thirds of
+that was for a defensible reason. I would rather report that number than tune
+the rule until it stops being inconvenient.
+
+**An earlier version of this rule could not fire at all.** The retrieval floor
+was set to 0.30 while the actual scores from this embedding model on this
+corpus run from 0.64 to 0.91, so it sat below anything that ever happens. An
+abstention rule that cannot trigger is not a safety net, it is a comment. It is
+now 0.75, and that is why the rule catches 2 of 8 traps instead of 0 of 8.
+
+Honest caveat: 0.75 was chosen by looking at the score distribution on this
+eval set, so the abstention figures from that same set are optimistic. Quoting
+them properly needs a held-out set of traps, which is on the list below.
+
+Three traps still get through, because they ask an unanswerable thing about a
+scheme that genuinely is in the corpus — the helpline number for a scheme whose
+page has no phone number on it. No retrieval score can catch that, and it is
+why the grounding check exists as a second, independent layer.
 
 ### On reading these honestly
 
-- 12 threshold questions means one question is 8 points. Differences smaller
-  than that are noise.
+- 12 threshold questions means one question is 8 points, and 40 questions means
+  one is 2.5. Differences smaller than that are noise, which is exactly what
+  the two reranker runs demonstrated.
+- The latency column is wall clock against a shared free tier and it moved by a
+  factor of three between runs of the same code. Treat it as an order of
+  magnitude, not a measurement. The only latency claim worth making is the
+  relative one: the cross-encoder adds a few hundred milliseconds.
 - Correctness is graded by a language model, and I checked the grader. Twenty
   answers were labelled by hand with the judge's verdict hidden:
   **agreement 0.85, 17 of 20.** Two of the three disagreements were the
@@ -141,8 +211,12 @@ none.
   matched my expected answer and my expected answer was wrong. The third was
   a trap where the judge wanted a flat refusal and the system said "I could
   not find this, check the official portal", which I count as correct.
-- Two questions were corrected after the first run and re-asked. The reason is
-  in *What I got wrong* below, and it is worth reading.
+- Two questions were corrected after an earlier run and re-asked, because a
+  hand review showed they tested a cutoff that does not exist. The reason is in
+  *What I got wrong* below, and it is the most useful thing in this README.
+- Retrieval hit rate is 1.00 everywhere and is not in the table, because every
+  eligibility and threshold question names its scheme. It measures nothing
+  here. The retrieval comparison above is the honest version of that number.
 
 ---
 
@@ -571,10 +645,14 @@ Written out because they are real.
 1. Move the criteria to one row per course level, so a scheme that asks 80% of
    an undergraduate and 70% of a postgraduate can say so. This is the biggest
    real gap and the eval already found it.
-2. Re-run the evaluation now the retrieval floor is calibrated, and hold out a
-   second set of trap questions so the abstention numbers mean something.
-3. Add a disability field and re-extract.
-4. Re-check the corpus against source pages on a schedule and record what
+2. Hold out a second set of trap questions, so the abstention numbers are not
+   quoted from the same set the retrieval floor was tuned on.
+3. Finish RAGAS properly: a general purpose judge model, three runs, and a
+   second scoring pass that includes the profile and the SQL verdict as
+   context, so faithfulness measures this system rather than the pure RAG
+   system it assumes.
+4. Add a disability field and re-extract.
+5. Re-check the corpus against source pages on a schedule and record what
    changed, so `last_updated` means something more than "when I fetched it".
-5. Build the quality dashboard on top of `query_log` once there is history in
+6. Build the quality dashboard on top of `query_log` once there is history in
    it worth plotting.
