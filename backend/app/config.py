@@ -42,6 +42,11 @@ DB_PASSWORD = get("DB_PASSWORD", "")
 DB_HOST = get("DB_HOST", "localhost")
 DB_PORT = get("DB_PORT", "5432")
 
+# Hosted Postgres refuses plain connections. Neon and Render both want
+# SSL, my laptop does not care, so "prefer" is the default and hosted
+# environments set this to "require".
+DB_SSLMODE = get("DB_SSLMODE", "prefer")
+
 # Which model provider to use: "groq" or "gemini".
 #
 # The guide picks Gemini and the code still supports it. I moved to Groq
@@ -90,8 +95,13 @@ DATA_DIR = BASE_DIR / "data"
 RAW_DIR = DATA_DIR / "raw"                 # the scheme documents as downloaded
 REVIEW_DIR = DATA_DIR / "review"           # the hand check of the extractions
 EXTRACT_DIR = DATA_DIR / "extractions"     # what the model returned, kept so it is asked once
-CHROMA_DIR = BASE_DIR / "backend" / "chroma"
-MODEL_DIR = BASE_DIR / "models"            # downloaded sentence-transformers
+# These two are overridable by environment variable, because in a
+# container the repository layout above does not exist. The image copies
+# only the backend folder, so BASE_DIR ends up as "/" and the defaults
+# would point at paths outside the app that a non-root user cannot
+# create. Docker sets both explicitly.
+CHROMA_DIR = Path(get("CHROMA_DIR", str(BASE_DIR / "backend" / "chroma")))
+MODEL_DIR = Path(get("MODEL_DIR", str(BASE_DIR / "models")))
 
 # sentence-transformers reads this environment variable when it decides
 # where to save a model. Setting it here, before that library is ever

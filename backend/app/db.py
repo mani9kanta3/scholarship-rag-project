@@ -37,6 +37,8 @@ def get_connection():
         password=config.DB_PASSWORD,
         host=config.DB_HOST,
         port=config.DB_PORT,
+        # Hosted Postgres will not accept an unencrypted connection.
+        sslmode=config.DB_SSLMODE,
     )
 
 
