@@ -281,11 +281,25 @@ def health():
     The query log summary is here too. An abstention rate that suddenly
     jumps, or an eligible count stuck at zero, is something no offline
     eval would ever catch.
+
+    It answers 200 even when the database is unreachable, and says so in
+    the body instead. A container host reads this endpoint to decide
+    whether a deployment succeeded, and a 500 here means the deployment
+    is rolled back before anyone can read the logs that would explain
+    why. "I am running and here is what is wrong" is far more useful
+    during a deploy than a failure with no explanation.
     """
-    return {
-        "status": "ok",
-        "schemes": db.fetch_one("SELECT count(*) AS n FROM scheme")["n"],
-        "chunks": db.fetch_one("SELECT count(*) AS n FROM document_chunk")["n"],
-        "chunks_indexed": vector_store.count(),
-        "recent_queries": query_log.health_summary(),
-    }
+    try:
+        return {
+            "status": "ok",
+            "schemes": db.fetch_one("SELECT count(*) AS n FROM scheme")["n"],
+            "chunks": db.fetch_one("SELECT count(*) AS n FROM document_chunk")["n"],
+            "chunks_indexed": vector_store.count(),
+            "recent_queries": query_log.health_summary(),
+        }
+    except Exception as error:
+        return {
+            "status": "degraded",
+            "problem": "the database could not be reached",
+            "detail": str(error)[:200],
+        }
