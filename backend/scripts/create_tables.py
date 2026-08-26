@@ -34,6 +34,28 @@ TABLES = [
 ]
 
 
+def database_exists():
+    """
+    Can we already connect to the database we want?
+
+    This is asked first because a hosted provider makes the database for
+    you when you create the project, and will not let you connect to the
+    built in "postgres" one at all. So on Neon or Render the whole
+    creation step below is not just unnecessary, it fails.
+    """
+    try:
+        connection = db.get_connection()
+        connection.close()
+        return True
+    except psycopg2.OperationalError as error:
+        if "does not exist" in str(error):
+            return False
+        # Anything else is a real problem: wrong password, wrong host,
+        # no SSL. Raise it, because silently trying to create a database
+        # would replace a clear message with a confusing one.
+        raise
+
+
 def create_database_if_missing():
     """
     A connection has to name a database, and the one we want does not
@@ -46,6 +68,9 @@ def create_database_if_missing():
         password=config.DB_PASSWORD,
         host=config.DB_HOST,
         port=config.DB_PORT,
+        # Same as everywhere else. Hosted Postgres refuses a plain
+        # connection, and this one was written before that mattered.
+        sslmode=config.DB_SSLMODE,
     )
     # CREATE DATABASE cannot run inside a transaction, and psycopg2 opens
     # one for me automatically. autocommit turns that off.
@@ -77,7 +102,10 @@ def drop_all_tables():
 
 
 def main():
-    create_database_if_missing()
+    if database_exists():
+        print(f"Connected to {config.DB_NAME} at {config.DB_HOST}.")
+    else:
+        create_database_if_missing()
 
     if "--reset" in sys.argv:
         drop_all_tables()
