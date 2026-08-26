@@ -46,7 +46,11 @@ function Eligibility() {
       setLoad(true);
       setError("");
       const response = await api.post("/eligibility", { profile });
-      setResult(response.data);
+      setResult({
+        ...response.data,
+        matches: response.data.matches || [],
+        near_misses: response.data.near_misses || [],
+      });
     } catch (err) {
       setError(getErrorMessage(err, "Could not check your eligibility."));
       setResult(null);

@@ -38,8 +38,11 @@ function Schemes() {
       const response = await api.get("/schemes", {
         params: { search: searchText, state: state },
       });
-      setSchemes(response.data.results);
-      setTotal(response.data.count);
+      // Default to an empty list rather than whatever arrived. A missing
+      // results array used to be stored as undefined and the next line
+      // that read its length took the whole page down.
+      setSchemes(response.data.results || []);
+      setTotal(response.data.count || 0);
     } catch (err) {
       setError(getErrorMessage(err, "Could not load the schemes."));
     } finally {

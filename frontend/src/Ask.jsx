@@ -72,7 +72,14 @@ function Ask() {
         mode: mode,
       });
 
-      setAnswer(response.data);
+      setAnswer({
+        ...response.data,
+        // The lists are read straight into .map further down, so make
+        // sure they are lists whatever the server sent.
+        citations: response.data.citations || [],
+        warnings: response.data.warnings || [],
+        near_misses: response.data.near_misses || [],
+      });
     } catch (err) {
       setError(getErrorMessage(err, "Could not answer that question."));
     } finally {

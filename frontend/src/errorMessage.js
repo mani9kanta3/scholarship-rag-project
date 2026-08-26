@@ -10,6 +10,12 @@ function getErrorMessage(error, fallback = "Something went wrong. Please try aga
     return "The server took too long to answer. Please try again.";
   }
 
+  // Thrown by the interceptor in api.js when the reply was a web page
+  // rather than data. It already reads as a sentence, so pass it on.
+  if (error && error.message && !error.response) {
+    return error.message;
+  }
+
   const data = error && error.response && error.response.data;
 
   if (!data) {
