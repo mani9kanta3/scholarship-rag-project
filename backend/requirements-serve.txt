@@ -1,0 +1,55 @@
+# What the deployed API needs, and nothing else.
+#
+#     pip install -r requirements-serve.txt
+#
+# requirements.txt is the development set. It carries PyTorch, the
+# cross-encoder, LangChain and the evaluation tooling, and it comes to
+# about 700 MB in memory once both models are loaded. The free tier I
+# could actually get gives 512 MB, so serving from that file was never
+# going to work.
+#
+# This file drops everything that is only needed offline:
+#
+#   torch, sentence-transformers, transformers
+#       Replaced by fastembed, which runs the same bge-small weights
+#       through ONNX. A document embedded either way comes out at cosine
+#       0.999999, so the vectors already in Postgres stay valid and
+#       nothing is re-embedded. This is the single biggest saving.
+#
+#   the cross-encoder reranker
+#       Needs torch, so it cannot come. Set RERANKER_ENABLED=false.
+#       A real loss, and the evaluation measured its effect twice and
+#       got opposite answers, so on that eval set it sits inside the
+#       noise. Shipping without it beats not shipping.
+#
+#   langchain, pypdf, beautifulsoup4
+#       Only used by ingestion, which runs on my laptop.
+#
+#   google-genai
+#       The alternate model provider. llm.py imports it lazily, so the
+#       service runs fine without it as long as LLM_PROVIDER is groq.
+#
+#   pytest
+#       Tests do not run in production.
+
+# The API
+fastapi==0.141.1
+uvicorn==0.52.4
+pydantic==2.12.5
+python-dotenv==1.2.3
+
+# Postgres, the source of truth for criteria, chunks and embeddings
+psycopg2-binary==2.9.12
+
+# The vector index, rebuilt from Postgres at boot
+chromadb==1.5.9
+
+# The model provider
+groq==1.6.0
+
+# Embeddings without torch. Same model, ONNX runtime.
+fastembed==0.8.0
+
+# Tracing and errors. Both do nothing at all when their keys are blank.
+langfuse==4.14.5
+sentry-sdk==2.68.1

@@ -1,78 +1,69 @@
-# Render blueprint: the API, the database and the React page.
+# Render blueprint for the API.
 #
-# The Chroma index is not stored anywhere here, on purpose. The free
-# tier has no persistent disk, so anything written to it is gone on the
-# next restart. Postgres holds the durable copy of every embedding and
-# app/main.py rebuilds the index from it at startup, which takes a few
-# seconds and costs nothing because no re-embedding happens.
+# Three things here are deliberate.
 #
-# That is the answer to "what happens when your vector store dies":
-# nothing is lost, because the vector store is derived data.
-
-databases:
-  - name: scholarship-db
-    databaseName: scholarship_rag
-    user: scholarship
-    plan: free
+# 1. It installs requirements-serve.txt, not requirements.txt. The
+#    development set carries PyTorch and the cross-encoder and needs
+#    about 700 MB in memory. The free instance gives 512 MB. The serve
+#    set swaps torch for fastembed, which runs the same embedding
+#    weights through ONNX, and lands at roughly 300 MB.
+#
+# 2. There is no database here. Postgres lives on Neon, on its own free
+#    tier that does not expire after 30 days the way Render's does.
+#
+# 3. The Chroma index is not stored anywhere either. Postgres holds the
+#    durable copy of every embedding and the app rebuilds the index from
+#    it at startup, in seconds and with no re-embedding. So a free tier
+#    that wipes its disk on every restart costs nothing, because the
+#    vector store is derived data.
 
 services:
   - type: web
     name: scholarship-api
-    runtime: docker
+    runtime: python
     plan: free
-    dockerfilePath: ./backend/Dockerfile
-    dockerContext: ./backend
+    rootDir: backend
+    buildCommand: pip install -r requirements-serve.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 1
     healthCheckPath: /api/health
     envVars:
-      - key: DB_HOST
-        fromDatabase:
-          name: scholarship-db
-          property: host
-      - key: DB_PORT
-        fromDatabase:
-          name: scholarship-db
-          property: port
-      - key: DB_NAME
-        fromDatabase:
-          name: scholarship-db
-          property: database
-      - key: DB_USER
-        fromDatabase:
-          name: scholarship-db
-          property: user
-      - key: DB_PASSWORD
-        fromDatabase:
-          name: scholarship-db
-          property: password
-      # Set these in the Render dashboard, not here. Nothing secret
-      # belongs in a file that goes to GitHub.
+      - key: PYTHON_VERSION
+        value: "3.12.3"
+
+      # Run the embedding model through ONNX. torch is not installed here.
+      - key: EMBEDDING_BACKEND
+        value: onnx
+      - key: RERANKER_ENABLED
+        value: "false"
+
       - key: LLM_PROVIDER
         value: groq
+      - key: GROQ_MODEL
+        value: openai/gpt-oss-20b
+      - key: GROQ_JUDGE_MODEL
+        value: openai/gpt-oss-safeguard-20b
+
+      # Everything below is set in the Render dashboard, never in this
+      # file. sync:false means "ask me, do not read it from git".
       - key: GROQ_API_KEY
         sync: false
-      - key: GROQ_MODEL
-        value: openai/gpt-oss-120b
+      - key: DB_HOST
+        sync: false
+      - key: DB_NAME
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_PORT
+        sync: false
+      - key: DB_SSLMODE
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false
       - key: LANGFUSE_PUBLIC_KEY
         sync: false
       - key: LANGFUSE_SECRET_KEY
         sync: false
       - key: SENTRY_DSN
         sync: false
-      - key: CORS_ORIGINS
-        value: https://scholarship-web.onrender.com
-
-  - type: web
-    name: scholarship-web
-    runtime: static
-    buildCommand: cd frontend && npm install && npm run build
-    staticPublishPath: ./frontend/dist
-    envVars:
-      - key: VITE_API_URL
-        value: https://scholarship-api.onrender.com/api
-    routes:
-      # A single page app. Every path has to serve index.html, or a
-      # refresh on /schemes/12 returns a 404 from the static server
-      # before React Router ever sees it.
-      - type: rewrite
-        source: /*
-        destination: /index.html
