@@ -17,14 +17,22 @@ google-genai==2.19.0
 
 # Embeddings and the reranker. Both run locally on the CPU.
 #
-# torch is pinned to the CPU build on purpose. The GPU wheel is about
-# 2.5 GB against 200 MB, and Render's free tier has no GPU anyway, so a
-# latency number measured on CUDA would not describe the thing I shipped.
-# Install it with:
-#   pip install torch --index-url https://download.pytorch.org/whl/cpu
-torch==2.13.0
+# torch is pinned to the CPU build on purpose. The GPU wheel is around
+# 2.5 GB against 200 MB, there is no GPU on any free tier to use it, and
+# a latency number measured on CUDA would not describe the thing I
+# shipped. The +cpu version only exists on PyTorch's own index, so
+# naming it here forces the right build on Windows and on Linux without
+# anyone having to remember a flag.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.13.0+cpu
 sentence-transformers==6.0.0
 transformers==5.15.1
+
+# Only used by space_app.py, the entry point for the Hugging Face Space.
+# Hugging Face charges for the Docker runtime and gives 16 GB free on the
+# Gradio one, so the API is served from inside a Gradio app. Nothing in
+# the project itself imports this.
+gradio==6.26.0
 
 # Ingestion. LangChain is here for the document loaders and the text
 # splitter only. Retrieval, ranking, prompting and the grounding check
