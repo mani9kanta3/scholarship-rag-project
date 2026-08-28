@@ -49,6 +49,12 @@ def rerank(question, hits, top_k=None):
     if not hits:
         return []
 
+    # Switched off where torch is not installed, which is the deployed
+    # service. The caller does not need to know: it asks for reranking
+    # and gets the top few by vector score instead, in the same shape.
+    if not config.RERANKER_ENABLED:
+        return hits[:top_k]
+
     pairs = [(question, hit["chunk_text"]) for hit in hits]
     scores = get_model().predict(pairs)
 

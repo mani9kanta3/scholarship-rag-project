@@ -77,6 +77,22 @@ GROQ_JUDGE_MODEL = get("GROQ_JUDGE_MODEL", "openai/gpt-oss-safeguard-20b")
 EMBEDDING_MODEL = get("EMBEDDING_MODEL", "BAAI/bge-small-en-v1.5")
 RERANKER_MODEL = get("RERANKER_MODEL", "cross-encoder/ms-marco-MiniLM-L-6-v2")
 
+# Which library runs the embedding model: "torch", "onnx" or "auto".
+#
+# Same weights either way. torch is the local setup because ingestion
+# and the evaluation need it for the cross-encoder anyway. onnx is the
+# deployed one, because torch plus both models needs about 700 MB and
+# the free tier is 512 MB. "auto" picks torch when it is installed.
+EMBEDDING_BACKEND = get("EMBEDDING_BACKEND", "auto")
+
+# The cross-encoder needs torch, so it cannot run where torch is not
+# installed. Turning it off is a real loss and worth being straight
+# about, but the evaluation measured its effect twice and got opposite
+# answers both times, so on this eval set it sits inside the noise.
+# Switching off a component I could not prove helps, in order to ship at
+# all, is the trade I would rather make than not deploy.
+RERANKER_ENABLED = get("RERANKER_ENABLED", "true").lower() != "false"
+
 # bge-small returns 384 numbers per chunk. If the embedding model is
 # changed this has to change with it, and the whole corpus has to be
 # embedded again, because old and new vectors cannot be compared.
