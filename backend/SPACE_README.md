@@ -7,7 +7,7 @@ sdk: gradio
 sdk_version: 6.26.0
 app_file: space_app.py
 pinned: false
-short_description: Hybrid RAG over 44 Indian scholarship schemes, with citations
+short_description: Hybrid RAG over 44 Indian scholarship schemes
 ---
 
 # Scholarship Eligibility Assistant
