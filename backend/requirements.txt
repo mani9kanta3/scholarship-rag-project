@@ -15,16 +15,21 @@ chromadb==1.5.9
 groq==1.6.0
 google-genai==2.19.0
 
-# Embeddings and the reranker. Both run locally on the CPU.
+# Embeddings and the reranker. Both are inference only and neither needs
+# a GPU: this project never calls one.
 #
-# torch is pinned to the CPU build on purpose. The GPU wheel is around
-# 2.5 GB against 200 MB, there is no GPU on any free tier to use it, and
-# a latency number measured on CUDA would not describe the thing I
-# shipped. The +cpu version only exists on PyTorch's own index, so
-# naming it here forces the right build on Windows and on Linux without
-# anyone having to remember a flag.
---extra-index-url https://download.pytorch.org/whl/cpu
-torch==2.13.0+cpu
+# The version is pinned to 2.11.0 because of where it is deployed, not
+# because of what it needs. Hugging Face now charges for the plain CPU
+# runtime, so the Space runs on their ZeroGPU hardware, and that only
+# accepts torch 2.8.0, 2.9.1, 2.10.0 or 2.11.0. Anything newer is
+# refused before the Space will even start.
+#
+# I also dropped the +cpu build tag. It made the install smaller, but it
+# is a local version segment and ZeroGPU matches the version exactly, so
+# it was the difference between building and not building. The floors
+# that actually matter are torch>=2.2 for sentence-transformers and
+# torch>=2.5 for transformers, and 2.11.0 clears both.
+torch==2.11.0
 sentence-transformers==6.0.0
 transformers==5.15.1
 

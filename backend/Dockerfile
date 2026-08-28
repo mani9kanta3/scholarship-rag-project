@@ -38,7 +38,10 @@ WORKDIR /app
 # psycopg2-binary ships its own libpq, so no build tools are needed.
 COPY --chown=user requirements.txt .
 
-RUN pip install --no-cache-dir torch==2.13.0 \
+# The CPU build, kept for the container path. Nothing here needs a GPU,
+# and the CUDA wheel is about 2.5 GB against 200 MB. The version matches
+# requirements.txt so pip does not then pull a second copy over the top.
+RUN pip install --no-cache-dir torch==2.11.0 \
         --index-url https://download.pytorch.org/whl/cpu \
  && pip install --no-cache-dir -r requirements.txt
 
