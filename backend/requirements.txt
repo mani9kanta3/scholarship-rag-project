@@ -1,8 +1,17 @@
 # The API
 fastapi==0.141.1
 uvicorn==0.52.4
-pydantic==2.13.4
 python-dotenv==1.2.3
+
+# pydantic is pinned to exactly this, and it is the only version that
+# works. Hugging Face installs gradio with its mcp extra on top of this
+# file, and that caps pydantic at <=2.12.5, while google-genai in this
+# same file needs >=2.12.5. Two constraints meeting at one point.
+#
+# Nothing here uses a pydantic feature newer than 2.9, so this costs
+# nothing. It is worth a comment because the next person to bump it will
+# get a resolver error that names eight packages and not the reason.
+pydantic==2.12.5
 
 # Postgres, the source of truth for criteria, chunks and embeddings
 psycopg2-binary==2.9.12
