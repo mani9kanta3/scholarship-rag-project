@@ -1,11 +1,60 @@
 # Scholarship Eligibility Assistant
 
+[![Live demo](https://img.shields.io/badge/live%20demo-open-4338ca?style=flat-square)](https://scholarship-rag-project.vercel.app)
+[![API](https://img.shields.io/badge/API-docs-0ea5e9?style=flat-square)](https://scholarship-api-ffzu.onrender.com/docs)
+[![Health](https://img.shields.io/badge/health-%2Fapi%2Fhealth-047857?style=flat-square)](https://scholarship-api-ffzu.onrender.com/api/health)
+[![Its own eval scores](https://img.shields.io/badge/it%20publishes-its%20own%20eval%20scores-b45309?style=flat-square)](https://scholarship-api-ffzu.onrender.com/api/eval/latest)
+
+![Python](https://img.shields.io/badge/Python-3.12-3776ab?style=flat-square&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169e1?style=flat-square&logo=postgresql&logoColor=white)
+![ChromaDB](https://img.shields.io/badge/ChromaDB-vector%20index-ff6b6b?style=flat-square)
+![React](https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react&logoColor=black)
+![Groq](https://img.shields.io/badge/Groq-gpt--oss--20b-f55036?style=flat-square)
+
+![Tests](https://img.shields.io/badge/tests-48%20passing-047857?style=flat-square)
+![Threshold questions](https://img.shields.io/badge/threshold%20questions-0.83%20%E2%86%92%200.92-4338ca?style=flat-square)
+![Invented figures](https://img.shields.io/badge/answers%20with%20an%20invented%20figure-0.075%20%E2%86%92%200.00-047857?style=flat-square)
+![Judge agreement](https://img.shields.io/badge/judge%20agreement-0.85-b45309?style=flat-square)
+
 A question answering system over 44 Indian scholarship and government
 education schemes. It answers two things: **what am I eligible for**, and
 **how do I apply for this one**.
 
 The interesting part is not the chatbot. It is that ordinary RAG gets this
 domain wrong, and this repository shows the failure and the fix with numbers.
+
+**Try it:** <https://scholarship-rag-project.vercel.app>
+
+The API is on a free tier that sleeps after 15 minutes, so the first request
+after a quiet spell takes about 50 seconds to wake it. Everything after that is
+normal speed.
+
+---
+
+## What is actually deployed
+
+Worth stating plainly, because it is not quite the system the numbers below
+were measured on.
+
+| | Measured on | Deployed |
+|---|---|---|
+| Embedding model | bge-small-en-v1.5 | the same weights, through ONNX |
+| Cross-encoder reranker | on | **off** |
+| Everything else | | identical |
+
+The free instance gives 512 MB and the full stack needs about 700 MB, so
+PyTorch had to go. `fastembed` runs the same bge-small weights through ONNX
+instead, and a document embedded either way comes out at cosine 0.999999, so
+the embeddings already in Postgres stayed valid and nothing was re-embedded.
+The cross-encoder needs PyTorch, so it could not come.
+
+That is a real loss and I would rather name it than bury it. What makes it a
+defensible trade is that the evaluation measured the reranker's effect twice
+and got opposite answers, so on this eval set it sits inside the noise.
+Switching off a component I could not prove helps, in order to ship at all, is
+a decision with evidence behind it. Ingestion and the evaluation still run the
+full stack locally.
 
 ---
 
@@ -586,6 +635,31 @@ frontend/            React + Vite, six pages
 | `GET /api/health` | Uptime ping, plus the live query log summary. |
 
 ---
+
+## How it is hosted
+
+Three free tiers, each doing the one thing it is good at.
+
+| Piece | Where | Why there |
+|---|---|---|
+| Frontend | Vercel | Static build, connects straight to GitHub, free and permanent. |
+| API | Render, free instance | 512 MB, which is what forced the ONNX swap above. Sleeps after 15 minutes idle. |
+| PostgreSQL | Neon | Free tier that does not expire. Render's free database is deleted after 30 days, so the data lives somewhere it will still be next month. |
+
+`render.yaml` describes the API service, so the whole thing deploys from the
+repository. The database is deliberately not in it.
+
+**Filling a fresh database costs nothing**, and that is the extraction cache
+paying off a second time. The raw model answers are committed under
+`data/extractions`, so pointing `.env` at the new database and running the
+normal ingestion reads them from disk, embeds locally, and writes everything
+across. Zero API tokens. Then `scripts/load_eval_results.py` copies the
+measured metrics in, so `/api/eval/latest` works on a new deployment without
+re-running a day's worth of evaluation.
+
+There is no persistent disk on the free instance, and it does not need one. The
+app rebuilds its Chroma index from Postgres at every startup, in a few seconds,
+because the embeddings are already computed and stored there.
 
 ## Monitoring
 
