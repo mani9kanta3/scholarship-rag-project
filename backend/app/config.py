@@ -186,3 +186,13 @@ DAILY_TOKEN_BUDGET = int(get("DAILY_TOKEN_BUDGET", "150000"))
 # only worker there is and everyone else queues behind it. A real answer
 # takes about five seconds, so sixty is generous and still bounded.
 LLM_TIMEOUT_SECONDS = float(get("LLM_TIMEOUT_SECONDS", "60"))
+
+# Chunking. Used by ingestion to split, and by the corpus page to
+# explain what it did.
+#
+# The strategy is one chunk per section, and the splitter only gets
+# involved when a section is genuinely longer than this. That is why
+# the number is generous: most sections stay whole, and a section that
+# stays whole cannot have a rule cut in half.
+CHUNK_MAX_CHARS = int(get("CHUNK_MAX_CHARS", "1200"))
+CHUNK_OVERLAP = int(get("CHUNK_OVERLAP", "150"))

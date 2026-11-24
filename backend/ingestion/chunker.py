@@ -19,8 +19,16 @@ chunks for eligibility questions.
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 # Roughly 200 words. Most sections are well under this and stay whole.
-MAX_CHUNK_CHARS = 1200
-CHUNK_OVERLAP = 150
+#
+# These live in config now rather than here, because the corpus page in
+# the API reports them and it must not import this module: this one
+# needs LangChain, which is left out of the deployed dependency set on
+# purpose. Two copies of a number that has to match is a bug waiting
+# for a quiet afternoon.
+from app import config
+
+MAX_CHUNK_CHARS = config.CHUNK_MAX_CHARS
+CHUNK_OVERLAP = config.CHUNK_OVERLAP
 
 # LangChain's splitter is genuinely useful here. It tries paragraph
 # breaks first, then line breaks, then sentences, so a long section
