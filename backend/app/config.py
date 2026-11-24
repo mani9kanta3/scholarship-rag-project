@@ -212,3 +212,14 @@ LLM_TIMEOUT_SECONDS = float(get("LLM_TIMEOUT_SECONDS", "60"))
 # stays whole cannot have a rule cut in half.
 CHUNK_MAX_CHARS = int(get("CHUNK_MAX_CHARS", "1200"))
 CHUNK_OVERLAP = int(get("CHUNK_OVERLAP", "150"))
+
+# How much room the judge is allowed for its reply.
+#
+# Groq counts a request against the per minute token limit as the prompt
+# plus the output the model is permitted to write, not the output it
+# actually writes. The judge model allows 2,000 tokens a minute, and an
+# uncapped request reserved more than that on its own, so every judge
+# call was refused with a 413 before it ran. The judge returns a boolean
+# and one sentence; this leaves room for that and for the quiet
+# reasoning the model does first.
+JUDGE_MAX_TOKENS = int(get("JUDGE_MAX_TOKENS", "800"))

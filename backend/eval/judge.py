@@ -22,7 +22,7 @@ writes in the style of my expected answers.
 
 from pydantic import BaseModel
 
-from app import llm
+from app import config, llm
 
 
 class CorrectnessVerdict(BaseModel):
@@ -84,6 +84,7 @@ def grade(question, expected_answer, actual_answer):
         # recognises its own phrasing and marks it generously, so this
         # is the cheap version of not marking your own homework.
         model=llm.model_name("judge"),
+        max_tokens=config.JUDGE_MAX_TOKENS,
     )
 
     return bool(verdict.get("correct")), verdict.get("reason", ""), tokens
