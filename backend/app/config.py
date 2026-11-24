@@ -101,7 +101,23 @@ EMBEDDING_DIM = 384
 # Langfuse and Sentry are optional. Blank keys mean "turned off".
 LANGFUSE_PUBLIC_KEY = get("LANGFUSE_PUBLIC_KEY", "")
 LANGFUSE_SECRET_KEY = get("LANGFUSE_SECRET_KEY", "")
-LANGFUSE_HOST = get("LANGFUSE_HOST", "https://cloud.langfuse.com")
+# Which Langfuse to talk to.
+#
+# The SDK's own name for this is LANGFUSE_BASE_URL, so that is what is
+# read first. LANGFUSE_HOST is still accepted because it was the name in
+# older versions and most guides out there still say it, and having the
+# service quietly ignore a variable somebody deliberately set is a
+# miserable thing to debug.
+#
+# The default is the European cloud. Langfuse also runs an American one
+# at https://us.cloud.langfuse.com, and a key pair from one region is
+# rejected by the other, which is the single most common way this ends
+# up configured but not working.
+LANGFUSE_HOST = (
+    get("LANGFUSE_BASE_URL")
+    or get("LANGFUSE_HOST")
+    or "https://cloud.langfuse.com"
+)
 SENTRY_DSN = get("SENTRY_DSN", "")
 
 CORS_ORIGINS = get("CORS_ORIGINS", "http://localhost:5173").split(",")
