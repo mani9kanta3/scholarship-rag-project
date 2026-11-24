@@ -33,11 +33,13 @@ function Home() {
 
       <section className="row g-3 mt-2">
         <div className="col-md-4">
-          <div className="info-card corners h-100 p-4">
-            <div className="info-icon mb-3">
-              <i className="fa-solid fa-calculator"></i>
+          <div className="info-card corners h-100 p-3 p-lg-4">
+            <div className="info-head">
+              <span className="info-icon">
+                <i className="fa-solid fa-calculator"></i>
+              </span>
+              <h5>Your numbers are compared, not guessed</h5>
             </div>
-            <h5>Your numbers are compared, not guessed</h5>
             <p className="info-text mb-0">
               The income limits and mark cutoffs are stored as real numbers in a
               database, and your profile is compared against them with plain
@@ -48,11 +50,13 @@ function Home() {
         </div>
 
         <div className="col-md-4">
-          <div className="info-card corners h-100 p-4">
-            <div className="info-icon mb-3">
-              <i className="fa-solid fa-link"></i>
+          <div className="info-card corners h-100 p-3 p-lg-4">
+            <div className="info-head">
+              <span className="info-icon">
+                <i className="fa-solid fa-link"></i>
+              </span>
+              <h5>Every answer names its source</h5>
             </div>
-            <h5>Every answer names its source</h5>
             <p className="info-text mb-0">
               Answers are written only from the scheme pages we hold, and each
               one carries a link to the page it was read from, so you can check
@@ -62,11 +66,13 @@ function Home() {
         </div>
 
         <div className="col-md-4">
-          <div className="info-card corners h-100 p-4">
-            <div className="info-icon mb-3">
-              <i className="fa-solid fa-shield-halved"></i>
+          <div className="info-card corners h-100 p-3 p-lg-4">
+            <div className="info-head">
+              <span className="info-icon">
+                <i className="fa-solid fa-shield-halved"></i>
+              </span>
+              <h5>It says when it does not know</h5>
             </div>
-            <h5>It says when it does not know</h5>
             <p className="info-text mb-0">
               If a figure in an answer cannot be traced back to a source, the
               answer is blocked rather than shown. A wrong deadline is worse
