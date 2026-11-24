@@ -1,0 +1,82 @@
+# Run the test suite on every push and every pull request.
+#
+# Two choices here are deliberate.
+#
+# **It installs requirements-serve.txt, not requirements.txt.** The
+# development set carries PyTorch, which is about 2 GB and several
+# minutes of download on a cold runner, and not one test needs it. The
+# serve set is the one the deployed service actually runs, so this job
+# checks the thing that ships rather than a heavier thing that does not.
+# If a future change makes the API depend on torch without noticing,
+# this job fails, which is exactly the warning I would want.
+#
+# **It runs a real Postgres rather than mocking the database.** Half the
+# project is SQL. The eligibility filter is the central claim of the
+# whole thing, and a mocked database would test my idea of what Postgres
+# does instead of what it does. The service container below costs a few
+# seconds and tests the real query.
+
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: scholarship_rag
+        ports:
+          - 5432:5432
+        # Without this the job races the database and fails on a cold
+        # start roughly one run in three.
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DB_HOST: localhost
+      DB_PORT: "5432"
+      DB_NAME: scholarship_rag
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_SSLMODE: disable
+      # No torch on this runner, so the embedding model runs through
+      # ONNX and the cross encoder is off, exactly as in production.
+      EMBEDDING_BACKEND: onnx
+      RERANKER_ENABLED: "false"
+      # No key is needed. No test calls a model: the one that could is
+      # given a stand in, on purpose, so the suite never spends tokens.
+      GROQ_API_KEY: ""
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install the dependencies the deployed service uses
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r backend/requirements-serve.txt
+          pip install pytest
+
+      - name: Create the tables
+        working-directory: backend
+        run: python -m scripts.create_tables
+
+      - name: Run the tests
+        working-directory: backend
+        run: python -m pytest -q
