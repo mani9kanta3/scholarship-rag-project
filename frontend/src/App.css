@@ -583,3 +583,286 @@ a:hover {
   color: var(--brand);
   font-weight: 800;
 }
+
+/* ------------------------------------------------------------------
+   The three pages that make the invisible parts visible: the pipeline
+   trace under an answer, the corpus page, and the running numbers.
+
+   All of them reuse the colour variables at the top of this file. The
+   trace in particular leans on them hard, because a stage that passed
+   and a stage that stopped the pipeline have to be tellable apart at a
+   glance and the meaning is already named up there.
+   ------------------------------------------------------------------ */
+
+/* A big number with a label under it. Used on the corpus and running
+   pages for the four summary cards at the top. */
+.stat-value {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--heading);
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.badge-warn {
+  background: var(--warn-bg);
+  color: var(--warn);
+  border-radius: 4px;
+  padding: 1px 7px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+/* ---- the pipeline trace ---- */
+
+.trace-toggle {
+  background: none;
+  border: none;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.trace-toggle:hover {
+  color: var(--brand);
+}
+
+.trace-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.trace-step {
+  display: flex;
+  gap: 12px;
+  padding: 10px 0 10px 4px;
+  border-left: 2px solid var(--line);
+  margin-left: 12px;
+  padding-left: 18px;
+  position: relative;
+}
+
+/* The round marker sitting on the line down the left. The line is the
+   border above, so the marker has to be pulled back over it. */
+.trace-mark {
+  position: absolute;
+  left: -13px;
+  top: 10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  background: var(--page-bg);
+  border: 2px solid var(--line);
+  color: var(--muted);
+}
+
+.trace-ok .trace-mark {
+  background: var(--good-bg);
+  border-color: var(--good);
+  color: var(--good);
+}
+
+.trace-stopped .trace-mark {
+  background: var(--stop-bg);
+  border-color: var(--stop);
+  color: var(--stop);
+}
+
+.trace-failed .trace-mark {
+  background: var(--warn-bg);
+  border-color: var(--warn);
+  color: var(--warn);
+}
+
+.trace-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.trace-name {
+  font-weight: 600;
+  color: var(--heading);
+}
+
+.trace-outcome {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.trace-stopped .trace-outcome {
+  color: var(--stop);
+  font-weight: 600;
+}
+
+.trace-detail {
+  color: var(--ink);
+  font-size: 0.92rem;
+}
+
+.trace-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.trace-chip {
+  background: var(--brand-light);
+  color: var(--ink);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 0.78rem;
+}
+
+/* ---- the corpus page ---- */
+
+.split-headline {
+  background: var(--brand-light);
+  border-radius: 6px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+
+.hist-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px;
+  font-size: 0.82rem;
+}
+
+.hist-label {
+  width: 78px;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.hist-track {
+  flex-grow: 1;
+  background: var(--page-bg);
+  border-radius: 3px;
+  height: 14px;
+}
+
+.hist-bar {
+  display: block;
+  height: 14px;
+  background: var(--brand);
+  border-radius: 3px;
+}
+
+.hist-count {
+  width: 32px;
+  text-align: right;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.chunk-card {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+
+.chunk-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 10px 12px;
+  cursor: pointer;
+  font-size: 0.88rem;
+}
+
+.chunk-head:hover {
+  background: var(--brand-light);
+}
+
+.chunk-id {
+  color: var(--muted);
+  font-family: monospace;
+}
+
+.chunk-scheme {
+  font-weight: 600;
+  color: var(--heading);
+}
+
+.chunk-section {
+  background: var(--page-bg);
+  border-radius: 4px;
+  padding: 1px 8px;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.chunk-chars {
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin-left: auto;
+}
+
+/* The chunk text is shown exactly as it is stored, newlines included,
+   because the whole point is to see what the retriever sees. */
+.chunk-text {
+  margin: 0;
+  padding: 12px;
+  background: var(--page-bg);
+  border-top: 1px solid var(--line);
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 0.85rem;
+  color: var(--ink);
+}
+
+/* ---- the running numbers page ---- */
+
+.budget-track {
+  background: var(--page-bg);
+  border-radius: 4px;
+  height: 18px;
+  overflow: hidden;
+}
+
+.budget-bar {
+  height: 18px;
+  background: var(--brand);
+  border-radius: 4px;
+}
+
+.day-track {
+  display: inline-block;
+  width: 90px;
+  height: 10px;
+  background: var(--page-bg);
+  border-radius: 3px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.day-bar {
+  display: block;
+  height: 10px;
+  background: var(--brand);
+  border-radius: 3px;
+}
+
+.day-count {
+  color: var(--muted);
+  font-size: 0.85rem;
+}

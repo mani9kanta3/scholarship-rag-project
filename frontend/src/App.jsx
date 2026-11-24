@@ -9,6 +9,8 @@ import Ask from "./Ask";
 import Schemes from "./Schemes";
 import SchemeDetail from "./SchemeDetail";
 import Evaluation from "./Evaluation";
+import Corpus from "./Corpus";
+import Ops from "./Ops";
 import NotFound from "./NotFound";
 
 /*
@@ -31,6 +33,8 @@ function App() {
           <Route path="/schemes" element={<Schemes />} />
           <Route path="/schemes/:id" element={<SchemeDetail />} />
           <Route path="/evaluation" element={<Evaluation />} />
+          <Route path="/corpus" element={<Corpus />} />
+          <Route path="/running" element={<Ops />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />

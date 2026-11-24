@@ -4,7 +4,7 @@ import { NavLink, Link } from "react-router-dom";
 /*
   The top bar.
 
-  NavLink is used instead of Link for the four page links because it
+  NavLink is used instead of Link for the page links because it
   knows whether it is the page you are on and hands me an isActive flag,
   so the current page can be highlighted without me tracking the URL
   myself.
@@ -14,6 +14,8 @@ const LINKS = [
   { to: "/ask", label: "Ask a question", icon: "fa-comments" },
   { to: "/schemes", label: "Browse schemes", icon: "fa-list" },
   { to: "/evaluation", label: "How well it works", icon: "fa-chart-simple" },
+  { to: "/corpus", label: "What it reads", icon: "fa-layer-group" },
+  { to: "/running", label: "How it is running", icon: "fa-gauge-high" },
 ];
 
 function Navbar() {
