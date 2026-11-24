@@ -12,7 +12,7 @@
 ![React](https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react&logoColor=black)
 ![Groq](https://img.shields.io/badge/Groq-gpt--oss--20b-f55036?style=flat-square)
 
-![Tests](https://img.shields.io/badge/tests-48%20passing-047857?style=flat-square)
+[![tests](https://img.shields.io/github/actions/workflow/status/mani9kanta3/scholarship-rag-project/tests.yml?branch=main&style=flat-square&label=tests)](https://github.com/mani9kanta3/scholarship-rag-project/actions/workflows/tests.yml)
 ![Threshold questions](https://img.shields.io/badge/threshold%20questions-0.83%20%E2%86%92%200.92-4338ca?style=flat-square)
 ![Invented figures](https://img.shields.io/badge/answers%20with%20an%20invented%20figure-0.075%20%E2%86%92%200.00-047857?style=flat-square)
 ![Judge agreement](https://img.shields.io/badge/judge%20agreement-0.85-b45309?style=flat-square)
