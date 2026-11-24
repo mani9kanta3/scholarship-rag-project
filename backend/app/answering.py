@@ -64,6 +64,26 @@ def top_score(chunks):
     return max(chunk.get("vector_similarity", chunk.get("similarity", 0)) for chunk in chunks)
 
 
+_scheme_total = None
+
+
+def scheme_total():
+    """
+    How many schemes are in the corpus.
+
+    Read once and kept. The trace wants to say "9 of 44 passed the
+    filter" rather than just "9", because the first one is a result and
+    the second one is a number. The corpus does not change while the
+    process is running, so asking Postgres every time would be a query
+    per question for a figure that cannot move.
+    """
+    global _scheme_total
+    if _scheme_total is None:
+        row = db.fetch_one("SELECT COUNT(*) AS total FROM scheme")
+        _scheme_total = int(row["total"]) if row else 0
+    return _scheme_total
+
+
 def staleness_warnings(schemes_by_id):
     """
     Warn when a page is old enough that its deadline may have passed.
@@ -158,6 +178,31 @@ def answer_question(
     # case where I want to know what was in front of it.
     retrieved = []
 
+    # Every stage of the pipeline writes one line in here as it runs.
+    #
+    # This exists because the interesting part of this project is
+    # invisible. A student sees an answer; what actually happened was a
+    # SQL filter, a scoped vector search, a reranker, four abstention
+    # rules and two grounding checks, and any one of them can be the
+    # reason the answer looks the way it does. Keeping a record of the
+    # decisions costs a few dictionaries and makes the whole thing
+    # explainable after the fact, including the refusals, which are the
+    # cases most worth explaining.
+    trace = []
+
+    def step(name, outcome, detail, **numbers):
+        """
+        Record one stage.
+
+        outcome is one of four. "ok" passed, "skipped" did not run,
+        "stopped" means this stage is why there is no answer, so there
+        is at most one and it is always last. "failed" means the check
+        did not pass but the pipeline was told not to enforce it, which
+        only happens on the naive baseline and is exactly the number
+        the comparison in the README reports.
+        """
+        trace.append({"step": name, "outcome": outcome, "detail": detail, **numbers})
+
     if run_judge is None:
         run_judge = random.random() < config.JUDGE_SAMPLE_RATE
 
@@ -173,6 +218,7 @@ def answer_question(
         # refusal still had a retrieval step worth scoring.
         result["retrieved_scheme_ids"] = sorted({chunk["scheme_id"] for chunk in retrieved})
         result["latency_ms"] = int((time.perf_counter() - started) * 1000)
+        result["trace"] = trace
         if log:
             query_log.record(result)
             tracing.record_answer(result, chunks=retrieved, profile=profile)
@@ -182,11 +228,23 @@ def answer_question(
     if mode == "naive":
         # No filtering, no routing, no profile. This is the whole point
         # of the baseline: it only knows how to compare embeddings.
+        step("route", "skipped",
+             "The baseline does not read the question for intent. It embeds it "
+             "and searches everything.")
+        step("sql filter", "skipped",
+             "The baseline has no filter. Searching the whole corpus and hoping "
+             "the right page floats up is the gap this project exists to close.")
         chunks = retrieval.naive_retrieve(question, use_reranker=use_reranker)
         eligible_ids = None
         intent = "naive"
     else:
         intent, scoped_ids = retrieval.route(question, profile)
+        step("route", "ok",
+             f"Read this as {'an' if intent[0] in 'aeiou' else 'a'} "
+             f"{intent.replace('_', ' ')} question.",
+             intent=intent,
+             named_scheme_id=scoped_ids[0] if scoped_ids else None)
+
         chunks, eligible_ids = retrieval.hybrid_retrieve(
             question,
             profile=profile,
@@ -203,8 +261,37 @@ def answer_question(
         if profile and intent == "scheme_detail" and scoped_ids:
             verdict = eligibility.check_one(profile, scoped_ids[0])
 
+        if scoped_ids:
+            step("sql filter", "skipped",
+                 "The question named one scheme, so the search was scoped "
+                 "straight to it and the profile filter was not needed.",
+                 kept=len(scoped_ids), total=scheme_total())
+        elif eligible_ids is None:
+            step("sql filter", "skipped",
+                 "No profile was given, so there were no typed criteria to "
+                 "filter on and the search ran over the whole corpus.")
+        else:
+            step("sql filter", "ok",
+                 f"{len(eligible_ids)} of {scheme_total()} schemes passed the "
+                 f"typed criteria. The vector search only ever saw these.",
+                 kept=len(eligible_ids), total=scheme_total())
+
     retrieved = chunks
     eligible_count = len(eligible_ids) if eligible_ids is not None else None
+
+    reranked = any("rerank_score" in chunk for chunk in chunks)
+    step("vector search", "ok",
+         f"Asked for {config.CANDIDATE_CHUNKS} candidate chunks, kept "
+         f"{len(chunks)}.",
+         candidates=config.CANDIDATE_CHUNKS,
+         kept=len(chunks),
+         top_similarity=round(top_score(chunks), 4))
+    step("rerank", "ok" if reranked else "skipped",
+         "The cross encoder read each chunk together with the question and "
+         "reordered them."
+         if reranked else
+         "The cross encoder is switched off here, so the vector order stands. "
+         "It needs PyTorch, which does not fit in the deployed instance.")
 
     # --- rule 1: the filter matched nothing -----------------------
     if (
@@ -223,6 +310,10 @@ def answer_question(
             missed = "; ".join(f"{item['name']} ({item['missed_by']})" for item in near[:3])
             message += f" The closest ones are: {missed}"
 
+        step("abstention", "stopped",
+             "No scheme matched the profile, so there is nothing honest to "
+             "recommend. Showing the near misses instead.",
+             rule="sql filter returned nothing")
         return finish(
             _refuse(
                 "sql filter returned nothing",
@@ -236,6 +327,10 @@ def answer_question(
     # This one is not optional even for the baseline. With no chunks
     # there is nothing to build an answer out of at all.
     if not chunks:
+        step("abstention", "stopped",
+             "The search came back empty, so there is nothing to build an "
+             "answer out of.",
+             rule="no chunks retrieved")
         return finish(
             _refuse(
                 "no chunks retrieved",
@@ -248,6 +343,13 @@ def answer_question(
 
     # --- rule 3: the best match is too weak -----------------------
     if enforce_abstention and best < config.MIN_SIMILARITY:
+        step("abstention", "stopped",
+             f"The best chunk scored {round(best, 4)}, under the "
+             f"{config.MIN_SIMILARITY} floor, so nothing retrieved is close "
+             f"enough to the question to answer from.",
+             rule="top retrieval score below threshold",
+             top_similarity=round(best, 4),
+             threshold=config.MIN_SIMILARITY)
         return finish(
             _refuse(
                 "top retrieval score below threshold",
@@ -269,6 +371,11 @@ def answer_question(
             f"{scheme['name']} ({scheme['source_url']})"
             for scheme in list(schemes_by_id.values())[:3]
         )
+        step("abstention", "stopped",
+             "Every scheme worth citing here has rules I could not verify "
+             "against its own source page, so I will not state them.",
+             rule="extraction confidence too low",
+             best_confidence=round(max(confidences), 2))
         return finish(
             _refuse(
                 "extraction confidence too low",
@@ -280,6 +387,11 @@ def answer_question(
             )
         )
 
+    step("abstention rules", "ok",
+         "All four checks before generation passed: the filter found schemes, "
+         "the search found chunks, the best one cleared the similarity floor, "
+         "and at least one scheme has verified rules.")
+
     # --- generate -------------------------------------------------
     answer, answer_tokens = generation.generate_answer(
         question,
@@ -290,6 +402,10 @@ def answer_question(
         verdict=verdict,
     )
     tokens += answer_tokens
+    step("generate", "ok",
+         f"Wrote a draft from {len(chunks)} chunks. The draft is not shown to "
+         f"anyone until the two checks below have run.",
+         tokens=answer_tokens)
 
     # --- rule 5: layer 1, numbers and dates -----------------------
     # The student's own numbers count as sources. An answer that repeats
@@ -304,6 +420,16 @@ def answer_question(
         extra_texts.extend(verdict["reasons"])
 
     layer_one = grounding.check_layer_one(answer, chunks, extra_texts)
+
+    _loose = layer_one["unsupported_numbers"] + layer_one["unsupported_dates"]
+    step("grounding: numbers and dates",
+         "ok" if layer_one["grounded"] else ("stopped" if enforce_abstention else "failed"),
+         "Every figure in the draft traces back to a retrieved sentence, the "
+         "question itself, or the database verdict."
+         if layer_one["grounded"] else
+         f"The draft contains {_loose} with no source behind it.",
+         unsupported_numbers=layer_one["unsupported_numbers"],
+         unsupported_dates=layer_one["unsupported_dates"])
 
     if not layer_one["grounded"] and enforce_abstention:
         problems = []
@@ -328,9 +454,22 @@ def answer_question(
         )
 
     # --- rule 6: layer 2, the judge -------------------------------
+    if not run_judge:
+        step("grounding: the judge", "skipped",
+             f"The judge runs on {int(config.JUDGE_SAMPLE_RATE * 100)}% of live "
+             f"answers, sampled, because it costs a second model call every "
+             f"time. This question was not in the sample.")
+
     if run_judge:
         supported, unsupported_claims, judge_tokens = grounding.check_layer_two(answer, chunks)
         tokens += judge_tokens
+        step("grounding: the judge",
+             "ok" if supported else ("stopped" if enforce_abstention else "failed"),
+             "A second model, a different one from the writer, read the draft "
+             "against the sources and backed every claim."
+             if supported else
+             f"The judge could not back: {'; '.join(unsupported_claims)[:160]}",
+             tokens=judge_tokens)
 
         if not supported and enforce_abstention:
             return finish(
