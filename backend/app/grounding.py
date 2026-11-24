@@ -48,6 +48,27 @@ LIST_MARKER_PATTERN = re.compile(r"^\s*[-*]?\s*\d+[.)]\s", re.MULTILINE)
 # not the kind of number this check exists to police.
 ORDINAL_PATTERN = re.compile(r"\b\d+(?:st|nd|rd|th)\b", re.IGNORECASE)
 
+# "31st December 2022" and "31 December 2022" are the same day.
+#
+# A model re-typing a date drops the ordinal suffix much of the time,
+# and the source documents use it. So a correct deadline, compared as a
+# plain substring, failed to match the very sentence it came from. That
+# is not a hypothetical: the system drafted the right closing date for a
+# scheme, could not find it in the text it had just read, and blocked
+# its own correct answer as ungrounded. A held-out question caught it.
+#
+# Stripping the suffix from both sides before comparing makes the two
+# spellings the same string. It is deliberately done only for dates. The
+# number check uses that same suffix to tell "1st year" from the
+# quantity one, and dropping it there would turn an ordinal back into a
+# number to be policed, which is the opposite of what that check wants.
+ORDINAL_SUFFIX = re.compile(r"\b(\d{1,2})(?:st|nd|rd|th)\b", re.IGNORECASE)
+
+
+def drop_ordinal_suffix(text):
+    """Turn "31st" into "31", so both spellings of a day compare equal."""
+    return ORDINAL_SUFFIX.sub(r"\1", text)
+
 
 def strip_non_claims(answer, drop_ordinals=False):
     """
@@ -111,11 +132,11 @@ def check_dates(answer, context_texts):
     month, and a wrong deadline is the mistake this domain punishes
     hardest.
     """
-    context = " ".join(normalise(text) for text in context_texts)
+    context = drop_ordinal_suffix(" ".join(normalise(text) for text in context_texts))
     unsupported = []
 
     for date in find_dates(strip_non_claims(answer)):
-        if normalise(date) not in context:
+        if drop_ordinal_suffix(normalise(date)) not in context:
             unsupported.append(date)
 
     return sorted(unsupported)
