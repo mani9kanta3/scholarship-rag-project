@@ -16,7 +16,7 @@ Logging never breaks a request. If the insert fails, the student still
 gets their answer.
 """
 
-from . import db
+from . import config, db
 
 INSERT_SQL = """
 INSERT INTO query_log
@@ -97,4 +97,123 @@ def health_summary(limit=200):
         "mean_top_score": round(float(row["mean_top_score"] or 0), 3),
         "mean_latency_ms": int(row["mean_latency_ms"] or 0),
         "zero_eligible_rate": round(float(row["zero_eligible_rate"] or 0), 3),
+    }
+
+
+# Grouping the refusal reasons.
+#
+# Two of the six carry detail in the text: layer 1 names the figures it
+# could not trace, and the judge quotes the claim it could not back. So
+# grouping on the raw column would give one bucket per refusal and tell
+# nobody anything. These two patterns fold them back into their rule.
+REASON_GROUP = """
+    CASE
+        WHEN abstain_reason LIKE 'layer 1 failed%%'
+            THEN 'layer 1: a figure with no source behind it'
+        WHEN abstain_reason LIKE 'judge rejected%%'
+            THEN 'layer 2: the judge could not back a claim'
+        ELSE abstain_reason
+    END
+"""
+
+
+def ops_summary(days=14):
+    """
+    What the service has actually been doing, for the ops page.
+
+    Everything here reads the query log, which has been written on every
+    answer since the first day. None of it is new instrumentation; it is
+    the instrumentation finally being looked at.
+
+    The percentiles matter more than the mean. One cold start on a free
+    instance that sleeps can drag a mean latency up by seconds and make
+    a perfectly healthy service look broken, which is exactly the kind
+    of false alarm that teaches people to ignore dashboards.
+    """
+    window = {"days": days}
+
+    totals = db.fetch_one(
+        """
+        SELECT count(*)                                          AS queries,
+               avg(CASE WHEN abstained THEN 1.0 ELSE 0 END)      AS abstain_rate,
+               avg(CASE WHEN grounded THEN 1.0 ELSE 0 END)       AS grounded_rate,
+               avg(top_retrieval_score)                          AS mean_top_score,
+               sum(tokens)                                       AS tokens,
+               avg(latency_ms)                                   AS mean_latency_ms,
+               PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY latency_ms)  AS p50_latency_ms,
+               PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY latency_ms) AS p95_latency_ms
+        FROM query_log
+        WHERE asked_at >= NOW() - (%(days)s || ' days')::interval
+        """,
+        window,
+    )
+
+    by_day = db.fetch_all(
+        """
+        SELECT asked_at::date                                    AS day,
+               count(*)                                          AS queries,
+               avg(CASE WHEN abstained THEN 1.0 ELSE 0 END)      AS abstain_rate,
+               avg(top_retrieval_score)                          AS mean_top_score,
+               sum(tokens)                                       AS tokens,
+               PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY latency_ms) AS p50_latency_ms
+        FROM query_log
+        WHERE asked_at >= NOW() - (%(days)s || ' days')::interval
+        GROUP BY 1
+        ORDER BY 1
+        """,
+        window,
+    )
+
+    reasons = db.fetch_all(
+        f"""
+        SELECT {REASON_GROUP} AS reason, count(*) AS times
+        FROM query_log
+        WHERE abstained
+          AND asked_at >= NOW() - (%(days)s || ' days')::interval
+        GROUP BY 1
+        ORDER BY count(*) DESC
+        """,
+        window,
+    )
+
+    today = db.fetch_one(
+        """
+        SELECT COALESCE(sum(tokens), 0) AS tokens, count(*) AS queries
+        FROM query_log
+        WHERE asked_at >= CURRENT_DATE
+        """
+    )
+
+    def number(value, places=3):
+        return round(float(value or 0), places)
+
+    return {
+        "days": days,
+        "queries": totals["queries"] or 0,
+        "abstain_rate": number(totals["abstain_rate"]),
+        "grounded_rate": number(totals["grounded_rate"]),
+        "mean_top_score": number(totals["mean_top_score"]),
+        "tokens": int(totals["tokens"] or 0),
+        "latency_ms": {
+            "mean": int(totals["mean_latency_ms"] or 0),
+            "p50": int(totals["p50_latency_ms"] or 0),
+            "p95": int(totals["p95_latency_ms"] or 0),
+        },
+        "today": {
+            "queries": today["queries"] or 0,
+            "tokens": int(today["tokens"] or 0),
+            "budget": config.DAILY_TOKEN_BUDGET,
+        },
+        "by_day": [
+            {
+                "day": row["day"].isoformat(),
+                "queries": row["queries"],
+                "abstain_rate": number(row["abstain_rate"]),
+                "mean_top_score": number(row["mean_top_score"]),
+                "tokens": int(row["tokens"] or 0),
+                "p50_latency_ms": int(row["p50_latency_ms"] or 0),
+            }
+            for row in by_day
+        ],
+        "abstain_reasons": [dict(row) for row in reasons],
     }
