@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import api from "./api";
 import getErrorMessage from "./errorMessage";
 import PageHeader from "./PageHeader";
+import Loading from "./Loading";
 
 /*
   What the service has actually been doing.
@@ -84,7 +85,7 @@ function Ops() {
       </PageHeader>
 
       {error && <div className="alert alert-danger">{error}</div>}
-      {load && <p className="info-text">Loading ...</p>}
+      {load && <Loading what="the service numbers" />}
 
       {summary && summary.queries === 0 && (
         <div className="panel corners p-4">

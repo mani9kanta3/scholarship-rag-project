@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import api from "./api";
 import getErrorMessage from "./errorMessage";
 import PageHeader from "./PageHeader";
+import Loading from "./Loading";
 
 /*
   The page that shows how well this thing actually works.
@@ -108,7 +109,7 @@ function Evaluation() {
       />
 
       {error && <div className="alert alert-danger">{error}</div>}
-      {load && <p className="info-text">Loading ...</p>}
+      {load && <Loading what="the evaluation results" />}
 
       {!load && !hybrid && (
         <div className="panel corners p-4">

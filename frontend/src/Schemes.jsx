@@ -5,6 +5,7 @@ import api from "./api";
 import getErrorMessage from "./errorMessage";
 import money from "./money";
 import PageHeader from "./PageHeader";
+import Loading from "./Loading";
 import useDebounce from "./useDebounce";
 import { STATES } from "./options";
 
@@ -94,7 +95,7 @@ function Schemes() {
 
       {error && <div className="alert alert-danger">{error}</div>}
 
-      {load && <p className="info-text">Loading ...</p>}
+      {load && <Loading what="the schemes" />}
 
       {!load && schemes.length === 0 && !error && (
         <p className="info-text">No scheme matches that search.</p>

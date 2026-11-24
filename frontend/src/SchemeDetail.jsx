@@ -5,6 +5,7 @@ import api from "./api";
 import getErrorMessage from "./errorMessage";
 import money from "./money";
 import PageHeader from "./PageHeader";
+import Loading from "./Loading";
 
 /*
   One scheme in full.
@@ -44,7 +45,7 @@ function SchemeDetail() {
   }, [id]);
 
   if (load) {
-    return <p className="info-text p-4">Loading ...</p>;
+    return <Loading what="this scheme" />;
   }
 
   if (error) {
