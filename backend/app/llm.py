@@ -113,7 +113,24 @@ def get_groq():
             raise RuntimeError("GROQ_API_KEY is empty. Put your key in backend/.env first.")
         from groq import Groq
 
-        _groq_client = Groq(api_key=config.GROQ_API_KEY)
+        # Two arguments worth explaining.
+        #
+        # timeout, because the deployed service runs a single worker. A
+        # request that hangs does not just lose its own answer, it holds
+        # the only worker there is and every later visitor waits behind
+        # it. The SDK default is minutes, which is far longer than any
+        # answer this project should ever take.
+        #
+        # max_retries=0, because the retry loop further down this file
+        # already handles the retryable failures and knows which ones
+        # they are. Leaving the SDK default on top of it would multiply
+        # the two, so a bad patch could retry six times and sit on that
+        # worker for a very long time.
+        _groq_client = Groq(
+            api_key=config.GROQ_API_KEY,
+            timeout=config.LLM_TIMEOUT_SECONDS,
+            max_retries=0,
+        )
     return _groq_client
 
 
