@@ -113,7 +113,7 @@ def get_client():
         except Exception as error:
             _last_error = (
                 "Langfuse rejected the keys. Check the pair, and check "
-                f"LANGFUSE_HOST, currently {config.LANGFUSE_HOST}. "
+                f"LANGFUSE_BASE_URL, currently {config.LANGFUSE_HOST}. "
                 f"The server said: {error}"
             )
             print(_last_error)

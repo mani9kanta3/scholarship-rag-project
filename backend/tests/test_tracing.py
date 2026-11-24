@@ -165,7 +165,9 @@ def test_rejected_keys_are_reported_as_failing_not_off(monkeypatch):
 
     state = tracing.status()
     assert state["state"] == "failing"
-    assert "LANGFUSE_HOST" in state["last_error"]
+    # The message has to name the variable the SDK actually reads, so
+    # that somebody chasing a 401 edits the right one.
+    assert "LANGFUSE_BASE_URL" in state["last_error"]
 
 
 def test_a_working_trace_counts(monkeypatch):
