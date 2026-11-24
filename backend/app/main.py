@@ -15,10 +15,10 @@ silently empty vector store answering every question with nothing.
 
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 
-from . import answering, config, db, eligibility, query_log, vector_store
+from . import answering, config, db, eligibility, query_log, rate_limit, vector_store
 from .models import (
     AskRequest,
     AskResponse,
@@ -77,7 +77,7 @@ def _as_text(value):
     return value.isoformat() if value else None
 
 
-@app.post("/api/eligibility", response_model=EligibilityResponse)
+@app.post("/api/eligibility", response_model=EligibilityResponse, dependencies=[Depends(rate_limit.limit_cheap)])
 def check_eligibility(request: EligibilityRequest):
     """
     What is this student eligible for?
@@ -118,7 +118,11 @@ def check_eligibility(request: EligibilityRequest):
     }
 
 
-@app.post("/api/ask", response_model=AskResponse)
+@app.post(
+    "/api/ask",
+    response_model=AskResponse,
+    dependencies=[Depends(rate_limit.limit_ask)],
+)
 def ask(request: AskRequest):
     """
     A free text question, answered with citations or refused honestly.
@@ -137,6 +141,8 @@ def ask(request: AskRequest):
         use_reranker=request.use_reranker,
     )
 
+    rate_limit.spend(result.get("tokens", 0))
+
     return {
         "answer": result["answer"],
         "abstained": result["abstained"],
@@ -152,8 +158,14 @@ def ask(request: AskRequest):
     }
 
 
-@app.get("/api/schemes")
-def list_schemes(search: str = "", provider: str = "", state: str = "", limit: int = 50, offset: int = 0):
+@app.get("/api/schemes", dependencies=[Depends(rate_limit.limit_cheap)])
+def list_schemes(
+    search: str = "",
+    provider: str = "",
+    state: str = "",
+    limit: int = Query(default=50, ge=1, le=100),
+    offset: int = Query(default=0, ge=0),
+):
     """
     Browse the corpus.
 
@@ -203,7 +215,7 @@ def list_schemes(search: str = "", provider: str = "", state: str = "", limit: i
     return {"results": rows, "count": total}
 
 
-@app.get("/api/schemes/{scheme_id}")
+@app.get("/api/schemes/{scheme_id}", dependencies=[Depends(rate_limit.limit_cheap)])
 def get_scheme(scheme_id: int):
     """One scheme, with its rules, its sections and its source link."""
     scheme = db.fetch_one(
@@ -242,7 +254,7 @@ def get_scheme(scheme_id: int):
     return scheme
 
 
-@app.get("/api/eval/latest")
+@app.get("/api/eval/latest", dependencies=[Depends(rate_limit.limit_cheap)])
 def latest_eval():
     """
     The metrics from the most recent evaluation run.
