@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import api from "./api";
 import getErrorMessage from "./errorMessage";
 import PageHeader from "./PageHeader";
+import Loading from "./Loading";
 import useDebounce from "./useDebounce";
 
 /*
@@ -64,6 +65,24 @@ function Corpus() {
   }, []);
 
   useEffect(() => {
+    // Wait for the summary before asking for chunks.
+    //
+    // These used to go out together, which is faster when the server is
+    // awake and worse when it is not. The API sleeps on its free tier,
+    // so on the first visit both requests race a server that is still
+    // starting, one of them loses, and the page shows a red network
+    // error while the spinner is still turning. An error and a loading
+    // state at the same time is the most confusing thing a page can
+    // say.
+    //
+    // Letting the summary go first means one request wakes the server
+    // and the rest are quick. It costs a few hundred milliseconds when
+    // everything is warm, which nobody will notice, and removes a
+    // failure that every first-time visitor would have seen.
+    if (!stats) {
+      return;
+    }
+
     async function loadChunks() {
       try {
         const response = await api.get("/corpus/chunks", {
@@ -82,7 +101,7 @@ function Corpus() {
     }
 
     loadChunks();
-  }, [section, typed, splitOnly, offset]);
+  }, [stats, section, typed, splitOnly, offset]);
 
   // Any change to a filter has to send the reader back to the first
   // page. Staying on page four of a list that now has one page shows
@@ -104,8 +123,8 @@ function Corpus() {
         subtitle="Every chunk in the corpus, and what chunking did to the documents"
       />
 
-      {error && <div className="alert alert-danger">{error}</div>}
-      {load && <p className="info-text">Loading ...</p>}
+      {error && !load && <div className="alert alert-danger">{error}</div>}
+      {load && <Loading what="the corpus" />}
 
       {stats && (
         <>
