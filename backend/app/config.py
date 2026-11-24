@@ -155,3 +155,34 @@ MIN_EXTRACTION_CONFIDENCE = 0.5
 # eval set; in production it costs tokens on every request, so it
 # samples. 0.0 turns it off, 1.0 runs it every time.
 JUDGE_SAMPLE_RATE = 0.2
+
+# Rate limiting. See app/rate_limit.py for why there are two kinds.
+#
+# Off by default on my laptop and in the tests, because tripping a limit
+# while developing wastes an afternoon working out what broke. The
+# deployed service turns it on.
+RATE_LIMIT_ENABLED = get("RATE_LIMIT_ENABLED", "false").lower() == "true"
+
+# Per address, for the endpoint that calls a model.
+ASK_PER_MINUTE = int(get("ASK_PER_MINUTE", "6"))
+ASK_PER_HOUR = int(get("ASK_PER_HOUR", "40"))
+
+# Per address, for the endpoints that only read Postgres.
+CHEAP_PER_MINUTE = int(get("CHEAP_PER_MINUTE", "60"))
+
+# The day's model spend, in tokens, counted from query_log.
+#
+# The free tier gives 200,000 tokens a day per model. A question costs
+# roughly 3,000 once the retrieved chunks and the answer are counted, so
+# this budget is about fifty questions and leaves real headroom under
+# the quota. It is in tokens rather than requests because the quota is,
+# and a request limit would let twenty long questions cost more than a
+# hundred short ones.
+DAILY_TOKEN_BUDGET = int(get("DAILY_TOKEN_BUDGET", "150000"))
+
+# How long to wait on one model call before giving up.
+#
+# The deployed service runs a single worker, so a hung request holds the
+# only worker there is and everyone else queues behind it. A real answer
+# takes about five seconds, so sixty is generous and still bounded.
+LLM_TIMEOUT_SECONDS = float(get("LLM_TIMEOUT_SECONDS", "60"))
