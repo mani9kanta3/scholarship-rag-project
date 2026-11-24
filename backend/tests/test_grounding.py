@@ -133,3 +133,56 @@ def test_dates_keep_their_ordinal_so_a_fake_deadline_is_still_caught():
     """
     answer = "Applications close on 31st December 2027."
     assert check_dates(answer, [chunk["chunk_text"] for chunk in CHUNKS]) != []
+
+
+# ------------------------------------------------- dates and ordinals
+#
+# A held-out question found this one, which is the whole argument for
+# having a held-out set. The system drafted the right closing date for a
+# scheme, failed to find it in the very sentence it had just read, and
+# blocked its own correct answer as ungrounded. The source wrote "31st
+# December 2022" and the model wrote "31 December 2022", and a plain
+# substring comparison says those are different days.
+
+
+SOURCE = ["Closed. The scholarship closing date was 31st December 2022."]
+
+
+def test_a_date_without_its_ordinal_suffix_still_matches():
+    """The failure itself. The model drops "st", the source keeps it."""
+    assert check_dates("The deadline was 31 December 2022.", SOURCE) == []
+
+
+def test_a_date_with_the_ordinal_suffix_still_matches():
+    assert check_dates("The deadline was 31st December 2022.", SOURCE) == []
+
+
+def test_an_odd_unicode_space_inside_a_date_still_matches():
+    """
+    The model wrote this with narrow no-break spaces, which is what the
+    abstention reason showed and what sent me looking at Unicode first.
+    It was a red herring: normalise already handles it. The suffix was
+    the real difference, and this test keeps both covered.
+    """
+    assert check_dates("The deadline was 31\u202fDecember\u202f2022.", SOURCE) == []
+
+
+def test_the_wrong_day_is_still_caught():
+    """
+    The point of the whole check. Loosening the comparison must not
+    loosen it so far that a fabricated deadline gets through, because a
+    wrong date is the mistake this domain punishes hardest.
+    """
+    assert check_dates("The deadline was 30 December 2022.", SOURCE) != []
+
+
+def test_the_wrong_month_is_still_caught():
+    """
+    "31 November" and "31 December" contain the same numbers, so only
+    comparing the written date catches a swapped month.
+    """
+    assert check_dates("The deadline was 31 November 2022.", SOURCE) != []
+
+
+def test_the_wrong_year_is_still_caught():
+    assert check_dates("The deadline was 31 December 2023.", SOURCE) != []
