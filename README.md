@@ -633,6 +633,47 @@ frontend/            React + Vite, six pages
 | `GET /api/schemes/{id}` | One scheme, its rules, and the sentence each rule was read from. |
 | `GET /api/eval/latest` | This system's own evaluation numbers, including the bad ones. |
 | `GET /api/health` | Uptime ping, plus the live query log summary. |
+| `GET /api/corpus/stats` | What the corpus is made of, and what chunking did to it. |
+| `GET /api/corpus/chunks` | The chunks themselves, exactly as the retriever sees them. |
+| `GET /api/ops/summary` | What the service has been doing: volume, latency, refusals, token spend. |
+
+---
+
+## Showing the parts that are normally invisible
+
+Three of the pages exist because the interesting work in a RAG system is the
+work nobody can see.
+
+**Every answer can show how it was reached.** The pipeline writes a line at
+each stage as it runs, and the Ask page will replay them: how the question was
+routed, how many schemes the SQL filter kept, what the search returned and
+scored, whether the reranker ran, which of the four abstention rules passed,
+and what the two grounding checks found. It is collapsed by default, because a
+student asking about their marks does not want a pipeline diagram.
+
+The refusals are the ones worth reading. When the system declines to answer it
+names the rule that stopped it and the numbers behind it, for example *"the
+best chunk scored 0.7159, under the 0.75 floor"*. Nothing is written after the
+fact; each line is recorded by the stage itself.
+
+**The corpus page shows all 264 chunks**, with a measurement of what chunking
+cost. The rule when building the corpus was one chunk per section, and the
+splitter only runs on a section longer than 1200 characters. So a section that
+produced one chunk is whole and no rule inside it can have been cut in half,
+and a section that produced two or more is a place where an income limit could
+sit in one chunk and the category list it applies to in another.
+
+On this corpus **the splitter never ran**. All 264 sections stayed whole and
+the longest is 772 characters. That is worth stating and worth not overselling:
+it is a fact about forty four government scheme pages, which have short
+sections, not a property of the design.
+
+**The running page reads the query log.** None of it is new instrumentation.
+Every answer since the first day has recorded its retrieval score, its
+abstention reason, its latency and its token cost. The page is that data
+finally being looked at. It answers a different question from the evaluation:
+the evaluation says how well the system does on forty questions I wrote, this
+says whether it is still behaving on the questions people actually ask.
 
 ---
 
