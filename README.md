@@ -49,11 +49,23 @@ instead, and a document embedded either way comes out at cosine 0.999999, so
 the embeddings already in Postgres stayed valid and nothing was re-embedded.
 The cross-encoder needs PyTorch, so it could not come.
 
-That is a real loss and I would rather name it than bury it. What makes it a
-defensible trade is that the evaluation measured the reranker's effect twice
-and got opposite answers, so on this eval set it sits inside the noise.
-Switching off a component I could not prove helps, in order to ship at all, is
-a decision with evidence behind it. Ingestion and the evaluation still run the
+That is a real loss, and I used to defend it with a sentence I can no longer
+use. The old wording was that the reranker's effect had been measured twice
+with opposite results, so switching off a component I could not prove helps was
+a decision with evidence behind it.
+
+A held-out set has since put a number on it, and the number is not zero. On
+thirty questions nothing was tuned against, the reranker is worth **8 of 8
+eligibility questions against 5 of 8**, and **0.967 against 0.900 overall**.
+The overall gap is two questions and I would not defend that on its own, but
+the eligibility gap is three questions out of eight and it matches the
+mechanism exactly: cosine keeps picking the description chunk while the
+reranker picks the eligibility one.
+
+So the honest version is that the deployed system is measurably worse than the
+one I measured, on precisely the questions this project exists to answer. It
+ships that way because 512 MB is what I could get for free, not because the
+component was shown to be useless. Ingestion and the evaluation still run the
 full stack locally.
 
 ---
@@ -130,14 +142,18 @@ questions being corrected. On 40 questions a five point swing is two questions,
 and two questions is well inside the run-to-run variation of a pipeline whose
 generator and grader are both language models.
 
-So the honest answer is not "it helps" and not "it hurts". It is **my eval is
-too small to tell**, and that is a more useful thing to know than a number I
-could have quoted from either run and sounded confident about. What is
-consistent across both is that the reranker never moved the threshold
-questions, which makes sense: those are decided by arithmetic in SQL before the
+So the honest answer was not "it helps" and not "it hurts". It was **my eval is
+too small to tell**, which is a more useful thing to know than a number I could
+have quoted from either run and sounded confident about. What was consistent
+across both runs is that the reranker never moved the threshold questions,
+which makes sense: those are decided by arithmetic in SQL before the
 cross-encoder ever sees a chunk.
 
-To settle it I would need a bigger eval set, not a better reranker.
+**I said settling it needed a bigger eval set rather than a better reranker, so
+I built one.** Thirty questions, on schemes the original forty never touch,
+written before any of them had been scored. The held-out section below has the
+numbers, and the short version is that the reranker does earn its place, but on
+a narrower set of questions than either of the runs above suggested.
 
 ### RAGAS, and why I am not quoting it as a result
 
@@ -237,12 +253,112 @@ now 0.75, and that is why the rule catches 2 of 8 traps instead of 0 of 8.
 
 Honest caveat: 0.75 was chosen by looking at the score distribution on this
 eval set, so the abstention figures from that same set are optimistic. Quoting
-them properly needs a held-out set of traps, which is on the list below.
+them properly needs a held-out set, and there now is one. On thirty questions
+the threshold was never tuned against, abstention precision came out at 1.000
+and the overall score was higher than on the set it was fitted to, so the
+caveat turns out to be weaker than I expected. It is still a caveat: thirty
+questions is not many, and I wrote them.
 
 Three traps still get through, because they ask an unanswerable thing about a
 scheme that genuinely is in the corpus — the helpline number for a scheme whose
 page has no phone number on it. No retrieval score can catch that, and it is
 why the grounding check exists as a second, independent layer.
+
+### The held-out set, and what it cost me to build
+
+The forty questions above have a problem the numbers cannot show.
+`MIN_SIMILARITY` was set to 0.75 by looking at the scores those forty
+questions produced. A threshold chosen on a set and then scored on the same
+set is not measured, it is fitted, and every abstention number above is
+optimistic by an unknown amount.
+
+So I wrote thirty more, on the twenty four schemes the original forty never
+touch, under one rule: nothing gets kept, dropped or reworded because of how
+the system did on it. They live in `eval/holdout_questions.py` and run with
+`python -m eval.run_eval --holdout`.
+
+| Measure | Reranker on | Reranker off |
+|---|---|---|
+| Overall correctness | **0.967** (29/30) | 0.900 (27/30) |
+| Eligibility questions | **1.000** (8/8) | 0.625 (5/8) |
+| Detail questions | 1.000 | 1.000 |
+| Threshold questions | 0.900 | **1.000** |
+| Refusals that were right | **1.000** | 0.667 |
+| Retrieval hit rate | 1.000 | 1.000 |
+| Groundedness | 1.00 | 1.00 |
+| Answers with an invented figure | 0.00 | 0.00 |
+
+**The abstention threshold held.** 0.75 was picked by eye on one set and
+scored at least as well on thirty questions it had never seen. I expected
+these numbers to come in below the ones above and they did not, so the
+"optimistic" caveat is weaker than I thought. With n=30 the interval is wide,
+and I would not claim more than that.
+
+**The reranker earns its place on a narrower set of questions than I
+expected.** Two questions out of thirty overall is not something I would
+defend. Three out of eight on eligibility questions is, and it matches the
+mechanism: on these thirty, cosine and the reranker disagree about the best
+chunk 43% of the time, and cosine keeps choosing the description section while
+the reranker chooses the eligibility one.
+
+#### The mistake that made the first version worthless
+
+The first draft of those thirty questions was wrong, and wrong in a way worth
+writing down.
+
+I built the ground truth by reading the `eligibility_criteria` columns, which
+was fast and which quietly broke the whole point. That table keeps one value
+per rule. The National Overseas Scholarship sets 35 years for a Master's, 40
+for a PhD and 45 for post-doctoral study, and the table holds a single
+`max_age` of 45. I read 45, wrote a question about a 45 year old applying for
+a Master's, and marked them eligible. The document says they are not.
+
+Three questions were wrong that way. **All three were wrong in the direction
+that agreed with the system**, because the system reads the same flattened
+column I did. It said yes, I had written yes, the judge compared them, found
+agreement, and scored it correct.
+
+That is the lesson, and it is not "check your work". It is that **a held-out
+set built from a derived table is not held out from the system that reads that
+table.** It inherits the blind spot and then certifies it. My checker could not
+catch it either, because it validated my answers against the same column.
+
+The rebuilt set reads ground truth from the scheme documents. `check_holdout.py`
+now scans those documents and flags any scheme stating more than one threshold:
+four of the twelve used here do. Two questions are marked as expected failures,
+where the document and the table genuinely disagree, so the gap is recorded
+rather than hidden.
+
+#### Three bugs it found that forty questions did not
+
+- **A correct date blocked by its own spelling.** The source wrote "31st
+  December 2022" and the model wrote "31 December 2022". The grounding check
+  compared them as plain substrings, failed to match, and refused a correct
+  answer as ungrounded. Fixing it moved detail questions from 0.833 to 1.000
+  and abstention precision from 0.8 to 1.000, in both configurations.
+- **A retry loop that ignored the provider.** Groq replies "please try again in
+  20s". The backoff started at two seconds and doubled, so it came back at 2,
+  4, 8 and 16 seconds, every one too early, and gave up having never once
+  waited long enough. It now reads the wait out of the refusal.
+- **A judge request refused for output it never used.** Groq counts a request
+  against the per minute limit as the prompt plus the output the model is
+  allowed to write. With no cap, a 200 token prompt was counted as 2,178
+  against a limit of 2,000 and refused with a 413 before it ran.
+
+None of these were found by the original forty questions. That is the argument
+for held-out evaluation better than any row in the table above.
+
+#### One thing I had backwards
+
+I wrote down before running that two questions would fail: the ones where the
+flattened `max_age` and `min_percentage` columns disagree with the document.
+One of them passed. Asked about a 36 year old applying for a Master's, the
+system answered correctly, because it read the real rule out of the retrieved
+chunk and overrode its own structured data.
+
+That is redundancy nobody designed. It does not repair the schema limitation,
+but it bounds how much damage it does, and I would not have known without
+writing a question I expected to fail.
 
 ### On reading these honestly
 
@@ -760,8 +876,11 @@ Written out because they are real.
 1. Move the criteria to one row per course level, so a scheme that asks 80% of
    an undergraduate and 70% of a postgraduate can say so. This is the biggest
    real gap and the eval already found it.
-2. Hold out a second set of trap questions, so the abstention numbers are not
-   quoted from the same set the retrieval floor was tuned on.
+2. Grow the held-out set past thirty questions. The one in
+   `eval/holdout_questions.py` answered what it was built for, but two
+   questions out of thirty is the width of the reranker result, and that is
+   too narrow to call. The next thirty should also be written by someone who
+   is not me.
 3. Finish RAGAS properly: a general purpose judge model, three runs, and a
    second scoring pass that includes the profile and the SQL verdict as
    context, so faithfulness measures this system rather than the pure RAG
@@ -769,5 +888,12 @@ Written out because they are real.
 4. Add a disability field and re-extract.
 5. Re-check the corpus against source pages on a schedule and record what
    changed, so `last_updated` means something more than "when I fetched it".
-6. Build the quality dashboard on top of `query_log` once there is history in
-   it worth plotting.
+6. Use the reranker's own score in the abstention rule when reranking ran.
+   The rule compares the cosine similarity, and on the held-out questions
+   cosine disagrees with the reranker about the best chunk 43% of the time,
+   so the pipeline computes a better relevance signal and then ignores it at
+   the one moment it matters. This needs a second threshold, and picking it
+   honestly needs the larger held-out set from item 2 first.
+7. The quality dashboard on `query_log` is now built and live at
+   `/running`, so what is left here is history worth plotting rather than
+   code.
