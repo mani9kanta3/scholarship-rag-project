@@ -18,7 +18,16 @@ from contextlib import asynccontextmanager
 from fastapi import Depends, FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 
-from . import answering, config, db, eligibility, query_log, rate_limit, vector_store
+from . import (
+    answering,
+    config,
+    corpus,
+    db,
+    eligibility,
+    query_log,
+    rate_limit,
+    vector_store,
+)
 from .models import (
     AskRequest,
     AskResponse,
@@ -155,6 +164,7 @@ def ask(request: AskRequest):
         "top_score": float(result.get("top_score") or 0),
         "latency_ms": result["latency_ms"],
         "tokens": result.get("tokens", 0),
+        "trace": result.get("trace", []),
     }
 
 
@@ -279,6 +289,58 @@ def latest_eval():
         run["run_at"] = str(run["run_at"])
 
     return {"runs": runs}
+
+
+@app.get("/api/corpus/stats", dependencies=[Depends(rate_limit.limit_cheap)])
+def corpus_stats():
+    """
+    What the corpus is made of, and what chunking did to it.
+
+    Chunking normally happens once, offline, and then every retrieval
+    number in the project rests on it while nobody can see what was
+    done. This endpoint exists so that it can be looked at instead of
+    taken on trust.
+    """
+    return corpus.stats()
+
+
+@app.get("/api/corpus/chunks", dependencies=[Depends(rate_limit.limit_cheap)])
+def corpus_chunks(
+    section: str = "",
+    scheme_id: int = Query(default=None),
+    search: str = "",
+    split_only: bool = False,
+    limit: int = Query(default=25, ge=1, le=100),
+    offset: int = Query(default=0, ge=0),
+):
+    """
+    The chunks themselves, exactly as the retriever sees them.
+
+    split_only narrows to chunks whose section was too long to keep
+    whole, which are the only places in the corpus where one rule could
+    have been cut across two chunks.
+    """
+    return corpus.chunks(
+        section=section,
+        scheme_id=scheme_id,
+        search=search,
+        split_only=split_only,
+        limit=limit,
+        offset=offset,
+    )
+
+
+@app.get("/api/ops/summary", dependencies=[Depends(rate_limit.limit_cheap)])
+def ops_summary(days: int = Query(default=14, ge=1, le=90)):
+    """
+    What the service has actually been doing.
+
+    Every answer since the first day has written a row to query_log with
+    its retrieval score, its abstention reason, its latency and its
+    token cost. None of this is new instrumentation. It is the
+    instrumentation finally being read.
+    """
+    return query_log.ops_summary(days=days)
 
 
 @app.get("/api/health")
