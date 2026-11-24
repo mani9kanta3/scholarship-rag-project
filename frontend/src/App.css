@@ -1162,3 +1162,74 @@ a:hover {
     max-width: 280px;
   }
 }
+
+/* ---------- waiting ---------- */
+
+.loading-state {
+  padding: 28px 4px;
+}
+
+.loading-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* A ring with one quarter in the accent colour, turning. Small and
+   quiet: a big spinner in the middle of an empty page makes the wait
+   feel longer than it is. */
+.loading-spinner {
+  width: 15px;
+  height: 15px;
+  border: 2px solid var(--line);
+  border-top-color: var(--brand);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-label {
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+/* The explanation, which only appears once the wait is unusual. It
+   fades in rather than appearing, because text that pops into an empty
+   page reads as an error message. */
+.loading-note {
+  margin-top: 10px;
+  max-width: 440px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--faint);
+  animation: fade-in 0.3s ease;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Somebody who has asked not to see motion still gets the message,
+   just without anything moving. */
+@media (prefers-reduced-motion: reduce) {
+  .loading-spinner {
+    animation: none;
+    border-top-color: var(--line);
+  }
+
+  .loading-note {
+    animation: none;
+  }
+}
