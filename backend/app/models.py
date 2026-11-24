@@ -80,6 +80,26 @@ class Citation(BaseModel):
     source_page: Optional[int] = None
 
 
+class TraceStep(BaseModel):
+    """
+    One stage of the pipeline, as it reports itself.
+
+    Loosely typed on purpose. Every step carries a name, an outcome and
+    a sentence of plain English, and then whatever numbers that
+    particular stage happens to have: a similarity score for the search,
+    a token count for generation, a list of unsupported figures for the
+    grounding check. Forcing those into one fixed shape would mean a
+    column of nulls for every stage that does not have them.
+    """
+
+    step: str
+    outcome: str      # ok, skipped, stopped or failed
+    detail: str
+
+    class Config:
+        extra = "allow"
+
+
 class AskResponse(BaseModel):
     answer: str
     abstained: bool
@@ -92,3 +112,5 @@ class AskResponse(BaseModel):
     top_score: float
     latency_ms: int
     tokens: int
+    # How the answer was reached, stage by stage, refusals included.
+    trace: List[TraceStep] = []
