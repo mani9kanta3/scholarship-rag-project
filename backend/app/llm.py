@@ -77,6 +77,13 @@ RETRYABLE = [
     "RESOURCE_EXHAUSTED",
     "UNAVAILABLE",
     EMPTY_REPLY,
+    # A dropped connection or a DNS hiccup. These are the most obviously
+    # temporary failures there are, and they were the one kind missing
+    # from this list, which is how a name lookup failing for one second
+    # killed a thirty question evaluation run at question thirty. Twice.
+    "Connection error",
+    "getaddrinfo",
+    "Temporary failure in name resolution",
 ]
 
 # Model families that think before answering. Only these accept the
@@ -134,7 +141,7 @@ def get_groq():
     return _groq_client
 
 
-def _groq_call(prompt, system_instruction, temperature, json_mode, model=None):
+def _groq_call(prompt, system_instruction, temperature, json_mode, model=None, max_tokens=None):
     """One Groq request. Returns (text, tokens)."""
     model = model or config.GROQ_MODEL
 
@@ -179,6 +186,19 @@ def _groq_call(prompt, system_instruction, temperature, json_mode, model=None):
     # option it never needed.
     if any(model.startswith(family) for family in REASONING_MODELS):
         extra["reasoning_format"] = "hidden"
+
+    # Cap the reply where the caller knows it will be short.
+    #
+    # This is not about cost, it is about getting the request accepted
+    # at all. Groq counts a request against the per minute token limit
+    # as the prompt plus whatever output the model is allowed to
+    # produce, so a two hundred token prompt with no cap was being
+    # counted as two thousand one hundred and seventy eight against a
+    # limit of two thousand, and refused with a 413 before it ran. The
+    # judge returns a boolean and one sentence, so reserving room for a
+    # whole essay was buying nothing and costing the request.
+    if max_tokens:
+        extra["max_completion_tokens"] = max_tokens
 
     response = get_groq().chat.completions.create(
         model=model,
@@ -239,27 +259,57 @@ def _gemini_call(prompt, system_instruction, temperature, json_mode, model=None)
 # --------------------------------------------------------- the two doors
 
 
-def _call(prompt, system_instruction=None, temperature=0.0, json_mode=False, retries=6, model=None):
+# Groq says how long to wait, in the text of the error: "Please try
+# again in 20s". Reading it beats guessing, and this is how I found out
+# it was worth reading at all. The judge model allows three requests a
+# minute, so a refusal there means waiting about twenty seconds, and a
+# backoff that starts at two and doubles spends its first four attempts
+# asking again far too early. The run then dies having never actually
+# waited long enough once.
+SUGGESTED_WAIT = re.compile(r"try again in ([0-9]+(?:\.[0-9]+)?)\s*(m|s)", re.IGNORECASE)
+
+
+def suggested_wait(message):
+    """How long the provider asked us to wait, in seconds, or None."""
+    found = SUGGESTED_WAIT.search(message)
+    if not found:
+        return None
+    seconds = float(found.group(1))
+    if found.group(2).lower() == "m":
+        seconds *= 60
+    # A second of slack, because the provider's clock and mine are not
+    # the same clock and coming back a hair early wastes the whole wait.
+    return seconds + 1
+
+
+def _call(prompt, system_instruction=None, temperature=0.0, json_mode=False, retries=6, model=None, max_tokens=None):
     """
     Send one request, waiting and trying again on a temporary failure.
 
-    The wait doubles each time and stops growing at 60 seconds. A fixed
-    wait walks straight back into the same rate limit, and one that
-    keeps doubling eventually sits there for a quarter of an hour, which
-    is not retrying any more, it is hanging.
+    If the provider says how long to wait, wait that long. Otherwise the
+    wait doubles each time and stops growing at 60 seconds. A fixed wait
+    walks straight back into the same rate limit, and one that keeps
+    doubling eventually sits there for a quarter of an hour, which is
+    not retrying any more, it is hanging.
     """
     send = _groq_call if using_groq() else _gemini_call
 
     for attempt in range(retries):
         try:
+            if using_groq():
+                return send(prompt, system_instruction, temperature, json_mode, model, max_tokens)
+            # Gemini has no cap argument here, and does not need one:
+            # its limits are counted per request, not per minute.
             return send(prompt, system_instruction, temperature, json_mode, model)
         except Exception as error:
             message = str(error)
             if not any(code in message for code in RETRYABLE) or attempt == retries - 1:
                 raise
 
-            wait = min(2 ** (attempt + 1), 60)
-            print(f"  provider said no ({message[:60]}...), waiting {wait}s")
+            # Prefer what the provider actually said over my own guess.
+            asked = suggested_wait(message)
+            wait = min(asked, 90) if asked else min(2 ** (attempt + 1), 60)
+            print(f"  provider said no ({message[:60]}...), waiting {wait:g}s")
             time.sleep(wait)
 
 
@@ -293,7 +343,7 @@ def _first_json_object(text):
     return text[start : end + 1]
 
 
-def generate_json(prompt, response_schema, system_instruction=None, model=None):
+def generate_json(prompt, response_schema, system_instruction=None, model=None, max_tokens=None):
     """
     Ask for JSON shaped like response_schema, and check that it is.
 
@@ -325,7 +375,7 @@ def generate_json(prompt, response_schema, system_instruction=None, model=None):
                 f"{last_problem}\nReturn the corrected JSON object."
             )
 
-        text, tokens = _call(ask, system_instruction, 0.0, json_mode=True, model=model)
+        text, tokens = _call(ask, system_instruction, 0.0, json_mode=True, model=model, max_tokens=max_tokens)
         total_tokens += tokens
 
         try:
