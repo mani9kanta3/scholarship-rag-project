@@ -26,6 +26,7 @@ from . import (
     eligibility,
     query_log,
     rate_limit,
+    tracing,
     vector_store,
 )
 from .models import (
@@ -50,7 +51,18 @@ async def lifespan(app: FastAPI):
         # is the worst kind of bug because nothing appears broken.
         print(f"WARNING: could not build the index: {error}")
 
+    if tracing.is_enabled():
+        print("Langfuse tracing is on.")
+
     yield
+
+    # Langfuse sends in batches on a background thread, so whatever is
+    # still queued when the process ends is lost unless it is pushed out
+    # here. That matters more than it sounds: this runs on an instance
+    # that sleeps after fifteen minutes idle, so without this the last
+    # few traces before every single sleep would go missing, and the
+    # ones just before a shutdown are often the interesting ones.
+    tracing.flush()
 
 
 app = FastAPI(
@@ -369,6 +381,10 @@ def health():
             "schemes": db.fetch_one("SELECT count(*) AS n FROM scheme")["n"],
             "chunks": db.fetch_one("SELECT count(*) AS n FROM document_chunk")["n"],
             "chunks_indexed": vector_store.count(),
+            # Say out loud whether tracing is actually on. Setting two
+            # secrets and assuming they took is how you find out a week
+            # later that nothing was ever recorded.
+            "tracing": tracing.status(),
             "recent_queries": query_log.health_summary(),
         }
     except Exception as error:
