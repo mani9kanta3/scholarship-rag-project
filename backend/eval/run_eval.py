@@ -32,7 +32,19 @@ import time
 from app import answering, config, db, llm
 
 from .judge import grade
+from .holdout_questions import HOLDOUT_QUESTIONS
 from .questions import QUESTIONS
+
+# Which set is being run. --holdout swaps it.
+#
+# The held-out thirty exist because the main forty cannot answer two of
+# the questions I most want answered: whether MIN_SIMILARITY survives
+# contact with data it was not chosen on, and whether the reranker does
+# anything. Both were measured on the set they were tuned against, and
+# that is not a measurement. See holdout_questions.py for the rules the
+# second set was written under.
+QUESTION_SET = QUESTIONS
+SET_NAME = "main"
 
 CONFIGS = [
     {
@@ -111,7 +123,11 @@ def run_config(settings, resume=False):
     """
     print(f"\n=== {settings['name']} ===")
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
-    path = RESULTS_DIR / f"results_{settings['name']}.json"
+    # The held-out results go in their own files. Writing them over the
+    # main ones would quietly destroy the thing they are being compared
+    # against, and --resume would then stitch two sets together.
+    prefix = "" if SET_NAME == "main" else f"{SET_NAME}_"
+    path = RESULTS_DIR / f"results_{prefix}{settings['name']}.json"
 
     rows = []
     if resume and path.exists():
@@ -121,7 +137,7 @@ def run_config(settings, resume=False):
     done = {row["id"] for row in rows}
     tokens = 0
 
-    for number, question in enumerate(QUESTIONS, start=1):
+    for number, question in enumerate(QUESTION_SET, start=1):
         if question["id"] in done:
             continue
 
@@ -190,7 +206,7 @@ def run_config(settings, resume=False):
 
         mark = "ok " if correct else "BAD"
         note = "refused" if result["abstained"] else f"{result['latency_ms']}ms"
-        print(f"  [{number:2d}/{len(QUESTIONS)}] {mark} {question['type']:<11} {note}")
+        print(f"  [{number:2d}/{len(QUESTION_SET)}] {mark} {question['type']:<11} {note}")
 
         time.sleep(SECONDS_BETWEEN_QUESTIONS)
 
@@ -272,6 +288,11 @@ def save_run(settings, metrics, tokens):
                 {
                     "mode": settings["name"] if settings["name"] == "naive" else settings["mode"],
                     "name": settings["name"],
+                    # Which set this run was scored on. Without it the
+                    # two sets' numbers sit in the same table looking
+                    # comparable, and they are not: one of them had the
+                    # thresholds chosen on it.
+                    "question_set": SET_NAME,
                     "model": llm.model_name(),
                     "judge_model": llm.model_name("judge"),
                     "provider": config.LLM_PROVIDER,
@@ -324,7 +345,13 @@ def main():
 
     resume = "--resume" in sys.argv
 
-    print(f"{len(QUESTIONS)} questions")
+    # --holdout runs the thirty questions nothing was tuned on.
+    global QUESTION_SET, SET_NAME
+    if "--holdout" in sys.argv:
+        QUESTION_SET = HOLDOUT_QUESTIONS
+        SET_NAME = "holdout"
+
+    print(f"{len(QUESTION_SET)} questions from the {SET_NAME} set")
     print(f"  answers judged by  {llm.model_name('judge')}")
     print(f"  answers written by {llm.model_name()}")
 
