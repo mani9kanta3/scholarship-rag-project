@@ -1,24 +1,66 @@
 /*
   All the styling for the app.
 
-  The colours are at the top as variables, so changing the look of the
-  whole app means changing the block at the top instead of hunting
+  The colours and sizes are at the top as variables, so changing the
+  look of the whole app means changing that block instead of hunting
   through the file.
+
+  **What changed, and why.** The first version of this looked like a
+  competent student project, which is what it was: Bootstrap defaults,
+  whatever sans-serif the machine happened to have, and 14px rounded
+  corners on every card. Nothing about it was wrong and nothing about
+  it was chosen.
+
+  Reading how products people actually use are put together, four
+  things come up again and again, and all four are now here:
+
+  1. **A smaller base size.** Application interfaces run at 13 or 14px,
+     not the 16px a web page uses. Denser reads as more capable.
+  2. **Borders instead of shadows.** A hairline separates things, and
+     shadow is kept for layers that genuinely float, which here is
+     nothing. Soft shadow everywhere is what makes a page look soft.
+  3. **Smaller radii.** 14px is a consumer app. 8px reads as a tool.
+  4. **One accent, and colour that means something.** Indigo marks what
+     you can act on. Green, amber and red are reserved for state, so
+     when something turns red it is information and not decoration.
+
+  Hierarchy comes from type weight and spacing instead, which is why
+  the font block below matters more than any of the colours.
 */
 
 :root {
-  /* Indigo and slate. The hardware store was rust and steel because a
-     shop is iron and timber. This is a form a student fills in about
-     their own marks and money, so it wants to look calm and official
-     rather than energetic. */
-  --brand: #4338ca;         /* indigo, buttons and active links */
-  --brand-dark: #3730a3;    /* the same colour pressed down, for hover */
-  --brand-light: #eef2ff;   /* the faintest tint, for icon squares */
-  --ink: #1e293b;           /* slate, headings and the nav bar text */
-  --page-bg: #f6f7fb;       /* very light grey behind every page */
-  --line: #e2e5ec;          /* borders and table rules */
-  --heading: #111827;       /* headings and table values */
+  /* Deep blue and slate.
+
+     The hardware store was rust and steel because a shop is iron and
+     timber. This is a form a student fills in about their own marks
+     and money, to decide whether to apply for a government scheme, so
+     it wants to look official and calm rather than energetic.
+
+     Blue rather than the indigo it started as, and rather than the
+     magenta and cyan the real National Scholarship Portal uses. Indigo
+     is what every AI product reaches for and says startup; the NSP
+     palette says 2015 government portal. Deep blue is what
+     universities and institutions use, and that is the register this
+     should be in.
+
+     One more constraint decided it. Green, amber and red already mean
+     eligible, unverified and refused, so the accent has to stay well
+     clear of all three or the interface starts saying things it does
+     not mean. */
+  --brand: #1d4ed8;         /* the one accent, for anything actionable */
+  --brand-dark: #1e40af;    /* the same colour pressed down, for hover */
+  --brand-light: #eff6ff;   /* the faintest tint, for icon squares */
+  --brand-ring: rgba(29, 78, 216, 0.16);   /* focus rings */
+
+  --page-bg: #f8fafc;       /* very light cool grey behind every page */
+  --surface: #ffffff;       /* cards and bars sit on top of it */
+  --line: #e2e8f0;          /* hairline borders and table rules */
+  --line-soft: #f1f5f9;     /* inner rules, lighter again */
+
+  --heading: #0f172a;       /* headings and table values */
+  --ink: #1e293b;           /* body text */
   --muted: #64748b;         /* helper text under a label */
+  --faint: #94a3b8;         /* captions, units, placeholder text */
 
   /* The three states an answer can be in. These carry meaning, so they
      are named for the meaning and not for the colour. */
@@ -28,57 +70,142 @@
   --warn-bg: #fffbeb;
   --stop: #b91c1c;          /* refused, not confirmed */
   --stop-bg: #fef2f2;
+
+  /* Corner radii. Small enough to read as a tool rather than a toy. */
+  --r-sm: 6px;
+  --r: 8px;
+  --r-lg: 10px;
+
+  /* The only two shadows in the project, both tight and downward.
+     Anything softer or wider starts to look like a sticker. */
+  --shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-lift: 0 2px 8px rgba(15, 23, 42, 0.07);
+
+  /* Two typefaces. Inter for language, JetBrains Mono for every
+     number, so a column of scores lines up instead of wandering. */
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", "SF Mono", Consolas, monospace;
 }
 
 body {
   background-color: var(--page-bg);
-  font-family: "Segoe UI", Arial, sans-serif;
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.55;
   color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  /* Inter ships typographic features switched off. These stop digits
+     colliding in tables and turn on the letterforms that make it look
+     drawn rather than defaulted. */
+  font-feature-settings: "cv05" 1, "cv11" 1, "ss01" 1;
+}
+
+h1, h2, h3, h4, h5 {
+  color: var(--heading);
+  font-weight: 600;
+  /* Large text at default tracking looks loose. Pulling it in is most
+     of what makes a heading look typeset rather than typed. */
+  letter-spacing: -0.015em;
 }
 
 /* ---------- shared bits ---------- */
 
+/* Every figure in the app. Tabular numerals so digits occupy the same
+   width, which is what lets a column of scores be read as a column. */
+.mono,
+.stat-value,
+.chunk-id,
+.chunk-chars,
+.hist-label,
+.hist-count,
+.day-count,
+.answer-meta,
+.eval-table td.text-center,
+.eval-table td.text-end {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+
 .corners {
-  border-radius: 14px;
+  border-radius: var(--r);
 }
 
 .panel {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
+  box-shadow: var(--shadow);
 }
 
 .field-label {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
-  color: #334155;
+  color: #475569;
+  letter-spacing: 0.01em;
 }
 
 .form-hint {
   font-size: 12px;
-  color: var(--muted);
+  color: var(--faint);
   margin-top: 4px;
 }
 
 .info-text {
-  font-size: 14px;
+  font-size: 13.5px;
   color: var(--muted);
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 .section-title {
   color: var(--heading);
-  font-weight: 700;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: -0.015em;
+  margin-bottom: 10px;
 }
 
 .text-brand {
   color: var(--brand);
 }
 
+/* ---------- controls ---------- */
+
+.form-control,
+.form-select {
+  font-size: 13.5px;
+  border-color: var(--line);
+  border-radius: var(--r-sm);
+  color: var(--ink);
+  padding: 7px 11px;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--brand);
+  /* A ring, not a glow. Bootstrap's default is three times this size
+     and makes every focused field look alarmed. */
+  box-shadow: 0 0 0 3px var(--brand-ring);
+}
+
+.form-control::placeholder {
+  color: var(--faint);
+}
+
+.btn {
+  font-size: 13.5px;
+  font-weight: 500;
+  border-radius: var(--r-sm);
+  padding: 7px 14px;
+}
+
+.btn:focus-visible {
+  box-shadow: 0 0 0 3px var(--brand-ring);
+}
+
 .btn-brand {
   background-color: var(--brand);
   border-color: var(--brand);
   color: #fff;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .btn-brand:hover,
@@ -89,15 +216,27 @@ body {
 }
 
 .btn-outline-brand {
-  border-color: var(--brand);
-  color: var(--brand);
-  font-weight: 600;
-  background: #fff;
+  border-color: var(--line);
+  color: var(--ink);
+  font-weight: 500;
+  background: var(--surface);
 }
 
 .btn-outline-brand:hover {
   background-color: var(--brand);
+  border-color: var(--brand);
   color: #fff;
+}
+
+.btn-outline-secondary {
+  border-color: var(--line);
+  color: var(--muted);
+}
+
+.btn-outline-secondary:hover {
+  background: var(--page-bg);
+  border-color: var(--line);
+  color: var(--ink);
 }
 
 a {
@@ -119,147 +258,234 @@ a:hover {
 
 .app-content {
   flex-grow: 1;
-  max-width: 1100px;
+  max-width: 1120px;
   width: 100%;
   margin: 0 auto;
-  padding: 24px 16px 48px;
+  padding: 28px 20px 64px;
 }
 
 .app-navbar {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.88);
+  /* The bar stays put and the page slides under it, which needs the
+     blur: without it, text passing behind shows through and turns to
+     mush. */
+  backdrop-filter: saturate(1.6) blur(10px);
   border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  padding-top: 6px;
+  padding-bottom: 6px;
 }
 
 .brand-mark {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--r-sm);
   background: var(--brand);
   color: #fff;
+  font-size: 14px;
 }
 
 .brand-text {
-  font-weight: 700;
+  font-weight: 600;
+  font-size: 14.5px;
   color: var(--heading);
+  letter-spacing: -0.015em;
 }
 
 .app-navbar .nav-link {
   color: var(--muted);
-  font-weight: 600;
-  font-size: 14px;
+  font-weight: 500;
+  font-size: 13px;
+  padding: 6px 11px;
+  border-radius: var(--r-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.app-navbar .nav-link i {
+  font-size: 12px;
+  /* The icon is a signpost, not the message. Holding it back stops a
+     row of six from reading as a row of six icons. */
+  opacity: 0.65;
 }
 
 .app-navbar .nav-link:hover {
-  color: var(--brand);
+  color: var(--heading);
+  background: var(--page-bg);
 }
 
-.app-navbar .nav-link-active {
+/* The current page as a quiet filled pill. A coloured word on its own
+   is easy to miss in a row of six. */
+.app-navbar .nav-link-active,
+.app-navbar .nav-link-active:hover {
   color: var(--brand);
+  background: var(--brand-light);
+}
+
+.app-navbar .nav-link-active i {
+  opacity: 1;
 }
 
 .app-footer {
   border-top: 1px solid var(--line);
-  background: #fff;
-  padding: 18px 16px;
-  font-size: 13px;
-  color: var(--muted);
+  background: var(--surface);
+  padding: 20px 16px;
+  font-size: 12.5px;
+  color: var(--faint);
 }
 
 /* ---------- page header ---------- */
 
 .page-header {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 14px;
-  margin-bottom: 20px;
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+  margin-bottom: 18px;
 }
 
 .page-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 46px;
-  height: 46px;
-  border-radius: 12px;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--r-sm);
   background: var(--brand-light);
   color: var(--brand);
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .page-title {
-  font-size: 22px;
-  font-weight: 700;
+  font-size: 19px;
+  font-weight: 600;
   color: var(--heading);
+  letter-spacing: -0.02em;
 }
 
 .page-subtitle {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--muted);
 }
 
 /* ---------- home ---------- */
 
 .hero {
-  padding: 48px 16px 24px;
+  padding: 52px 16px 28px;
 }
 
+/* Bigger and lighter than it was.
+   
+   It used to be 34px at weight 800, which is the setting you reach for
+   when you want a heading to feel important and have not got anything
+   else to make it feel that way. Size and tight tracking do the work
+   instead, and 600 keeps it readable rather than shouted. */
 .hero-title {
-  font-size: 34px;
-  font-weight: 800;
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
   color: var(--heading);
   max-width: 720px;
   margin: 0 auto 14px;
+  /* Share the words evenly between the lines instead of filling the
+     first one and leaving whatever is left stranded on the second.
+     Without it this heading breaks after "actually" and drops "get?"
+     on a line of its own, which looks like a mistake. Browsers that
+     do not know this property ignore it and nothing is lost. */
+  text-wrap: balance;
 }
 
 .hero-subtitle {
-  font-size: 16px;
+  font-size: 15.5px;
   color: var(--muted);
-  max-width: 640px;
+  max-width: 600px;
   margin: 0 auto;
-  line-height: 1.7;
+  line-height: 1.65;
+  text-wrap: pretty;
 }
 
+/* The three cards under the hero.
+   
+   These were the loosest thing on the page: a 42px icon block stacked
+   over a 16px bold heading over a long paragraph, all inside generous
+   padding. That is the feature-card layout every template ships with.
+   
+   Tightened by putting the icon on the same line as the heading, which
+   removes a whole row of vertical space and lets the two be read as
+   one unit, and by pulling every size down a step. */
 .info-card {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.info-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: var(--shadow-lift);
 }
 
 .info-card h5 {
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 600;
   color: var(--heading);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+/* Icon and heading side by side. */
+.info-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
 .info-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: var(--r-sm);
   background: var(--brand-light);
   color: var(--brand);
+  font-size: 13px;
 }
 
+/* A note, not an alarm.
+   
+   A full amber panel competes with the hero directly above it. A rule
+   down the left says the same thing and stays out of the way, which is
+   what a caveat should do: be there when looked for, not first. */
 .honest-note {
-  background: var(--warn-bg);
-  border: 1px solid #fde68a;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--warn);
+  box-shadow: var(--shadow);
 }
 
 .honest-note h5 {
-  font-size: 15px;
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 600;
   color: var(--warn);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 /* ---------- results ---------- */
 
 .result-summary {
   background: var(--brand-light);
-  border: 1px solid #c7d2fe;
+  border: 1px solid #bfdbfe;
   font-size: 14px;
   color: var(--ink);
 }
@@ -400,7 +626,7 @@ a:hover {
 .baseline-warning {
   background: var(--warn-bg);
   border: 1px solid #fde68a;
-  border-radius: 10px;
+  border-radius: var(--r-lg);
   padding: 12px 16px;
   font-size: 13px;
   color: var(--warn);
@@ -553,13 +779,40 @@ a:hover {
 
 /* ---------- evaluation ---------- */
 
+/* Data tables.
+   
+   The header row is the thing that separates a table that looks built
+   from one that looks like a default. Small, uppercase, widely
+   tracked and quiet: it has to read as a label for the column rather
+   than as a first row of content. */
 .eval-table th {
-  font-size: 13px;
-  color: #334155;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--faint);
+  border-bottom: 1px solid var(--line);
+  padding: 8px 10px;
+  white-space: nowrap;
 }
 
 .eval-table td {
   vertical-align: middle;
+  font-size: 13.5px;
+  padding: 9px 10px;
+  border-color: var(--line-soft);
+  color: var(--ink);
+}
+
+/* Tracking the row the cursor is on, which is most of what makes a
+   long table readable. */
+.eval-table tbody tr:hover td {
+  background: var(--page-bg);
+}
+
+/* The last row has the panel edge under it already. */
+.eval-table tbody tr:last-child td {
+  border-bottom: none;
 }
 
 .eval-table .highlight-row {
@@ -596,16 +849,27 @@ a:hover {
 
 /* A big number with a label under it. Used on the corpus and running
    pages for the four summary cards at the top. */
+/* A figure with its label under it.
+   
+   The label goes small, uppercase and tracked for the same reason a
+   table header does: it names the number rather than competing with
+   it. The figure itself is the only thing on the card that should be
+   readable from across the room. */
 .stat-value {
-  font-size: 1.6rem;
+  font-size: 26px;
   font-weight: 600;
   color: var(--heading);
-  line-height: 1.2;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
 .stat-label {
-  font-size: 0.85rem;
-  color: var(--muted);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--faint);
+  margin-top: 3px;
 }
 
 .badge-warn {
@@ -865,4 +1129,36 @@ a:hover {
 .day-count {
   color: var(--muted);
   font-size: 0.85rem;
+}
+
+/* ---------- phones ---------- */
+
+/* 38px is right on a laptop and shouty on a 375px screen, where it
+   takes three lines before the reader has learned anything. Everything
+   else stacks on its own, so this is the only size that needs saying
+   twice. */
+@media (max-width: 575px) {
+  .hero {
+    padding: 32px 4px 20px;
+  }
+
+  .hero-title {
+    font-size: 29px;
+    letter-spacing: -0.03em;
+  }
+
+  .hero-subtitle {
+    font-size: 14.5px;
+  }
+
+  .page-title {
+    font-size: 17px;
+  }
+
+  /* Side by side these are fine; stacked on a phone they are two full
+     width buttons, so they should look like a pair. */
+  .hero .btn-lg {
+    width: 100%;
+    max-width: 280px;
+  }
 }
