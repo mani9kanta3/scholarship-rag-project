@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import api from "./api";
 import getErrorMessage from "./errorMessage";
 import PageHeader from "./PageHeader";
+import Trace from "./Trace";
 import ProfileForm from "./ProfileForm";
 
 const EMPTY_PROFILE = {
@@ -79,6 +80,9 @@ function Ask() {
         citations: response.data.citations || [],
         warnings: response.data.warnings || [],
         near_misses: response.data.near_misses || [],
+        // Every stage the pipeline went through on the way here. Shown
+        // under the answer, collapsed, by <Trace />.
+        trace: response.data.trace || [],
       });
     } catch (err) {
       setError(getErrorMessage(err, "Could not answer that question."));
@@ -253,6 +257,8 @@ function Ask() {
           </div>
         </div>
       )}
+
+      {answer && <Trace trace={answer.trace} />}
     </div>
   );
 }
