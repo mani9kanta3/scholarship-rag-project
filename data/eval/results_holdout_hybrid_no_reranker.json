@@ -1,0 +1,662 @@
+[
+  {
+    "id": 1,
+    "type": "eligibility",
+    "question": "Am I eligible for the Begum Hazrat Mahal National Scholarship?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      4
+    ],
+    "retrieved_scheme_ids": [
+      4
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The answer confirms all the eligibility criteria mentioned in the expected answer and provides matching details, so it is correct.",
+    "answer": "Yes, you are eligible for the Begum Hazrat Mahal National Scholarship.  \n- Your family income of \u20b9150,000 is below the \u20b9200,000 limit\u30102\u3011.  \n- You have 60\u202f% marks, which is above the required 50\u202f%\u30102\u3011.  \n- You belong to a minority community\u30102\u3011.  \n- The scholarship is for female students\u30101\u3011.  \n- It covers secondary education (classes 9\u201112)\u30102\u3011.",
+    "top_score": 0.8321,
+    "latency_ms": 36361
+  },
+  {
+    "id": 2,
+    "type": "eligibility",
+    "question": "Am I eligible for the Begum Hazrat Mahal National Scholarship?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      4
+    ],
+    "retrieved_scheme_ids": [
+      4
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": false,
+    "judge_reason": "The actual answer states that a male student can apply, contradicting the expected answer that the scholarship is only for girls and thus the student is ineligible.",
+    "answer": "Yes, you could be eligible for the Begum Hazrat Mahal National Scholarship.  \nThe eligibility criteria state that the scholarship is for students in classes\u202f9\u201112 who have at least\u202f50\u202f% marks, an annual family income not more than INR\u202f2\u202fLakh, and belong to one of the six notified minority communities. The criteria do not specify a gender requirement, so a male student can apply if all other conditions are met.  \n\nSources: eligibility details [2], description of the scholarship [1].",
+    "top_score": 0.8321,
+    "latency_ms": 3337
+  },
+  {
+    "id": 3,
+    "type": "eligibility",
+    "question": "Am I eligible for the MOMA Pre-Matric Scholarship for Minorities?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      17
+    ],
+    "retrieved_scheme_ids": [
+      17
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The response correctly states that the student is not eligible because the scholarship is only for recognized minority groups and the student is in the general category.",
+    "answer": "You are not eligible for the MOMA Pre\u2011Matric Scholarship for Minorities. The scholarship is only for students who belong to a recognized minority group (Muslim, Christian, Sikh, Buddhist, Jain or Parsi) [2]. Since you are listed as GEN, you do not meet this requirement.",
+    "top_score": 0.9009,
+    "latency_ms": 53994
+  },
+  {
+    "id": 4,
+    "type": "eligibility",
+    "question": "Am I eligible for the Post-Graduate Indira Gandhi Scholarship for Single Girl Child?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      12
+    ],
+    "retrieved_scheme_ids": [
+      12
+    ],
+    "abstained": true,
+    "abstain_reason": "layer 1 failed on dates ['31\\u202fDecember\\u202f2022']",
+    "grounded": false,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": false,
+    "judge_reason": "refused a question that has an answer",
+    "answer": "I drafted an answer but it contained a figure I could not trace back to a source, so I have blocked it rather than risk giving you a wrong threshold or deadline. Please check the scheme page directly.",
+    "top_score": 0.8935,
+    "latency_ms": 3185
+  },
+  {
+    "id": 5,
+    "type": "eligibility",
+    "question": "Am I eligible for the Pre-Matric Scholarship for SC Students (Class 9 and 10), Delhi?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      33
+    ],
+    "retrieved_scheme_ids": [
+      33
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer states the same fact that the student is ineligible because they are from Haryana and not domiciled in Delhi, matching the expected answer.",
+    "answer": "No, you are not eligible for the Pre\u2011Matric Scholarship for SC Students (Class\u202f9 and\u202f10) in Delhi. The scholarship requires applicants to be a domicile of Delhi, and you are from Haryana\u30103\u3011.",
+    "top_score": 0.8809,
+    "latency_ms": 3127
+  },
+  {
+    "id": 6,
+    "type": "eligibility",
+    "question": "Am I eligible for the Post-Matric Scholarship (PMS) for SC/ST/BC/Disabled Category, Telangana?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      41
+    ],
+    "retrieved_scheme_ids": [
+      41
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The answer confirms eligibility for an OBC student from Telangana, matching the expected statement and adding no contradictory information.",
+    "answer": "Yes, you are eligible for the Post\u2011Matric Scholarship (PMS) for SC/ST/BC/Disabled Category in Telangana.  \nYour family income of \u20b9140,000 is below the \u20b9150,000 limit for Backward Classes (BC) from rural areas, and you belong to the OBC category, which is covered by the scheme. You are also a Telangana domicile and have passed Class\u202f10, meeting the other eligibility criteria.  \n\nThe only rule that could not be confirmed from the sources is whether the scheme is open for undergraduate (UG) courses; you may want to check the official page for that detail.  \n\nSources: eligibility criteria [3], income limits [3].",
+    "top_score": 0.9059,
+    "latency_ms": 3375
+  },
+  {
+    "id": 7,
+    "type": "eligibility",
+    "question": "Am I eligible for the Prime Minister's Fellowship Scheme for Doctoral Research?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      26
+    ],
+    "retrieved_scheme_ids": [
+      26
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The response correctly states that the student is not eligible because the scheme is for Ph.D. scholars, matching the expected answer.",
+    "answer": "You are not eligible for the Prime Minister's Fellowship Scheme for Doctoral Research. The scheme is only for full\u2011time Ph.D. scholars, and you are currently at the undergraduate level. The eligibility criteria require a Ph.D. admission within the last 14 months, an Indian nationality, completed academic qualifications, and an industry partner to sponsor 50% of the fellowship [3].",
+    "top_score": 0.808,
+    "latency_ms": 2984
+  },
+  {
+    "id": 8,
+    "type": "eligibility",
+    "question": "Am I eligible for the Swami Vivekananda Merit Cum Means Scholarship Scheme?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      40
+    ],
+    "retrieved_scheme_ids": [
+      40
+    ],
+    "abstained": true,
+    "abstain_reason": "layer 1 failed on dates ['31\\u202fMay\\u202f2026']",
+    "grounded": false,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": false,
+    "judge_reason": "refused a question that has an answer",
+    "answer": "I drafted an answer but it contained a figure I could not trace back to a source, so I have blocked it rather than risk giving you a wrong threshold or deadline. Please check the scheme page directly.",
+    "top_score": 0.8213,
+    "latency_ms": 30882
+  },
+  {
+    "id": 9,
+    "type": "threshold",
+    "question": "I am a 3rd year MBBS student with 71% in my last university exam. Am I eligible for the Vivek Medical Students Scholarship Program?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      44
+    ],
+    "retrieved_scheme_ids": [
+      44
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The response confirms eligibility by noting the student is a 3rd\u2011year MBBS with 71% (over 70%) and a family income of 200,000 INR (below the 3,00,000 INR cap), matching the expected criteria.",
+    "answer": "Yes.  \nThe Vivek Medical Students Scholarship Program allows a 3rd\u2011year MBBS student who has not received another scholarship and has scored over 70\u202f% in the last university exam, with a family income not exceeding INR\u202f3,00,000. Your 71\u202f% score and INR\u202f200,000 income meet these conditions\u30101\u3011.",
+    "top_score": 0.8595,
+    "latency_ms": 2881
+  },
+  {
+    "id": 10,
+    "type": "threshold",
+    "question": "I am a 3rd year MBBS student with exactly 70% in my last university exam. Am I eligible for the Vivek Medical Students Scholarship Program?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      44
+    ],
+    "retrieved_scheme_ids": [
+      44
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer correctly states that the scholarship requires over 70% and the student has exactly 70%, so the student is not eligible.",
+    "answer": "No. The Vivek Medical Students Scholarship Program requires a 3rd\u2011year MBBS student to have **over 70\u202f%** in the last university exam. Your score is exactly 70\u202f%, which does not meet the \u201cover 70\u202f%\u201d criterion\u30101\u3011.",
+    "top_score": 0.8598,
+    "latency_ms": 2781
+  },
+  {
+    "id": 11,
+    "type": "threshold",
+    "question": "I am 35 and applying for a Master's degree abroad. Am I eligible for the National Overseas Scholarship Scheme for SC Students?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      22
+    ],
+    "retrieved_scheme_ids": [
+      22
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer correctly confirms eligibility by stating the student meets the age limit, SC category, 65% marks and a family income below \u20b9800,000, matching all facts of the expected answer.",
+    "answer": "Yes, you are eligible for the National Overseas Scholarship Scheme for SC Students.\n\n- The age limit for a Master\u2019s program is 35 years or less\u30101\u3011, and you are 35\u30101\u3011.\n- The scheme is open to SC students\u30101\u3011.\n- Your marks (65\u202f%) exceed the required 60\u202f% for a Master\u2019s\u30101\u3011.\n- Your family income (\u20b9500,000) is below the \u20b9800,000 limit\u30101\u3011.",
+    "top_score": 0.8226,
+    "latency_ms": 2934
+  },
+  {
+    "id": 12,
+    "type": "threshold",
+    "question": "I am 36 and applying for a Master's degree abroad. Am I eligible for the National Overseas Scholarship Scheme for SC Students?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      22
+    ],
+    "retrieved_scheme_ids": [
+      22
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "Both the expected and the actual answer correctly state that a 36\u2011year\u2011old applicant is ineligible because the age limit for a Master\u2019s program under the National Overseas Scholarship Scheme for SC Students is 35 years or less.",
+    "answer": "No. The National Overseas Scholarship Scheme for SC Students limits the age for a Master\u2019s program to 35 years or less as of April\u202f1\u202f[1]. Since you are 36, you do not meet the age requirement.",
+    "top_score": 0.8148,
+    "latency_ms": 2825
+  },
+  {
+    "id": 13,
+    "type": "threshold",
+    "question": "Am I eligible for the National Means-cum-Merit Scholarship Scheme?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      21
+    ],
+    "retrieved_scheme_ids": [
+      21
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The answer correctly states that the student meets the income limit of INR\u202f3,50,000 and is eligible under the scheme\u2019s rules, matching the expected information.",
+    "answer": "Yes, you are eligible for the National Means\u2011cum\u2011Merit Scholarship Scheme (NMMS).  \nThe scheme allows students from any community studying in government, government\u2011aided, or local body schools, with a parental income not exceeding INR\u202f3,50,000 per annum, and who have scored at least 55\u202f% in their Class\u202fVII exams to qualify for the selection test. Your details match these criteria. [2]",
+    "top_score": 0.8174,
+    "latency_ms": 5127
+  },
+  {
+    "id": 14,
+    "type": "threshold",
+    "question": "Am I eligible for the National Means-cum-Merit Scholarship Scheme?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      21
+    ],
+    "retrieved_scheme_ids": [
+      21
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The answer accurately states the income threshold of INR\u202f3,50,000 and notes that the provided family income of INR\u202f360,000 exceeds it, matching the expected answer.",
+    "answer": "You are not eligible for the National Means\u2011cum\u2011Merit Scholarship Scheme (NMMS).  \nThe scheme requires the parental income to be **not more than INR\u202f3,50,000 per annum** [2], and your family income is INR\u202f360,000, which exceeds that limit.",
+    "top_score": 0.8174,
+    "latency_ms": 3756
+  },
+  {
+    "id": 15,
+    "type": "threshold",
+    "question": "I have been admitted to a full time PhD and scored 55% in my postgraduate degree. Am I eligible for the National Fellowship and Scholarship for Higher Education of ST Students?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      20
+    ],
+    "retrieved_scheme_ids": [
+      20
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The answer correctly states that the student meets all the eligibility criteria (age, admission to PhD, and 55% marks), matching the expected answer and adding only permissible additional correct information.",
+    "answer": "Yes, you are eligible for the National Fellowship and Scholarship for Higher Education of ST Students (NFST).  \n- You are an Indian national belonging to the Scheduled Tribe category.  \n- Your age is 30, which is below the maximum age of 36 for the fellowship.  \n- You have been admitted to a full\u2011time PhD course.  \n- Your postgraduate marks are 55\u202f%, meeting the minimum requirement of 55\u202f% for the fellowship.  \n- Your annual family income of \u20b9400,000 is below the \u20b96,00,000 limit for the scholarship.  \n\nAll the eligibility criteria are satisfied according to the scheme rules [2].",
+    "top_score": 0.7775,
+    "latency_ms": 35066
+  },
+  {
+    "id": 16,
+    "type": "threshold",
+    "question": "I have been admitted to a full time PhD and scored 54.5% in my postgraduate degree. Am I eligible for the National Fellowship and Scholarship for Higher Education of ST Students?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      20
+    ],
+    "retrieved_scheme_ids": [
+      20
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer states that the student is not eligible because the minimum required score is 55%, which aligns with the expected answer.",
+    "answer": "You are not eligible for the National Fellowship and Scholarship for Higher Education of ST Students (NFST). The fellowship requires a minimum of 55\u202f% marks in the postgraduate degree, and you have 54.5\u202f%\u30102\u3011.",
+    "top_score": 0.7788,
+    "latency_ms": 2806
+  },
+  {
+    "id": 17,
+    "type": "threshold",
+    "question": "Am I eligible for the Reliance Foundation Undergraduate Scholarships?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      35
+    ],
+    "retrieved_scheme_ids": [
+      35
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The answer confirms eligibility by noting the student\u2019s 60% marks and a family income below INR\u202f15\u202flakh, matching the scheme\u2019s criteria and adding permissible extra detail.",
+    "answer": "Yes, you are eligible for the Reliance Foundation Undergraduate Scholarships.  \n- Your family income of \u20b9400,000 is below the \u20b915\u202fLakh limit and well below the \u20b92.5\u202fLakh preference threshold [1].  \n- You have 60\u202f% marks, which meets the minimum requirement of 60\u202f% [1].  \n- The scholarship is for first\u2011year undergraduate students, which matches your course level [1].",
+    "top_score": 0.8523,
+    "latency_ms": 3040
+  },
+  {
+    "id": 18,
+    "type": "threshold",
+    "question": "Am I eligible for the Reliance Foundation Undergraduate Scholarships?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      35
+    ],
+    "retrieved_scheme_ids": [
+      35
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The answer correctly states that the student is not eligible because the required minimum is 60% and the student has 59.5%.",
+    "answer": "No, you are not eligible for the Reliance Foundation Undergraduate Scholarships. The scholarship requires a minimum of 60.00\u202f% marks, and you have 59.5\u202f%\u30101\u3011.",
+    "top_score": 0.8523,
+    "latency_ms": 4142
+  },
+  {
+    "id": 19,
+    "type": "detail",
+    "question": "How much money does the Begum Hazrat Mahal National Scholarship give?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      4
+    ],
+    "retrieved_scheme_ids": [
+      4
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The amounts and class categories match the expected figures and the statement about instalment releases is consistent with the expected information.",
+    "answer": "The Begum Hazrat Mahal National Scholarship gives INR\u202f10,000 annually for students in classes\u202f9 and\u202f10, and INR\u202f12,000 annually for students in classes\u202f11 and\u202f12. The amounts are released in two instalments of INR\u202f5,000 (for classes\u202f9\u201110) or INR\u202f6,000 (for classes\u202f11\u201112) each quarter. This covers books, stationery, tuition fees and lodging or boarding charges. [2]",
+    "top_score": 0.828,
+    "latency_ms": 1730
+  },
+  {
+    "id": 20,
+    "type": "detail",
+    "question": "What is the scholarship amount for the National Means-cum-Merit Scholarship Scheme?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      21
+    ],
+    "retrieved_scheme_ids": [
+      21
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer states the scholarship amount as INR 1,000 per month for a year, which matches the expected answer.",
+    "answer": "The National Means\u2011cum\u2011Merit Scholarship Scheme provides **INR\u202f1,000 per month for a year** to selected students. [2]",
+    "top_score": 0.7821,
+    "latency_ms": 1760
+  },
+  {
+    "id": 21,
+    "type": "detail",
+    "question": "What documents do I need for the Vivek Medical Students Scholarship Program?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      44
+    ],
+    "retrieved_scheme_ids": [
+      44
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer lists exactly the same documents as the expected answer: Aadhaar card, academic transcripts, proof of admission, family income proof, and a passport size picture.",
+    "answer": "For the Vivek Medical Students Scholarship Program you need to submit the following documents:\n\n- Aadhaar card  \n- Academic transcripts  \n- Proof of admission  \n- Family income proof  \n- Passport\u2011size picture  \n\nThese are the documents listed in the program\u2019s requirements [1].",
+    "top_score": 0.8891,
+    "latency_ms": 2443
+  },
+  {
+    "id": 22,
+    "type": "detail",
+    "question": "What is the deadline for the Reliance Foundation Undergraduate Scholarships?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      35
+    ],
+    "retrieved_scheme_ids": [
+      35
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The answer states the deadline as October\u202f7,\u202f2025, which matches the expected answer.",
+    "answer": "The deadline for the Reliance Foundation Undergraduate Scholarships is October\u202f7,\u202f2025\u30101\u3011.",
+    "top_score": 0.911,
+    "latency_ms": 3147
+  },
+  {
+    "id": 23,
+    "type": "detail",
+    "question": "Is the Post-Graduate Indira Gandhi Scholarship for Single Girl Child still open?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      12
+    ],
+    "retrieved_scheme_ids": [
+      12
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The answer states that the scholarship is closed and gives the same closing date of 31\u202fDecember\u202f2022, which matches the expected answer.",
+    "answer": "No, the Post\u2011Graduate Indira Gandhi Scholarship for Single Girl Child is no longer open. The scholarship closed on 31\u202fDecember\u202f2022\u30101\u3011.",
+    "top_score": 0.8922,
+    "latency_ms": 26899
+  },
+  {
+    "id": 24,
+    "type": "detail",
+    "question": "What does the National Overseas Scholarship Scheme for SC Students pay for maintenance?",
+    "expected_abstain": false,
+    "expected_scheme_ids": [
+      22
+    ],
+    "retrieved_scheme_ids": [
+      22
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer states the same maintenance allowances (USD\u202f15,400 for outside the UK and GBP\u202f9,900 for the UK) as the expected answer.",
+    "answer": "The scheme provides an annual maintenance allowance of USD\u202f15,400 for students studying outside the UK, or GBP\u202f9,900 for those studying in the UK. [1]",
+    "top_score": 0.8035,
+    "latency_ms": 3546
+  },
+  {
+    "id": 25,
+    "type": "trap",
+    "question": "What is the eligibility for the INSPIRE Scholarship for Higher Education?",
+    "expected_abstain": true,
+    "expected_scheme_ids": [],
+    "retrieved_scheme_ids": [
+      20
+    ],
+    "abstained": true,
+    "abstain_reason": "top retrieval score below threshold",
+    "grounded": null,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "the pipeline refused, which is what this question wants",
+    "answer": "I do not have a source that answers that closely enough to be worth trusting, so I would rather not guess.",
+    "top_score": 0.6675,
+    "latency_ms": 1146
+  },
+  {
+    "id": 26,
+    "type": "trap",
+    "question": "How do I apply for the KVPY fellowship?",
+    "expected_abstain": true,
+    "expected_scheme_ids": [],
+    "retrieved_scheme_ids": [
+      3,
+      20,
+      25,
+      26,
+      44
+    ],
+    "abstained": true,
+    "abstain_reason": "top retrieval score below threshold",
+    "grounded": null,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "the pipeline refused, which is what this question wants",
+    "answer": "I do not have a source that answers that closely enough to be worth trusting, so I would rather not guess.",
+    "top_score": 0.6892,
+    "latency_ms": 1017
+  },
+  {
+    "id": 27,
+    "type": "trap",
+    "question": "What is the income limit for the Tamil Nadu Post-Matric Scholarship?",
+    "expected_abstain": true,
+    "expected_scheme_ids": [],
+    "retrieved_scheme_ids": [
+      31
+    ],
+    "abstained": true,
+    "abstain_reason": "top retrieval score below threshold",
+    "grounded": null,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "the pipeline refused, which is what this question wants",
+    "answer": "I do not have a source that answers that closely enough to be worth trusting, so I would rather not guess.",
+    "top_score": 0.7382,
+    "latency_ms": 1612
+  },
+  {
+    "id": 28,
+    "type": "trap",
+    "question": "Am I eligible for the Chevening Scholarship?",
+    "expected_abstain": true,
+    "expected_scheme_ids": [],
+    "retrieved_scheme_ids": [
+      6,
+      14,
+      20,
+      23,
+      24
+    ],
+    "abstained": true,
+    "abstain_reason": "top retrieval score below threshold",
+    "grounded": null,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "the pipeline refused, which is what this question wants",
+    "answer": "I do not have a source that answers that closely enough to be worth trusting, so I would rather not guess.",
+    "top_score": 0.6421,
+    "latency_ms": 1173
+  },
+  {
+    "id": 29,
+    "type": "trap",
+    "question": "What is the interview date for the National Means-cum-Merit Scholarship Scheme?",
+    "expected_abstain": true,
+    "expected_scheme_ids": [
+      21
+    ],
+    "retrieved_scheme_ids": [
+      21
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The answer correctly states that no interview date is mentioned and refrains from providing a deadline, matching the expected response.",
+    "answer": "I couldn\u2019t find any information about an interview date for the National Means\u2011cum\u2011Merit Scholarship Scheme in the sources provided. The sources only mention the application deadline, how to apply, description, benefits, and eligibility criteria. If you need details about an interview, you may want to check the official National Scholarship Portal or the state\u2011specific official websites listed for submitting applications.",
+    "top_score": 0.7936,
+    "latency_ms": 1904
+  },
+  {
+    "id": 30,
+    "type": "trap",
+    "question": "What is the helpline number for the Reliance Foundation Undergraduate Scholarships?",
+    "expected_abstain": true,
+    "expected_scheme_ids": [
+      35
+    ],
+    "retrieved_scheme_ids": [
+      35
+    ],
+    "abstained": false,
+    "abstain_reason": null,
+    "grounded": true,
+    "unsupported_numbers": [],
+    "unsupported_dates": [],
+    "correct": true,
+    "judge_reason": "The actual answer states that no helpline number was found, which aligns with the expected answer that no phone number appears in the document.",
+    "answer": "I couldn\u2019t find a helpline number for the Reliance Foundation Undergraduate Scholarships in the provided sources.",
+    "top_score": 0.8195,
+    "latency_ms": 36984
+  }
+]
